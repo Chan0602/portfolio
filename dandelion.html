@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>蒲公英与龙猫</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { overflow: hidden; height: 100vh; cursor: none; }
+  canvas { display: block; }
+
+  #panel {
+    position: fixed; top: 20px; right: 20px; width: 220px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(180,200,160,0.4);
+    border-radius: 18px;
+    box-shadow: 0 6px 28px rgba(100,130,80,0.12);
+    font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+    color: #4a6040; overflow: hidden; cursor: default; user-select: none;
+  }
+  #panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 15px; cursor: pointer;
+    border-bottom: 1px solid rgba(150,190,110,0.2);
+  }
+  #panel-header span { font-size: 13px; font-weight: 600; }
+  #panel-toggle {
+    width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; background: rgba(150,200,100,0.2); border-radius: 50%;
+    transition: transform 0.3s; color: #5a8040;
+  }
+  #panel.collapsed #panel-toggle { transform: rotate(180deg); }
+  #panel-body { padding: 12px 15px 15px; }
+  #panel.collapsed #panel-body { display: none; }
+  .ctrl { margin-bottom: 12px; }
+  .ctrl:last-child { margin-bottom: 0; }
+  .ctrl-top { display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .ctrl-label { font-size: 11.5px; opacity: 0.8; }
+  .ctrl-value {
+    font-size: 11.5px; font-weight: 600;
+    background: rgba(150,200,100,0.18); padding: 1px 7px;
+    border-radius: 20px; min-width: 30px; text-align: center; color: #3a6025;
+  }
+  input[type=range] {
+    -webkit-appearance: none; width: 100%; height: 3px;
+    background: rgba(130,180,90,0.3); border-radius: 2px; outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+    background: #7ab350; box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer;
+  }
+  .section-title {
+    font-size: 10px; letter-spacing: 1px; opacity: 0.45;
+    text-transform: uppercase; margin-bottom: 9px; margin-top: 4px;
+  }
+  .divider { height: 1px; background: rgba(150,190,110,0.2); margin: 10px 0; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="panel">
+  <div id="panel-header">
+    <span>🍃 调节面板</span>
+    <div id="panel-toggle">▲</div>
+  </div>
+  <div id="panel-body">
+    <div class="section-title">龙猫</div>
+    <div class="ctrl">
+      <div class="ctrl-top"><span class="ctrl-label">触发距离</span><span class="ctrl-value" id="v-trigger">5</span></div>
+      <input type="range" id="s-trigger" min="1" max="10" step="1" value="5">
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-top"><span class="ctrl-label">飘动幅度</span><span class="ctrl-value" id="v-wobble">5</span></div>
+      <input type="range" id="s-wobble" min="1" max="10" step="1" value="5">
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-top"><span class="ctrl-label">上升速度</span><span class="ctrl-value" id="v-rise">5</span></div>
+      <input type="range" id="s-rise" min="1" max="10" step="1" value="5">
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-top"><span class="ctrl-label">冷却时间</span><span class="ctrl-value" id="v-cool">5</span></div>
+      <input type="range" id="s-cool" min="1" max="10" step="1" value="5">
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title">场景</div>
+    <div class="ctrl">
+      <div class="ctrl-top"><span class="ctrl-label">摇晃幅度</span><span class="ctrl-value" id="v-sway">5</span></div>
+      <input type="range" id="s-sway" min="1" max="10" step="1" value="5">
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-top"><span class="ctrl-label">草地密度</span><span class="ctrl-value" id="v-grass">5</span></div>
+      <input type="range" id="s-grass" min="1" max="10" step="1" value="5">
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+const GY = () => H - 60; // ground y
+
+window.addEventListener('resize', () => {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  initDandelions();
+  rebuildGrass();
+});
+
+// ---- Config ----
+const cfg = {
+  triggerDist: 5,  // 1-10 → actual px
+  wobble: 5,
+  rise: 5,
+  cooldown: 5,
+  swayAmt: 5,
+  grassDensity: 5,
+};
+[
+  ['s-trigger','v-trigger','triggerDist'],
+  ['s-wobble', 'v-wobble', 'wobble'],
+  ['s-rise',   'v-rise',   'rise'],
+  ['s-cool',   'v-cool',   'cooldown'],
+  ['s-sway',   'v-sway',   'swayAmt'],
+  ['s-grass',  'v-grass',  'grassDensity'],
+].forEach(([sid, vid, key]) => {
+  const el = document.getElementById(sid);
+  const vEl = document.getElementById(vid);
+  el.addEventListener('input', () => {
+    cfg[key] = Number(el.value);
+    vEl.textContent = el.value;
+    if (key === 'grassDensity') rebuildGrass();
+  });
+});
+document.getElementById('panel-header').addEventListener('click', () =>
+  document.getElementById('panel').classList.toggle('collapsed'));
+
+const triggerPx  = () => 60 + cfg.triggerDist * 18;
+const wobbleAmt  = () => cfg.wobble * 0.022;
+const riseSpeed  = () => 0.018 + cfg.rise * 0.018;
+const coolFrames = () => Math.round(300 / cfg.cooldown);
+const swayScale  = () => cfg.swayAmt / 5;
+
+// ---- Mouse ----
+const mouse = { x: W/2, vx: 0, px: W/2 };
+let facingLeft = false;
+let mouseIdleFrames = 0;
+let mouseSpeed = 0;
+
+window.addEventListener('mousemove', e => {
+  mouse.vx = e.clientX - mouse.px;
+  mouseSpeed = Math.abs(mouse.vx);
+  if (mouseSpeed > 0.5) facingLeft = mouse.vx < 0;
+  mouse.px = mouse.x;
+  mouse.x = e.clientX;
+  mouseIdleFrames = 0;
+});
+
+// ---- Cat image state machine ----
+// States: 'lay' | 'run' | 'click'
+// Transitions:
+//   lay  → run   : mouse starts moving
+//   run  → lay   : mouse idle > IDLE_THRESHOLD frames
+//   any  → click : mousedown
+//   click→ run/lay: after CLICK_HOLD frames
+
+const IDLE_THRESHOLD = 60;  // ~0.8s idle → lay
+const CLICK_HOLD     = 60;  // ~0.63s click pose
+
+let catState     = 'lay';
+let catPrevState = 'lay';
+let catFrame     = 0;       // increments every frame, used for run animation
+let clickFrames  = 0;
+let alpha        = { lay:1, run:0, click:0 }; // cross-fade alphas
+const FADE_SPEED = 0.12;
+
+window.addEventListener('mousedown', () => {
+  catPrevState = catState;
+  catState = 'click';
+  clickFrames = CLICK_HOLD;
+});
+
+// Processed cat canvases (white bg removed + auto-cropped)
+const catCanvases = { lay: [], run: [], click: null };
+let catsReady = false;
+let layFrame = 0;        // current lay animation frame index
+let layFrameTimer = 0;  // counts up, advances frame every LAY_FPS ticks
+const LAY_FPS = 60;     // frames per second for lay animation (at 60fps loop)
+
+function removeWhiteBg(img) {
+  const oc = document.createElement('canvas');
+  oc.width = img.naturalWidth; oc.height = img.naturalHeight;
+  const octx = oc.getContext('2d');
+  octx.drawImage(img, 0, 0);
+  const id = octx.getImageData(0, 0, oc.width, oc.height);
+  const d = id.data;
+  const W2 = oc.width, H2 = oc.height;
+
+  // Find tight bounding box of visible (non-transparent, non-white) pixels
+  let x0 = W2, x1 = 0, y0 = H2, y1 = 0;
+  for (let y = 0; y < H2; y++) {
+    for (let x = 0; x < W2; x++) {
+      const i = (y * W2 + x) * 4;
+      const a = d[i+3];
+      const bright = (d[i] + d[i+1] + d[i+2]) / 3;
+      // count pixel if it's visible AND not near-white
+      if (a > 20 && bright < 240) {
+        if (x < x0) x0 = x; if (x > x1) x1 = x;
+        if (y < y0) y0 = y; if (y > y1) y1 = y;
+      }
+    }
+  }
+
+  // If no content found, return original
+  if (x0 >= x1 || y0 >= y1) return oc;
+
+  // Remove near-white pixels (for white-bg images)
+  for (let i = 0; i < d.length; i += 4) {
+    const bright = (d[i] + d[i+1] + d[i+2]) / 3;
+    if (bright > 245) {
+      d[i+3] = 0;
+    } else if (bright > 210) {
+      d[i+3] = Math.round((1 - (bright - 210) / 35) * d[i+3]);
+    }
+  }
+  octx.putImageData(id, 0, 0);
+
+  // Crop to bounding box with padding
+  const pad = 40;
+  const cx = Math.max(0, x0 - pad);
+  const cy = Math.max(0, y0 - pad);
+  const cw = Math.min(W2, x1 + pad) - cx;
+  const ch = Math.min(H2, y1 + pad) - cy;
+
+  const cropped = document.createElement('canvas');
+  cropped.width = cw; cropped.height = ch;
+  cropped.getContext('2d').drawImage(oc, cx, cy, cw, ch, 0, 0, cw, ch);
+  return cropped;
+}
+
+function normalizeLay(frames) {
+  // Pad all lay frames to the same canvas size (max W × max H), bottom-center aligned
+  // so every frame scales identically
+  const maxW = Math.max(...frames.map(f => f.width));
+  const maxH = Math.max(...frames.map(f => f.height));
+  return frames.map(f => {
+    if (f.width === maxW && f.height === maxH) return f;
+    const nc = document.createElement('canvas');
+    nc.width = maxW; nc.height = maxH;
+    const nctx = nc.getContext('2d');
+    // bottom-center align
+    const dx = Math.floor((maxW - f.width) / 2);
+    const dy = maxH - f.height;
+    nctx.drawImage(f, dx, dy);
+    return nc;
+  });
+}
+
+function loadCatImages() {
+  const laySrcs = ['cat-lay.png', 'cat-lay1.png', 'cat-lay2.png', 'cat-lay3.png', 'cat-lay4.png'];
+  const runSrcs = ['cat-run1.png', 'cat-run2.png', 'cat-run3.png', 'cat-run4.png'];
+  const total = laySrcs.length + runSrcs.length + 1; // +1 for click
+  let loaded = 0;
+  const rawLay = [], rawRun = [];
+
+  const done = () => {
+    loaded++;
+    if (loaded === total) {
+      catCanvases.lay = normalizeLay(rawLay);
+      catCanvases.run = normalizeLay(rawRun); // normalize run frames too
+      catsReady = true;
+    }
+  };
+
+  laySrcs.forEach((src, i) => {
+    const img = new Image();
+    img.onload = () => { rawLay[i] = removeWhiteBg(img); done(); };
+    img.onerror = done;
+    img.src = src;
+  });
+
+  runSrcs.forEach((src, i) => {
+    const img = new Image();
+    img.onload = () => { rawRun[i] = removeWhiteBg(img); done(); };
+    img.onerror = done;
+    img.src = src;
+  });
+
+  const clickImg = new Image();
+  clickImg.onload = () => { catCanvases.click = removeWhiteBg(clickImg); done(); };
+  clickImg.onerror = done;
+  clickImg.src = 'cat-click.png';
+}
+loadCatImages();
+
+function updateCatState() {
+  mouseIdleFrames++;
+  catFrame++;
+
+  // advance lay animation frame
+  if (catCanvases.lay.length > 0) {
+    layFrameTimer++;
+    if (layFrameTimer >= LAY_FPS) {
+      layFrameTimer = 0;
+      layFrame = (layFrame + 1) % catCanvases.lay.length;
+    }
+  }
+
+  if (catState === 'click') {
+    clickFrames--;
+    if (clickFrames <= 0) {
+      catState = mouseIdleFrames < IDLE_THRESHOLD ? 'run' : 'lay';
+    }
+  } else if (catState === 'run') {
+    if (mouseIdleFrames > IDLE_THRESHOLD) catState = 'lay';
+  } else { // lay
+    if (mouseIdleFrames < 3) catState = 'run';
+  }
+
+  // Cross-fade alphas toward target
+  for (const s of ['lay', 'run', 'click']) {
+    const target = catState === s ? 1 : 0;
+    alpha[s] += (target - alpha[s]) * FADE_SPEED;
+  }
+}
+
+function drawCat(x) {
+  const groundY = GY();
+
+  // Target display HEIGHT — same for all states so cat never changes size
+  const TARGET_H = { lay: 80, run: 80, click: 80 };
+
+  // Run frame: cycle through all run frames at ~8fps, with gentle vertical bob
+  const runIdx = Math.floor(catFrame / 20) % (catCanvases.run.length || 1);
+  const runCanvas = catCanvases.run[runIdx] ?? null;
+  const runBob = alpha.run > 0.01 ? Math.sin(catFrame * 0.45) * 3 : 0; // ±3px bounce
+
+  // Draw each state with its cross-fade alpha
+  const layCanvas = catCanvases.lay[layFrame] ?? catCanvases.lay[0] ?? null;
+  const layers = [
+    { canvas: layCanvas,         a: alpha.lay,   th: TARGET_H.lay,   bob: 0       },
+    { canvas: runCanvas,         a: alpha.run,   th: TARGET_H.run,   bob: runBob  },
+    { canvas: catCanvases.click, a: alpha.click, th: TARGET_H.click, bob: 0       },
+  ];
+
+  for (const { canvas, a, th, bob } of layers) {
+    if (!canvas || a < 0.01) continue;
+    const scale = th / canvas.height;
+    const dw = canvas.width * scale;
+    const dh = canvas.height * scale;
+
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.translate(x, groundY + bob);
+    if (facingLeft) ctx.scale(-1, 1);
+    ctx.drawImage(canvas, -dw / 2, -dh, dw, dh);
+    ctx.restore();
+  }
+
+  // subtle shadow under cat
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY, 32, 6, 0, 0, Math.PI * 2);
+  ctx.fillStyle = '#000';
+  ctx.fill();
+  ctx.restore();
+}
+
+// ---- Draw Totoro ----
+function drawTotoro(x, y, sc, alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.translate(x, y);
+  ctx.scale(sc, sc);
+
+  const bH = 18, bW = 13;
+
+  // body
+  ctx.beginPath(); ctx.ellipse(0,0,bW,bH,0,0,Math.PI*2);
+  ctx.fillStyle='#e8ede4'; ctx.fill();
+  ctx.strokeStyle='#b0bca8'; ctx.lineWidth=0.8; ctx.stroke();
+
+  // belly
+  ctx.beginPath(); ctx.ellipse(0,4,bW*0.55,bH*0.4,0,0,Math.PI*2);
+  ctx.fillStyle='#f5f5f0'; ctx.fill();
+
+  // ears
+  for (const ex of [-7,7]) {
+    ctx.beginPath();
+    ctx.moveTo(ex,-bH+2);
+    ctx.lineTo(ex-(ex<0?4:-4),-bH-10);
+    ctx.lineTo(ex+(ex<0?4:-4),-bH-10);
+    ctx.closePath();
+    ctx.fillStyle='#d8ddd4'; ctx.fill();
+    ctx.strokeStyle='#b0bca8'; ctx.lineWidth=0.8; ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(ex,-bH+1);
+    ctx.lineTo(ex-(ex<0?2:-2),-bH-7);
+    ctx.lineTo(ex+(ex<0?2:-2),-bH-7);
+    ctx.closePath();
+    ctx.fillStyle='rgba(240,180,180,0.5)'; ctx.fill();
+  }
+
+  // eyes
+  for (const ex of [-4.5,4.5]) {
+    ctx.beginPath(); ctx.arc(ex,-bH*0.35,4,0,Math.PI*2);
+    ctx.fillStyle='white'; ctx.fill();
+    ctx.strokeStyle='#8a9a84'; ctx.lineWidth=0.6; ctx.stroke();
+    ctx.beginPath(); ctx.arc(ex+0.5,-bH*0.35+0.5,2.2,0,Math.PI*2);
+    ctx.fillStyle='#1a2018'; ctx.fill();
+    ctx.beginPath(); ctx.arc(ex+1.2,-bH*0.35-0.8,0.8,0,Math.PI*2);
+    ctx.fillStyle='white'; ctx.fill();
+  }
+
+  // nose
+  ctx.beginPath(); ctx.arc(0,-bH*0.1,1.5,0,Math.PI*2);
+  ctx.fillStyle='#888f84'; ctx.fill();
+
+  // cheeks
+  ctx.fillStyle='rgba(240,160,160,0.4)';
+  ctx.beginPath(); ctx.ellipse(-8,-bH*0.05,3.5,2,0,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(8, -bH*0.05,3.5,2,0,0,Math.PI*2); ctx.fill();
+
+  // arms gripping stem above
+  ctx.strokeStyle='#c8cfc4'; ctx.lineWidth=2.5; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(-bW*0.7,-2); ctx.lineTo(-bW*0.95,-bH*0.3); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bW*0.7,-2);  ctx.lineTo(bW*0.95,-bH*0.3); ctx.stroke();
+
+  ctx.restore();
+}
+
+// ---- Load dandelion & fly images ----
+const imgAssets = { dan1: null, dan2: null, fly: null };
+let assetsReady = 0;
+['蒲公英1','蒲公英2'].forEach((name, i) => {
+  const img = new Image();
+  img.onload = () => { imgAssets[`dan${i+1}`] = removeWhiteBg(img); assetsReady++; };
+  img.onerror = () => assetsReady++;
+  img.src = `${name}.png`;
+});
+(() => {
+  const img = new Image();
+  img.onload = () => { imgAssets.fly = removeWhiteBg(img); assetsReady++; };
+  img.onerror = () => assetsReady++;
+  img.src = 'fly.png';
+})();
+
+// ---- Flying item (uses fly.png image) ----
+class FlyingTotoro {
+  constructor(x, y) {
+    this.x = x; this.y = y;
+    this.vx = (Math.random()-0.5)*1.2;
+    this.vy = -(0.6 + Math.random()*0.6);
+    this.wobble = Math.random()*Math.PI*2;
+    this.wobbleSpeed = 0.022 + Math.random()*0.015;
+    this.alpha = 1;
+    this.displayH = 70 + Math.random() * 20; // px height
+    this.gone = false;
+  }
+
+  update() {
+    this.wobble += this.wobbleSpeed;
+    this.x += this.vx + Math.sin(this.wobble * 1.05) * wobbleAmt() * 4;
+    this.vy += -riseSpeed() + 0.006;
+    this.y += this.vy;
+    this.vx *= 0.97;
+    if (this.y < -150 || this.x < -150 || this.x > W+150) this.gone = true;
+    if (this.y < 80) this.alpha = Math.max(0, this.alpha - 0.008);
+  }
+
+  draw() {
+    if (this.gone) return;
+    const img = imgAssets.fly;
+    if (!img) return;
+    const scale = this.displayH / img.height;
+    const dw = img.width * scale;
+    const dh = img.height * scale;
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    // center-bottom anchor
+    ctx.drawImage(img, this.x - dw/2, this.y - dh, dw, dh);
+    ctx.restore();
+  }
+}
+
+const flyingTotoros = [];
+
+// ---- Dandelion (image-based) ----
+class Dandelion {
+  constructor(x, displayH, imgKey) {
+    this.x = x;
+    this.displayH = displayH; // rendered height in px
+    this.imgKey = imgKey;     // 'dan1' or 'dan2'
+    this.sway = 0; this.swayVel = 0;
+    this.cooldown = Math.floor(Math.random() * 80);
+  }
+
+  get groundY() { return GY(); }
+
+  get img() { return imgAssets[this.imgKey]; }
+
+  // top-center of the rendered image (where flies launch from)
+  get headY() {
+    const img = this.img;
+    if (!img) return this.groundY - this.displayH;
+    return this.groundY - this.displayH;
+  }
+  get headX() { return this.x + this.sway * 14 * swayScale(); }
+
+  update(catX) {
+    const dx = catX - this.x;
+    const dist = Math.abs(dx);
+    const prox = Math.max(0, 1 - dist / 300);
+    this.swayVel += -dx * 0.00012 * prox * swayScale();
+    this.swayVel *= 0.88;
+    this.sway += this.swayVel;
+    this.sway = Math.max(-1, Math.min(1, this.sway * 0.93));
+
+    if (this.cooldown > 0) { this.cooldown--; return; }
+
+    if (dist < triggerPx()) {
+      const count = 1 + (Math.random() < 0.45 ? 1 : 0);
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          flyingTotoros.push(new FlyingTotoro(
+            this.headX + (Math.random()-0.5)*30,
+            this.headY + this.displayH * 0.15
+          ));
+        }, i * 300);
+      }
+      this.cooldown = coolFrames();
+    }
+  }
+
+  draw() {
+    const img = this.img;
+    if (!img) return;
+    const scale = this.displayH / img.height;
+    const dw = img.width * scale;
+    const dh = img.height * scale;
+    const groundY = this.groundY;
+
+    ctx.save();
+    ctx.translate(this.headX, groundY);
+    // slight lean based on sway
+    ctx.rotate(this.sway * 0.06);
+    // draw bottom-center anchored to ground
+    ctx.drawImage(img, -dw/2, -dh, dw, dh);
+    ctx.restore();
+  }
+}
+
+// ---- Init dandelions (5 spread, alternating dan1/dan2) ----
+let dandelions = [];
+function initDandelions() {
+  const positions = [0.10, 0.28, 0.50, 0.68, 0.88];
+  const heights   = [100,  110,  150,  140,  90 ]; // vary height for size variety
+  dandelions = positions.map((p, i) => new Dandelion(
+    W * p + (Math.random()-0.5)*30,
+    heights[i] + (Math.random()-0.5)*40,
+    i % 2 === 0 ? 'dan1' : 'dan2'
+  ));
+}
+initDandelions();
+
+// ---- Grass ----
+let grassBlades = [];
+function rebuildGrass() {
+  const count = Math.round(cfg.grassDensity * 22);
+  grassBlades = Array.from({length: count}, () => ({
+    x: Math.random()*W,
+    h: 18+Math.random()*36,
+    w: 1+Math.random()*2,
+    color: `hsl(${95+Math.random()*30},${45+Math.random()*28}%,${28+Math.random()*20}%)`,
+    sway: Math.random()*Math.PI*2,
+    swaySpeed: 0.01+Math.random()*0.018,
+  }));
+}
+rebuildGrass();
+
+function drawGrass() {
+  const gy = GY();
+  const grad = ctx.createLinearGradient(0,gy,0,H);
+  grad.addColorStop(0,'#9dc95a'); grad.addColorStop(1,'#5a8a28');
+  ctx.fillStyle=grad; ctx.fillRect(0,gy,W,H-gy);
+  for (const g of grassBlades) {
+    g.sway += g.swaySpeed;
+    const lean = Math.sin(g.sway)*3 + (mouse.x-g.x)*0.0012;
+    ctx.beginPath(); ctx.moveTo(g.x,gy);
+    ctx.quadraticCurveTo(g.x+lean, gy-g.h*0.55, g.x+lean*1.4, gy-g.h);
+    ctx.strokeStyle=g.color; ctx.lineWidth=g.w; ctx.lineCap='round'; ctx.stroke();
+  }
+}
+
+// ---- Particles ----
+const particles = Array.from({length:10}, () => ({
+  x: Math.random()*W, y: Math.random()*H*0.7,
+  r: 1+Math.random()*1.5, vx:(Math.random()-0.5)*0.2,
+  vy:-0.07-Math.random()*0.13, alpha:0.08+Math.random()*0.2,
+}));
+
+function drawParticles() {
+  for (const p of particles) {
+    p.x += p.vx + mouse.vx*0.006;
+    p.y += p.vy;
+    if (p.y < -10) { p.y = H*0.7; p.x = Math.random()*W; }
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${p.alpha})`; ctx.fill();
+  }
+}
+
+// ---- Loop ----
+function loop() {
+  ctx.clearRect(0,0,W,H);
+
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#c8e8f8'); sky.addColorStop(0.55,'#dff0fa'); sky.addColorStop(1,'#e8f5e0');
+  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
+
+  drawParticles();
+  drawGrass();
+
+  for (const d of dandelions) { d.update(mouse.x); d.draw(); }
+
+  // cull gone totoros
+  for (let i = flyingTotoros.length-1; i>=0; i--) {
+    if (flyingTotoros[i].gone) flyingTotoros.splice(i,1);
+  }
+  for (const t of flyingTotoros) { t.update(); t.draw(); }
+
+  updateCatState();
+  drawCat(mouse.x);
+
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
