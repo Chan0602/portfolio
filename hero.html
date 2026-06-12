@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yilin Chen Hero</title>
+  <title>Yilin Chen Portfolio</title>
   <style>
     :root {
       --ink: #30435a;
@@ -18,10 +18,44 @@
 
     body {
       margin: 0;
-      min-height: 130vh;
+      min-height: 100vh;
       color: var(--ink);
       background: #f8fbff;
       font-family: ui-serif, Georgia, "Times New Roman", serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 28px 0;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: rgba(48, 67, 90, 0.82);
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.92rem;
+      font-weight: 520;
     }
 
     .hero {
@@ -103,6 +137,93 @@
       position: relative;
       height: min(430px, 58vh);
       min-height: 320px;
+    }
+
+    .cases {
+      min-height: 82vh;
+      padding: clamp(76px, 11vw, 132px) 0;
+      background: linear-gradient(180deg, #fbfbf7 0%, #f7fbff 100%);
+    }
+
+    .section-inner {
+      width: min(1120px, calc(100% - 56px));
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      margin: 0 0 18px;
+      color: rgba(91, 112, 135, 0.74);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.86rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .case-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 48vh;
+      border: 1px dashed rgba(91, 112, 135, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.48);
+      color: rgba(91, 112, 135, 0.5);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .site-footer {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(72px, 9vw, 112px) 0 42px;
+      background:
+        linear-gradient(180deg, rgba(247, 251, 255, 0.95), rgba(222, 239, 250, 0.92)),
+        url("hero-assets/sky.jpg") center bottom / cover no-repeat;
+      color: var(--ink);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 48px;
+      align-items: end;
+    }
+
+    .footer-title {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 4.4vw, 4.6rem);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .footer-copy {
+      margin: 0;
+      max-width: 520px;
+      color: rgba(48, 67, 90, 0.72);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      line-height: 1.65;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 620;
+      color: rgba(48, 67, 90, 0.76);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 70px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(91, 112, 135, 0.16);
+      color: rgba(91, 112, 135, 0.7);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.92rem;
     }
 
     .cloud {
@@ -204,6 +325,16 @@
     }
 
     @media (max-width: 760px) {
+      .site-nav {
+        width: min(100% - 36px, 560px);
+        padding-top: 22px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 0.86rem;
+      }
+
       .hero-inner {
         grid-template-columns: 1fr;
         align-content: center;
@@ -226,10 +357,33 @@
         width: max(100vw, calc(var(--hero-height) * var(--art-ratio)));
         transform: translate(-72%, -56%) scale(0.9);
       }
+
+      .section-inner {
+        width: min(100% - 36px, 560px);
+      }
+
+      .footer-grid,
+      .footer-bottom {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
 <body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="brand" href="#">Yilin Chen</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
   <section class="hero" aria-label="Intro hero">
     <div class="soft-grain"></div>
     <div class="hero-artboard" aria-hidden="true">
@@ -257,6 +411,35 @@
       <div class="sky-stage" aria-hidden="true"></div>
     </div>
   </section>
+
+  <main>
+    <section class="cases" id="work" aria-label="Case studies">
+      <div class="section-inner">
+        <p class="section-kicker">Selected Work</p>
+        <div class="case-placeholder">Case studies coming soon</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">Let's make something thoughtful.</h2>
+          <p class="footer-copy">I'm open to UX design opportunities, research-led product work, and playful collaborations.</p>
+        </div>
+        <div class="footer-links" aria-label="Footer links">
+          <a href="#contact">Email</a>
+          <a href="https://github.com/Chan0602">GitHub</a>
+          <a href="#work">Work</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Designed and built by Yilin Chen</span>
+        <span>2026</span>
+      </div>
+    </div>
+  </footer>
 
   <script>
     const catFrameA = document.getElementById("cat-frame-a");
