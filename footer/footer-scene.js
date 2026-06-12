@@ -55,6 +55,7 @@ let vh = 0;
 let dpr = 1;
 let progress = 0;
 let targetProgress = 0;
+let scrollDirection = 1;
 let isScrolling = false;
 let scrollStopTimer = 0;
 let lastTime = performance.now();
@@ -471,7 +472,13 @@ function drawCatFrame(frame, x, groundY, targetHeight, alpha, bob) {
   const dh = frame.height * scale;
   ctx.save();
   ctx.globalAlpha *= alpha;
-  ctx.drawImage(frame, x - dw / 2, groundY - dh + bob, dw, dh);
+  if (scrollDirection < 0) {
+    ctx.translate(x, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(frame, -dw / 2, groundY - dh + bob, dw, dh);
+  } else {
+    ctx.drawImage(frame, x - dw / 2, groundY - dh + bob, dw, dh);
+  }
   ctx.restore();
 }
 
@@ -548,6 +555,10 @@ function render(now) {
   const dt = Math.min(50, now - lastTime);
   lastTime = now;
   updateScrollProgress();
+  const progressDelta = targetProgress - progress;
+  if (Math.abs(progressDelta) > 0.0008) {
+    scrollDirection = progressDelta < 0 ? -1 : 1;
+  }
   progress += (targetProgress - progress) * 0.16;
 
   ctx.clearRect(0, 0, vw, vh);

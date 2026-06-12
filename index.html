@@ -114,7 +114,7 @@
       opacity: 0;
       transform: translateY(18px);
       animation: intro-in 1100ms ease forwards;
-      animation-delay: 2200ms;
+      animation-delay: 2800ms;
     }
 
     .intro h1 {
@@ -174,13 +174,16 @@
     }
 
     .hero-cloud-1 {
-      animation: cloud-one-out 780ms ease forwards;
-      animation-delay: 760ms;
+      transition: opacity 820ms ease, transform 820ms ease;
     }
 
     .hero-cloud-2 {
-      animation: cloud-two-out 780ms ease forwards;
-      animation-delay: 1540ms;
+      transition: opacity 820ms ease, transform 820ms ease;
+    }
+
+    .hero-cloud.is-gone {
+      opacity: 0;
+      transform: scale(0.99);
     }
 
     .hero-cat {
@@ -285,20 +288,6 @@
       transform: translate(-50%, 0);
     }
 
-    @keyframes cloud-one-out {
-      to {
-        opacity: 0;
-        transform: scale(0.99);
-      }
-    }
-
-    @keyframes cloud-two-out {
-      to {
-        opacity: 0;
-        transform: scale(0.99);
-      }
-    }
-
     @keyframes intro-in {
       to {
         opacity: 1;
@@ -307,11 +296,14 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .intro,
-      .hero-cloud-1,
-      .hero-cloud-2 {
+      .intro {
         animation-duration: 1ms;
         animation-delay: 1ms;
+      }
+
+      .hero-cloud-1,
+      .hero-cloud-2 {
+        transition-duration: 1ms;
       }
     }
 
@@ -442,6 +434,8 @@
       down: "hero/stay-4-down.png"
     };
     const processedFrames = new Map();
+    const firstCloud = document.querySelector(".hero-cloud-1");
+    const secondCloud = document.querySelector(".hero-cloud-2");
     let stayBounds = null;
     let catIsInteractive = false;
     let currentStay = "neutral";
@@ -653,25 +647,32 @@
       const stayNeutral = await loadProcessedFrame(stayFrames.neutral);
       const processedRunFrames = await Promise.all(runFrames.map(src => loadProcessedFrame(src)));
       const sequence = [
-        stayNeutral,
+        processedRunFrames[0],
         ...processedRunFrames,
+        processedRunFrames[processedRunFrames.length - 1],
         stayNeutral
       ];
 
-      let index = 0;
-      showCatFrame(sequence[0], "intro", true);
+      let index = -1;
+      activeFrame.classList.remove("is-visible");
+      idleFrame.classList.remove("is-visible");
+      activeFrame.dataset.catState = "hidden";
       const timer = window.setInterval(() => {
         index += 1;
         if (index >= sequence.length) {
           window.clearInterval(timer);
+          firstCloud.classList.add("is-gone");
+          secondCloud.classList.add("is-gone");
           showCatFrame(stayNeutral, "neutral");
           catIsInteractive = true;
           currentStay = "neutral";
           pendingStay = "neutral";
           return;
         }
+        if (index === 4) firstCloud.classList.add("is-gone");
+        if (index === 7) secondCloud.classList.add("is-gone");
         showCatFrame(sequence[index], index === sequence.length - 1 ? "stay" : "run", true);
-      }, 180);
+      }, 260);
     }
 
     prepareClouds();
