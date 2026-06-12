@@ -3,10 +3,680 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=hero.html">
   <title>Yilin Chen Portfolio</title>
+  <style>
+    :root {
+      --ink: #30435a;
+      --soft-ink: #5b7087;
+      --hero-height: 70vh;
+      --art-ratio: 2548 / 965;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: #f8fbff;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 28px 0;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: rgba(48, 67, 90, 0.82);
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.92rem;
+      font-weight: 520;
+    }
+
+    .hero {
+      position: relative;
+      height: var(--hero-height);
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(180deg, #d9edfb 0%, #edf6fb 58%, #fbfbf7 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 16% 24%, rgba(255, 255, 255, 0.34), transparent 22%),
+        radial-gradient(circle at 78% 15%, rgba(255, 255, 255, 0.2), transparent 24%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.38), transparent 48%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-artboard {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 0;
+      width: max(100vw, calc(var(--hero-height) * var(--art-ratio)));
+      aspect-ratio: var(--art-ratio);
+      transform: translate(-50%, -50%);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 252, 242, 0.42)),
+        url("hero/sky.jpg") center / contain no-repeat;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(260px, 0.92fr) minmax(360px, 1.08fr);
+      align-items: center;
+      width: min(1120px, calc(100% - 56px));
+      height: 100%;
+      margin: 0 auto;
+    }
+
+    .intro {
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: intro-in 1100ms ease forwards;
+      animation-delay: 2200ms;
+    }
+
+    .intro h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.4rem, 4.8vw, 5rem);
+      line-height: 0.96;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-wrap: balance;
+      text-shadow: 0 1px 16px rgba(255, 255, 255, 0.6);
+    }
+
+    .intro p {
+      margin: 0;
+      max-width: 430px;
+      color: var(--soft-ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      line-height: 1.58;
+      letter-spacing: 0;
+      text-shadow: 0 1px 14px rgba(255, 255, 255, 0.7);
+    }
+
+    .sky-stage {
+      position: relative;
+      height: min(430px, 58vh);
+      min-height: 320px;
+    }
+
+    .hero-cloud,
+    .hero-cat {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-cloud {
+      z-index: 1;
+      opacity: 0.93;
+      filter: drop-shadow(0 10px 18px rgba(91, 122, 148, 0.08));
+    }
+
+    .hero-cloud img,
+    .hero-cat img {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0;
+    }
+
+    .hero-cloud img {
+      transition: opacity 260ms ease;
+    }
+
+    .hero-cloud-1 {
+      animation: cloud-one-out 780ms ease forwards;
+      animation-delay: 760ms;
+    }
+
+    .hero-cloud-2 {
+      animation: cloud-two-out 780ms ease forwards;
+      animation-delay: 1540ms;
+    }
+
+    .hero-cat {
+      z-index: 2;
+      filter: drop-shadow(0 10px 10px rgba(72, 92, 112, 0.16));
+    }
+
+    .hero-cat img {
+      transition: opacity 260ms ease-in-out;
+    }
+
+    .hero-cat img.is-visible {
+      opacity: 1;
+    }
+
+    .soft-grain {
+      position: absolute;
+      inset: -20%;
+      z-index: -1;
+      opacity: 0.12;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,0.75) 0 1px, transparent 1px);
+      background-size: 42px 38px, 56px 52px;
+      pointer-events: none;
+    }
+
+    .cases {
+      min-height: 90vh;
+      padding: clamp(86px, 12vw, 148px) 0;
+      background: linear-gradient(180deg, #fbfbf7 0%, #f7fbff 100%);
+    }
+
+    .section-inner {
+      width: min(1120px, calc(100% - 56px));
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      margin: 0 0 18px;
+      color: rgba(91, 112, 135, 0.74);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.86rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .case-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 56vh;
+      border: 1px dashed rgba(91, 112, 135, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.48);
+      color: rgba(91, 112, 135, 0.5);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .scroll-footer {
+      position: relative;
+      height: 320vh;
+    }
+
+    .footer-scene {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      min-height: 520px;
+      overflow: hidden;
+      background: #d9f0fb;
+    }
+
+    #scene-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .thanks {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(72px, 12vh, 132px);
+      margin: 0;
+      color: rgba(65, 86, 55, 0.88);
+      font-size: clamp(42px, 7vw, 112px);
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 0.95;
+      text-align: center;
+      text-shadow: 0 10px 34px rgba(255, 255, 255, 0.92);
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: opacity 120ms linear, transform 120ms linear;
+    }
+
+    .thanks.is-visible {
+      transform: translate(-50%, 0);
+    }
+
+    @keyframes cloud-one-out {
+      to {
+        opacity: 0;
+        transform: scale(0.99);
+      }
+    }
+
+    @keyframes cloud-two-out {
+      to {
+        opacity: 0;
+        transform: scale(0.99);
+      }
+    }
+
+    @keyframes intro-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .intro,
+      .hero-cloud-1,
+      .hero-cloud-2 {
+        animation-duration: 1ms;
+        animation-delay: 1ms;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-nav {
+        width: min(100% - 36px, 560px);
+        padding-top: 22px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 0.86rem;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 8px;
+        width: min(100% - 36px, 560px);
+        padding-top: 18px;
+      }
+
+      .intro {
+        order: 2;
+      }
+
+      .sky-stage {
+        order: 1;
+        height: 330px;
+        min-height: 300px;
+      }
+
+      .hero-artboard {
+        width: max(100vw, calc(var(--hero-height) * var(--art-ratio)));
+        transform: translate(-72%, -56%) scale(0.9);
+      }
+
+      .section-inner {
+        width: min(100% - 36px, 560px);
+      }
+
+      .scroll-footer {
+        height: 260vh;
+      }
+
+      .footer-scene {
+        min-height: 420px;
+      }
+
+      .thanks {
+        bottom: clamp(58px, 10vh, 96px);
+        width: min(88vw, 520px);
+        white-space: normal;
+      }
+    }
+  </style>
 </head>
 <body>
-  <p><a href="hero.html">Open Yilin Chen Portfolio</a></p>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="brand" href="#">Yilin Chen</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#scroll-footer">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" aria-label="Intro hero">
+    <div class="soft-grain"></div>
+    <div class="hero-artboard" aria-hidden="true">
+      <div class="hero-cloud hero-cloud-1">
+        <img data-cloud src="hero/cloud1.png" alt="">
+      </div>
+      <div class="hero-cloud hero-cloud-2">
+        <img data-cloud src="hero/cloud2.png" alt="">
+      </div>
+      <div class="hero-cloud hero-cloud-3">
+        <img data-cloud src="hero/cloud3.png" alt="">
+      </div>
+      <div class="hero-cat">
+        <img id="cat-frame-a" class="is-visible" alt="" src="">
+        <img id="cat-frame-b" alt="" src="">
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="intro" aria-live="polite">
+        <h1>Hi, I'm Yilin Chen</h1>
+        <p>UX Designer crafting thoughtful experiences through curiosity, research, and play.</p>
+      </div>
+
+      <div class="sky-stage" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="cases" id="work" aria-label="Case studies">
+      <div class="section-inner">
+        <p class="section-kicker">Selected Work</p>
+        <div class="case-placeholder">Case studies coming soon</div>
+      </div>
+    </section>
+  </main>
+
+  <section class="scroll-footer" id="scroll-footer" aria-label="Animated footer">
+    <div class="footer-scene">
+      <canvas id="scene-canvas"></canvas>
+      <p class="thanks" id="thanks">Thanks for visiting</p>
+    </div>
+  </section>
+
+  <script>
+    const catFrameA = document.getElementById("cat-frame-a");
+    const catFrameB = document.getElementById("cat-frame-b");
+    let activeFrame = catFrameA;
+    let idleFrame = catFrameB;
+    const runFrames = [
+      "hero/run-1.png",
+      "hero/run-2.png",
+      "hero/run-3.png",
+      "hero/run-4.png",
+      "hero/run-5.png",
+      "hero/run-6.png"
+    ];
+    const stayFrames = {
+      neutral: "hero/stay-1.png",
+      right: "hero/stay-2-right.png",
+      up: "hero/stay-3-up.png",
+      down: "hero/stay-4-down.png"
+    };
+    const processedFrames = new Map();
+    let stayBounds = null;
+    let catIsInteractive = false;
+    let currentStay = "neutral";
+    let pendingStay = "neutral";
+
+    function makeTransparentCloud(source) {
+      const cloud = document.createElement("canvas");
+      cloud.width = source.naturalWidth;
+      cloud.height = source.naturalHeight;
+      const cloudCtx = cloud.getContext("2d", { willReadFrequently: true });
+      cloudCtx.drawImage(source, 0, 0);
+
+      const pixels = cloudCtx.getImageData(0, 0, cloud.width, cloud.height);
+      const data = pixels.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+        if (brightness < 28) {
+          data[i + 3] = 0;
+        } else if (brightness < 82) {
+          data[i + 3] = Math.round((brightness - 28) * 2.1);
+        }
+      }
+      cloudCtx.putImageData(pixels, 0, 0);
+      return cloud.toDataURL("image/png");
+    }
+
+    function prepareClouds() {
+      document.querySelectorAll("[data-cloud]").forEach(cloud => {
+        const source = new Image();
+        source.onload = () => {
+          cloud.src = makeTransparentCloud(source);
+          cloud.style.opacity = "1";
+        };
+        source.src = cloud.src;
+      });
+    }
+
+    function mirrorVisibleOverlay(source) {
+      const canvas = document.createElement("canvas");
+      canvas.width = source.naturalWidth;
+      canvas.height = source.naturalHeight;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(source, 0, 0);
+
+      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = pixels.data;
+      let x0 = canvas.width;
+      let y0 = canvas.height;
+      let x1 = 0;
+      let y1 = 0;
+
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i + 3] > 20) {
+          const pixel = i / 4;
+          const x = pixel % canvas.width;
+          const y = Math.floor(pixel / canvas.width);
+          x0 = Math.min(x0, x);
+          y0 = Math.min(y0, y);
+          x1 = Math.max(x1, x);
+          y1 = Math.max(y1, y);
+        }
+      }
+
+      if (x0 >= x1 || y0 >= y1) return source.src;
+
+      const mirrored = document.createElement("canvas");
+      mirrored.width = canvas.width;
+      mirrored.height = canvas.height;
+      const mirroredCtx = mirrored.getContext("2d");
+      const w = x1 - x0 + 1;
+      const h = y1 - y0 + 1;
+
+      mirroredCtx.translate(x0 + w, y0);
+      mirroredCtx.scale(-1, 1);
+      mirroredCtx.drawImage(canvas, x0, y0, w, h, 0, 0, w, h);
+      return mirrored.toDataURL("image/png");
+    }
+
+    function measureVisibleBounds(source) {
+      const canvas = document.createElement("canvas");
+      canvas.width = source.naturalWidth;
+      canvas.height = source.naturalHeight;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(source, 0, 0);
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let x0 = canvas.width;
+      let y0 = canvas.height;
+      let x1 = 0;
+      let y1 = 0;
+
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i + 3] > 20) {
+          const pixel = i / 4;
+          const x = pixel % canvas.width;
+          const y = Math.floor(pixel / canvas.width);
+          x0 = Math.min(x0, x);
+          y0 = Math.min(y0, y);
+          x1 = Math.max(x1, x);
+          y1 = Math.max(y1, y);
+        }
+      }
+
+      if (x0 >= x1 || y0 >= y1) return null;
+      return {
+        x: (x0 + x1) / 2 / canvas.width,
+        y: (y0 + y1) / 2 / canvas.height,
+        w: (x1 - x0 + 1) / canvas.width,
+        h: (y1 - y0 + 1) / canvas.height
+      };
+    }
+
+    function loadStayBounds() {
+      return new Promise(resolve => {
+        const source = new Image();
+        source.onload = () => {
+          stayBounds = measureVisibleBounds(source);
+          resolve(stayBounds);
+        };
+        source.src = stayFrames.neutral;
+      });
+    }
+
+    function loadProcessedFrame(src, options = {}) {
+      const cacheKey = `${src}:${options.mirrorVisible ? "mirror" : "normal"}`;
+      if (processedFrames.has(cacheKey)) return processedFrames.get(cacheKey);
+
+      if (!options.mirrorVisible) {
+        const promise = Promise.resolve(src);
+        processedFrames.set(cacheKey, promise);
+        return promise;
+      }
+
+      const promise = new Promise(resolve => {
+        const source = new Image();
+        source.onload = () => resolve(mirrorVisibleOverlay(source));
+        source.src = src;
+      });
+      processedFrames.set(cacheKey, promise);
+      return promise;
+    }
+
+    function showCatFrame(src, state, immediate = false) {
+      if (activeFrame.src.endsWith(src) && activeFrame.dataset.catState === state) return;
+
+      idleFrame.src = src;
+      idleFrame.dataset.catState = state;
+      if (immediate) {
+        activeFrame.classList.remove("is-visible");
+        idleFrame.classList.add("is-visible");
+      } else {
+        idleFrame.getBoundingClientRect();
+        activeFrame.classList.remove("is-visible");
+        idleFrame.classList.add("is-visible");
+      }
+
+      const previous = activeFrame;
+      activeFrame = idleFrame;
+      idleFrame = previous;
+    }
+
+    async function setStayFrame(direction) {
+      if (!catIsInteractive) return;
+      if (direction === currentStay || direction === pendingStay) return;
+      pendingStay = direction;
+
+      if (direction === "left") {
+        const frame = await loadProcessedFrame(stayFrames.right, { mirrorVisible: true });
+        if (pendingStay === direction) {
+          showCatFrame(frame, direction);
+          currentStay = direction;
+        }
+        return;
+      }
+
+      const frame = await loadProcessedFrame(stayFrames[direction]);
+      if (pendingStay === direction) {
+        showCatFrame(frame, direction);
+        currentStay = direction;
+      }
+    }
+
+    function updateCatLook(clientX, clientY) {
+      if (!catIsInteractive || !stayBounds) return;
+      const artboard = document.querySelector(".hero-artboard").getBoundingClientRect();
+      const catCenterX = artboard.left + stayBounds.x * artboard.width;
+      const catCenterY = artboard.top + stayBounds.y * artboard.height;
+      const dx = (clientX - catCenterX) / Math.max(48, stayBounds.w * artboard.width * 1.4);
+      const dy = (clientY - catCenterY) / Math.max(48, stayBounds.h * artboard.height * 1.4);
+
+      if (Math.abs(dx) < 0.35 && Math.abs(dy) < 0.35) {
+        setStayFrame("neutral");
+      } else if (Math.abs(dy) > Math.abs(dx) && dy < -0.18) {
+        setStayFrame("up");
+      } else if (Math.abs(dy) > Math.abs(dx) && dy > 0.18) {
+        setStayFrame("down");
+      } else if (dx < 0) {
+        setStayFrame("left");
+      } else {
+        setStayFrame("right");
+      }
+    }
+
+    window.addEventListener("pointermove", event => updateCatLook(event.clientX, event.clientY));
+    window.addEventListener("mousemove", event => updateCatLook(event.clientX, event.clientY));
+    window.addEventListener("mouseleave", () => setStayFrame("neutral"));
+
+    async function playCat() {
+      await loadStayBounds();
+      const stayNeutral = await loadProcessedFrame(stayFrames.neutral);
+      const processedRunFrames = await Promise.all(runFrames.map(src => loadProcessedFrame(src)));
+      const sequence = [
+        stayNeutral,
+        ...processedRunFrames,
+        stayNeutral
+      ];
+
+      let index = 0;
+      showCatFrame(sequence[0], "intro", true);
+      const timer = window.setInterval(() => {
+        index += 1;
+        if (index >= sequence.length) {
+          window.clearInterval(timer);
+          showCatFrame(stayNeutral, "neutral");
+          catIsInteractive = true;
+          currentStay = "neutral";
+          pendingStay = "neutral";
+          return;
+        }
+        showCatFrame(sequence[index], index === sequence.length - 1 ? "stay" : "run", true);
+      }, 180);
+    }
+
+    prepareClouds();
+    playCat();
+  </script>
+  <script src="footer/footer-scene.js"></script>
 </body>
 </html>
