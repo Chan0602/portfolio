@@ -211,12 +211,6 @@
       pointer-events: none;
     }
 
-    .cases {
-      min-height: 90vh;
-      padding: clamp(86px, 12vw, 148px) 0;
-      background: linear-gradient(180deg, #fbfbf7 0%, #f7fbff 100%);
-    }
-
     .section-inner {
       width: min(1120px, calc(100% - 56px));
       margin: 0 auto;
@@ -232,16 +226,247 @@
       text-transform: uppercase;
     }
 
-    .case-placeholder {
+    .glide-transition {
+      position: relative;
+      padding: clamp(86px, 11vw, 150px) 0 clamp(110px, 14vw, 180px);
+      background: #fbfbf7;
+    }
+
+    .glide-stage {
+      position: relative;
+      width: min(1180px, calc(100% - clamp(48px, 8vw, 132px)));
+      margin: 0 auto;
+      background: #fbfbf7;
+    }
+
+    .glide-stage::after {
+      content: "";
+      position: absolute;
+      inset: -80px -6vw auto;
+      z-index: 0;
+      height: 520px;
+      background:
+        radial-gradient(circle at 80% 22%, rgba(218, 237, 250, 0.42), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(251, 251, 247, 0));
+      pointer-events: none;
+    }
+
+    .case-showcase,
+    .play-section {
+      position: relative;
+      z-index: 3;
+      width: min(980px, calc(100% - clamp(150px, 18vw, 250px)));
+      margin: 0 auto;
+    }
+
+    .case-showcase h2,
+    .play-section h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 5.8rem);
+      line-height: 1;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .case-grid {
+      display: grid;
+      gap: clamp(54px, 8vw, 96px);
+      margin-top: clamp(36px, 6vw, 68px);
+    }
+
+    .case-card {
+      border: 1px solid rgba(91, 112, 135, 0.16);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 18px 44px rgba(84, 106, 126, 0.08);
+      overflow: hidden;
+    }
+
+    .case-copy {
+      padding: clamp(24px, 4vw, 44px) clamp(24px, 4vw, 48px) clamp(18px, 3vw, 28px);
+    }
+
+    .case-year {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: #fff0eb;
+      color: #db4a2f;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .case-title {
+      margin: 24px 0 12px;
+      color: #172233;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1.45rem, 2.5vw, 2.2rem);
+      line-height: 1.18;
+      font-weight: 760;
+      letter-spacing: -0.02em;
+    }
+
+    .case-title span {
+      color: rgba(23, 34, 51, 0.44);
+      font-weight: 650;
+    }
+
+    .case-desc {
+      margin: 0;
+      color: rgba(23, 34, 51, 0.78);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      line-height: 1.52;
+    }
+
+    .case-link {
+      display: inline-flex;
+      gap: 12px;
+      margin-top: 26px;
+      color: #db4a2f;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.96rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .case-media {
+      min-height: clamp(280px, 42vw, 560px);
+      margin: 0 clamp(18px, 3vw, 38px) clamp(18px, 3vw, 38px);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(236, 222, 203, 0.84), rgba(255, 255, 255, 0.32)),
+        linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.45) 1px, transparent 1px);
+      background-size: auto, 90px 90px, 90px 90px;
       display: grid;
       place-items: center;
-      min-height: 56vh;
-      border: 1px dashed rgba(91, 112, 135, 0.2);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.48);
-      color: rgba(91, 112, 135, 0.5);
+      color: rgba(23, 34, 51, 0.34);
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 700;
+    }
+
+    .play-card {
+      min-height: clamp(220px, 26vw, 330px);
+      border: 1px solid rgba(91, 112, 135, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 12px 34px rgba(84, 106, 126, 0.08);
+      overflow: hidden;
+    }
+
+    .play-card::before {
+      content: "";
+      display: block;
+      height: 62%;
+      background:
+        linear-gradient(135deg, rgba(218, 237, 250, 0.74), rgba(255, 255, 255, 0.1)),
+        radial-gradient(circle at 34% 36%, rgba(91, 112, 135, 0.15), transparent 22%);
+    }
+
+    .play-card span {
+      display: block;
+      padding: 18px;
+      color: rgba(48, 67, 90, 0.74);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 620;
+    }
+
+    .glide-cat {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: var(--transition-cat-size, clamp(190px, 24vw, 340px));
+      aspect-ratio: 1;
+      z-index: 4;
+      transform: translate(-999px, -999px);
+      transform-origin: 50% 50%;
+      opacity: 1;
+      filter: drop-shadow(0 14px 14px rgba(72, 92, 112, 0.14));
+      transition: opacity 420ms ease, transform 120ms linear, width 300ms ease;
+      pointer-events: none;
+    }
+
+    .glide-cat.is-hidden {
+      opacity: 0;
+    }
+
+    .glide-cat.is-flight {
+      --transition-cat-size: clamp(160px, 18vw, 260px);
+    }
+
+    .glide-cat.is-run {
+      --transition-cat-size: clamp(250px, 31vw, 430px);
+    }
+
+    .transition-frame {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 280ms ease;
+      will-change: opacity, transform;
+    }
+
+    .transition-frame.is-active {
+      opacity: 1;
+    }
+
+    .play-section {
+      min-height: 120vh;
+      padding-top: clamp(110px, 16vw, 180px);
+    }
+
+    .play-intro {
+      margin-bottom: clamp(28px, 5vw, 54px);
+    }
+
+    .play-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(16px, 2vw, 24px);
+    }
+
+    .play-card {
+      min-height: clamp(220px, 26vw, 330px);
+    }
+
+    .play-card:nth-child(3n + 2) {
+      transform: translateY(36px);
+    }
+
+    .play-card:nth-child(4n) {
+      transform: translateY(-18px);
+    }
+
+    .play-card:nth-child(even)::before {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(48, 67, 90, 0.08)),
+        radial-gradient(circle at 62% 38%, rgba(48, 67, 90, 0.15), transparent 24%);
+    }
+
+    .section-note {
+      margin: 14px auto 0;
+      max-width: 520px;
+      color: rgba(91, 112, 135, 0.68);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .case-showcase .section-note,
+    .play-intro .section-note {
+      margin-left: 0;
+      text-align: left;
     }
 
     .scroll-footer {
@@ -342,7 +567,45 @@
       }
 
       .section-inner {
-        width: min(100% - 36px, 560px);
+        width: min(100% - 48px, 560px);
+      }
+
+      .glide-stage {
+        min-height: 520px;
+      }
+
+      .case-showcase,
+      .play-section {
+        width: min(100% - 260px, 420px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .case-grid,
+      .play-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .case-card,
+      .play-card {
+        min-height: 220px;
+      }
+
+      .glide-cat {
+        --transition-cat-size: 154px;
+      }
+
+      .glide-cat.is-flight {
+        --transition-cat-size: clamp(96px, 22vw, 150px);
+      }
+
+      .glide-cat.is-run {
+        --transition-cat-size: clamp(210px, 48vw, 270px);
+      }
+
+      .play-card:nth-child(n) {
+        transform: none;
       }
 
       .scroll-footer {
@@ -398,14 +661,73 @@
     </div>
   </section>
 
-  <main>
-    <section class="cases" id="work" aria-label="Case studies">
-      <div class="section-inner">
-        <p class="section-kicker">Selected Work</p>
-        <div class="case-placeholder">Case studies coming soon</div>
+  <section class="glide-transition" id="work" aria-label="Case study transition">
+    <div class="glide-stage">
+      <div class="case-showcase">
+        <h2>Case Study</h2>
+        <p class="section-note">A small shelf for selected UX stories, process notes, and design experiments.</p>
+        <div class="case-grid" aria-label="Case study placeholders">
+          <article class="case-card">
+            <div class="case-copy">
+              <span class="case-year">2026</span>
+              <h3 class="case-title"><span>Project 01</span> · UX case study placeholder</h3>
+              <p class="case-desc">Short summary for the project, research question, audience, and design outcome.</p>
+              <span class="case-link">View Case -></span>
+            </div>
+            <div class="case-media">Video / image placeholder</div>
+          </article>
+          <article class="case-card">
+            <div class="case-copy">
+              <span class="case-year">2026</span>
+              <h3 class="case-title"><span>Project 02</span> · Product design placeholder</h3>
+              <p class="case-desc">A reserved space for a future process story with prototype footage or screenshots.</p>
+              <span class="case-link">View Case -></span>
+            </div>
+            <div class="case-media">Video / image placeholder</div>
+          </article>
+          <article class="case-card">
+            <div class="case-copy">
+              <span class="case-year">2025</span>
+              <h3 class="case-title"><span>Project 03</span> · Research to interaction</h3>
+              <p class="case-desc">Placeholder copy for a research-led case study and the final interaction direction.</p>
+              <span class="case-link">View Case -></span>
+            </div>
+            <div class="case-media">Video / image placeholder</div>
+          </article>
+          <article class="case-card">
+            <div class="case-copy">
+              <span class="case-year">2025</span>
+              <h3 class="case-title"><span>Project 04</span> · Service experience placeholder</h3>
+              <p class="case-desc">A space for the problem, approach, and design system or service flow highlights.</p>
+              <span class="case-link">View Case -></span>
+            </div>
+            <div class="case-media">Video / image placeholder</div>
+          </article>
+        </div>
       </div>
-    </section>
-  </main>
+      <div class="glide-cat is-hidden" id="transition-cat">
+        <img class="transition-frame is-active" id="transition-frame-a" alt="" src="">
+        <img class="transition-frame" id="transition-frame-b" alt="" src="">
+      </div>
+
+      <section class="play-section" id="play" aria-label="Play projects">
+        <div class="play-intro">
+          <h2>Play Section</h2>
+          <p class="section-note">A looser playground for prototypes, visual systems, coding sketches, and tiny interactive ideas.</p>
+        </div>
+        <div class="play-grid" aria-label="Play project placeholders">
+          <article class="play-card"><span>Play Project 01</span></article>
+          <article class="play-card"><span>Play Project 02</span></article>
+          <article class="play-card"><span>Play Project 03</span></article>
+          <article class="play-card"><span>Play Project 04</span></article>
+          <article class="play-card"><span>Play Project 05</span></article>
+          <article class="play-card"><span>Play Project 06</span></article>
+          <article class="play-card"><span>Play Project 07</span></article>
+          <article class="play-card"><span>Play Project 08</span></article>
+        </div>
+      </section>
+    </div>
+  </section>
 
   <section class="scroll-footer" id="scroll-footer" aria-label="Animated footer">
     <div class="footer-scene">
@@ -417,6 +739,12 @@
   <script>
     const catFrameA = document.getElementById("cat-frame-a");
     const catFrameB = document.getElementById("cat-frame-b");
+    const transition = document.getElementById("work");
+    const transitionCat = document.getElementById("transition-cat");
+    const transitionFrames = [
+      document.getElementById("transition-frame-a"),
+      document.getElementById("transition-frame-b")
+    ];
     let activeFrame = catFrameA;
     let idleFrame = catFrameB;
     const runFrames = [
@@ -427,11 +755,36 @@
       "hero/run-5.png",
       "hero/run-6.png"
     ];
+    const footerRunFrames = [
+      "footer/cat-run-1.png",
+      "footer/cat-run-2.png",
+      "footer/cat-run-3.png",
+      "footer/cat-run-4.png"
+    ];
     const stayFrames = {
       neutral: "hero/stay-1.png",
       right: "hero/stay-2-right.png",
       up: "hero/stay-3-up.png",
       down: "hero/stay-4-down.png"
+    };
+    const transitionAssetBase = "transition/glide-demo-assets/";
+    const transitionFrameSets = {
+      takeOff: [
+        `${transitionAssetBase}take-off1.png`,
+        `${transitionAssetBase}take-off2.png`
+      ],
+      gliding: [
+        `${transitionAssetBase}gliding-1.png`,
+        `${transitionAssetBase}gliding-2.png`,
+        `${transitionAssetBase}gliding-3.png`,
+        `${transitionAssetBase}gliding-4.png`,
+        `${transitionAssetBase}gliding-5.png`,
+        `${transitionAssetBase}gliding-6.png`
+      ],
+      landing: [
+        `${transitionAssetBase}landing1.png`,
+        `${transitionAssetBase}landing2.png`
+      ]
     };
     const processedFrames = new Map();
     const firstCloud = document.querySelector(".hero-cloud-1");
@@ -440,6 +793,17 @@
     let catIsInteractive = false;
     let currentStay = "neutral";
     let pendingStay = "neutral";
+    let transitionMouseX = 0.5;
+    let transitionMouseY = 0.5;
+    let transitionDrift = 0;
+    let transitionActiveLayer = 0;
+    let transitionLastFrame = "";
+    let transitionLastScrollY = window.scrollY;
+    let transitionScrollDirection = 1;
+    let transitionRunLineBottom = null;
+    let transitionFinalGlideStartY = null;
+    let transitionFinalGlideStartScroll = null;
+    const transitionProcessedFrames = new Map();
 
     function makeTransparentCloud(source) {
       const cloud = document.createElement("canvas");
@@ -577,6 +941,232 @@
       return promise;
     }
 
+    function preloadTransitionFrames() {
+      const sources = [
+        ...transitionFrameSets.takeOff,
+        ...transitionFrameSets.gliding,
+        ...transitionFrameSets.landing,
+        ...footerRunFrames,
+        ...runFrames,
+        stayFrames.neutral,
+        stayFrames.right,
+        stayFrames.up,
+        stayFrames.down
+      ];
+
+      return Promise.all(sources.map(src => new Promise(resolve => {
+        const image = new Image();
+        image.onload = resolve;
+        image.onerror = resolve;
+        image.src = src;
+      })));
+    }
+
+    function cropVisibleOverlay(source) {
+      const canvas = document.createElement("canvas");
+      canvas.width = source.naturalWidth;
+      canvas.height = source.naturalHeight;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(source, 0, 0);
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let x0 = canvas.width;
+      let y0 = canvas.height;
+      let x1 = 0;
+      let y1 = 0;
+
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i + 3] > 20) {
+          const pixel = i / 4;
+          const x = pixel % canvas.width;
+          const y = Math.floor(pixel / canvas.width);
+          x0 = Math.min(x0, x);
+          y0 = Math.min(y0, y);
+          x1 = Math.max(x1, x);
+          y1 = Math.max(y1, y);
+        }
+      }
+
+      if (x0 >= x1 || y0 >= y1) return source.src;
+
+      const pad = 28;
+      const sx = Math.max(0, x0 - pad);
+      const sy = Math.max(0, y0 - pad);
+      const sw = Math.min(canvas.width, x1 + pad) - sx;
+      const sh = Math.min(canvas.height, y1 + pad) - sy;
+      const cropped = document.createElement("canvas");
+      cropped.width = sw;
+      cropped.height = sh;
+      cropped.getContext("2d").drawImage(canvas, sx, sy, sw, sh, 0, 0, sw, sh);
+      return cropped.toDataURL("image/png");
+    }
+
+    function loadTransitionFrame(src) {
+      if (transitionProcessedFrames.has(src)) return transitionProcessedFrames.get(src);
+      const promise = new Promise(resolve => {
+        const source = new Image();
+        source.onload = () => resolve(cropVisibleOverlay(source));
+        source.onerror = () => resolve(src);
+        source.src = src;
+      });
+      transitionProcessedFrames.set(src, promise);
+      return promise;
+    }
+
+    function transitionFrameForProgress(progress) {
+      if (progress < 0.12) {
+        const idx = Math.min(
+          transitionFrameSets.takeOff.length - 1,
+          Math.floor((progress / 0.12) * transitionFrameSets.takeOff.length)
+        );
+        return { src: transitionFrameSets.takeOff[idx], flipped: false };
+      }
+
+      if (progress < 0.56) {
+        const idx = Math.floor(performance.now() / 210) % transitionFrameSets.gliding.length;
+        return { src: transitionFrameSets.gliding[idx], flipped: false };
+      }
+
+      if (progress < 0.72) {
+        const idx = Math.min(
+          transitionFrameSets.landing.length - 1,
+          Math.floor(((progress - 0.56) / 0.16) * transitionFrameSets.landing.length)
+        );
+        return { src: transitionFrameSets.landing[idx], flipped: false };
+      }
+
+      if (progress < 0.88) {
+        const idx = Math.floor(performance.now() / 185) % runFrames.length;
+        return { src: runFrames[idx], flipped: true };
+      }
+
+      const idx = Math.floor(performance.now() / 220) % transitionFrameSets.gliding.length;
+      return { src: transitionFrameSets.gliding[idx], flipped: false };
+    }
+
+    function showTransitionFrame(next) {
+      const transform = next.flipped ? "scaleX(-1)" : "scaleX(1)";
+      const frameKey = `${next.kind || "flight"}:${next.src}:${next.flipped ? "flipped" : "normal"}`;
+      transitionCat.classList.toggle("is-run", next.kind === "run");
+      transitionCat.classList.toggle("is-flight", next.kind !== "run");
+      if (transitionLastFrame === frameKey) {
+        transitionFrames[transitionActiveLayer].style.transform = transform;
+        return;
+      }
+
+      transitionLastFrame = frameKey;
+      const applyFrame = displaySrc => {
+        if (transitionLastFrame !== frameKey) return;
+        const nextLayer = transitionActiveLayer === 0 ? 1 : 0;
+        transitionFrames[nextLayer].style.transform = transform;
+        transitionFrames[nextLayer].src = displaySrc;
+        transitionFrames[nextLayer].classList.add("is-active");
+        transitionFrames[transitionActiveLayer].classList.remove("is-active");
+        transitionActiveLayer = nextLayer;
+      };
+
+      loadTransitionFrame(next.src).then(applyFrame);
+    }
+
+    function updateTransitionCat() {
+      const rect = transition.getBoundingClientRect();
+      const heroRect = document.querySelector(".hero").getBoundingClientRect();
+      const scrollDelta = window.scrollY - transitionLastScrollY;
+      if (Math.abs(scrollDelta) > 0.5) {
+        transitionScrollDirection = scrollDelta >= 0 ? 1 : -1;
+        transitionLastScrollY = window.scrollY;
+      }
+      const scrollable = Math.max(1, rect.height - window.innerHeight);
+      const progress = Math.max(0, Math.min(1, (window.scrollY - transition.offsetTop) / scrollable));
+      const firstCase = document.querySelector(".case-card").getBoundingClientRect();
+      const playGrid = document.querySelector(".play-grid").getBoundingClientRect();
+      const playTitle = document.querySelector(".play-intro h2").getBoundingClientRect();
+      const playMid = (playTitle.top + playTitle.height / 2) / window.innerHeight;
+      const hasEntered = heroRect.bottom <= 8 && rect.bottom > window.innerHeight * 0.08;
+      const takeOffT = Math.max(0, Math.min(1, (8 - heroRect.bottom) / (window.innerHeight * 0.44)));
+      const landingT = Math.max(0, Math.min(1, (0.58 - playMid) / 0.16));
+      const runT = Math.max(0, Math.min(1, (0.43 - playMid) / 0.18));
+      const finalGlideT = Math.max(0, Math.min(1, (0.18 - playMid) / 0.86));
+      const isPostRunGlide = finalGlideT > 0;
+      const driftLimit = isPostRunGlide ? 7 : 11;
+      transitionDrift += (((transitionMouseX - 0.5) * driftLimit) - transitionDrift) * 0.12;
+      const approachT = Math.max(0, Math.min(1, progress / 0.52));
+      const gap = 21;
+      const isRunPhase = runT > 0 && !isPostRunGlide;
+      const isLeftFlight = isPostRunGlide;
+      const rightFlightSize = Math.max(72, window.innerWidth - firstCase.right - gap * 2);
+      const leftFlightSize = Math.max(72, playGrid.left - gap * 2);
+      const runScale = 0.82;
+      const runSize = leftFlightSize * runScale;
+      const transitionSize = isRunPhase ? runSize : isLeftFlight ? leftFlightSize : rightFlightSize;
+      transitionCat.style.setProperty("--transition-cat-size", `${transitionSize.toFixed(1)}px`);
+      const leftFlightCenterPx = gap + leftFlightSize / 2;
+      const rightRunCenterPx = window.innerWidth - gap - runSize / 2;
+      const rightFlightCenterPx = window.innerWidth - gap - rightFlightSize / 2;
+      const titleLineY = playTitle.bottom;
+      const finalGlideEndScroll = transition.offsetTop + transition.offsetHeight - window.innerHeight * 0.08;
+      const baseX = runT <= 0
+        ? (rightFlightCenterPx / window.innerWidth) * 100
+        : !isPostRunGlide
+          ? ((rightRunCenterPx - Math.min(runT, 1) * (rightRunCenterPx - leftFlightCenterPx)) / window.innerWidth) * 100
+          : (leftFlightCenterPx / window.innerWidth) * 100;
+      const bottomAnchorY = ((titleLineY - transitionSize / 2) / window.innerHeight) * 100;
+      const topAnchorY = ((titleLineY + transitionSize / 2) / window.innerHeight) * 100;
+      if (!isPostRunGlide) {
+        transitionFinalGlideStartY = null;
+        transitionFinalGlideStartScroll = null;
+      } else if (transitionFinalGlideStartY === null) {
+        transitionFinalGlideStartY = topAnchorY;
+        transitionFinalGlideStartScroll = window.scrollY;
+      }
+      const minX = ((gap + transitionSize / 2) / window.innerWidth) * 100;
+      const maxX = ((window.innerWidth - gap - transitionSize / 2) / window.innerWidth) * 100;
+      const minY = ((gap + transitionSize / 2) / window.innerHeight) * 100;
+      const maxY = ((window.innerHeight - gap - transitionSize / 2) / window.innerHeight) * 100;
+      const finalGlideScrollT = transitionFinalGlideStartScroll === null
+        ? 0
+        : Math.max(0, Math.min(1, (window.scrollY - transitionFinalGlideStartScroll) / Math.max(1, finalGlideEndScroll - transitionFinalGlideStartScroll)));
+      const approachY = 28 + approachT * 20;
+      const baseY = landingT > 0 && runT <= 0
+        ? bottomAnchorY
+        : isRunPhase
+          ? bottomAnchorY
+          : isPostRunGlide
+            ? transitionFinalGlideStartY + finalGlideScrollT * Math.max(0, maxY - transitionFinalGlideStartY)
+          : approachY;
+      const runMinX = (leftFlightCenterPx / window.innerWidth) * 100;
+      const driftX = isRunPhase ? 0 : (transitionDrift / window.innerWidth) * 100;
+      const transitionX = Math.max(isRunPhase ? runMinX : minX, Math.min(maxX, baseX + driftX));
+      const transitionY = Math.max(minY, Math.min(maxY, baseY));
+      const transitionXPx = transitionX / 100 * window.innerWidth;
+      const transitionYPx = transitionY / 100 * window.innerHeight;
+
+      transitionCat.classList.toggle("is-hidden", !hasEntered);
+      document.documentElement.style.setProperty("--transition-left", `${transitionX.toFixed(1)}vw`);
+      document.documentElement.style.setProperty("--transition-top", `${transitionY.toFixed(1)}vh`);
+      transitionCat.style.transform = `translate(${transitionXPx.toFixed(1)}px, ${transitionYPx.toFixed(1)}px) translate(-50%, -50%)`;
+      if (hasEntered) {
+        if (takeOffT < 1 && landingT <= 0) {
+          const idx = Math.min(
+            transitionFrameSets.takeOff.length - 1,
+            Math.floor(takeOffT * transitionFrameSets.takeOff.length)
+          );
+          showTransitionFrame({ src: transitionFrameSets.takeOff[idx], flipped: false, kind: "flight" });
+        } else if (landingT > 0 && runT <= 0) {
+          const idx = Math.min(
+            transitionFrameSets.landing.length - 1,
+            Math.floor(landingT * transitionFrameSets.landing.length)
+          );
+          showTransitionFrame({ src: transitionFrameSets.landing[idx], flipped: false, kind: "flight" });
+        } else if (isRunPhase) {
+          const idx = Math.floor(performance.now() / 210) % footerRunFrames.length;
+          showTransitionFrame({ src: footerRunFrames[idx], flipped: transitionScrollDirection >= 0, kind: "run" });
+        } else {
+          const idx = Math.floor(performance.now() / 220) % transitionFrameSets.gliding.length;
+          showTransitionFrame({ src: transitionFrameSets.gliding[idx], flipped: false, kind: "flight" });
+        }
+      }
+    }
+
     function showCatFrame(src, state, immediate = false) {
       if (activeFrame.src.endsWith(src) && activeFrame.dataset.catState === state) return;
 
@@ -641,6 +1231,15 @@
     window.addEventListener("pointermove", event => updateCatLook(event.clientX, event.clientY));
     window.addEventListener("mousemove", event => updateCatLook(event.clientX, event.clientY));
     window.addEventListener("mouseleave", () => setStayFrame("neutral"));
+    window.addEventListener("pointermove", event => {
+      transitionMouseX = Math.max(0, Math.min(1, event.clientX / window.innerWidth));
+      transitionMouseY = Math.max(0, Math.min(1, event.clientY / window.innerHeight));
+    });
+    window.addEventListener("touchmove", event => {
+      if (!event.touches.length) return;
+      transitionMouseX = Math.max(0, Math.min(1, event.touches[0].clientX / window.innerWidth));
+      transitionMouseY = Math.max(0, Math.min(1, event.touches[0].clientY / window.innerHeight));
+    }, { passive: true });
 
     async function playCat() {
       await loadStayBounds();
@@ -676,6 +1275,12 @@
     }
 
     prepareClouds();
+    transitionFrames[0].src = transitionFrameSets.takeOff[0];
+    transitionLastFrame = transitionFrameSets.takeOff[0];
+    updateTransitionCat();
+    window.addEventListener("scroll", updateTransitionCat, { passive: true });
+    window.setInterval(updateTransitionCat, 120);
+    preloadTransitionFrames();
     playCat();
   </script>
   <script src="footer/footer-scene.js"></script>
