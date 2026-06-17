@@ -10,6 +10,8 @@
       --soft-ink: #5b7087;
       --hero-height: 70vh;
       --art-ratio: 2548 / 965;
+      --transition-top-radius: 42px;
+      --case-study-width: 1000px;
     }
 
     * {
@@ -228,35 +230,41 @@
 
     .glide-transition {
       position: relative;
-      padding: clamp(86px, 11vw, 150px) 0 clamp(110px, 14vw, 180px);
-      background: #fbfbf7;
+      padding: clamp(86px, 11vw, 150px) 0 42px;
+      margin-top: calc(var(--transition-top-radius) * -0.35);
+      border-radius: var(--transition-top-radius) var(--transition-top-radius) 0 0;
+      background:
+        radial-gradient(circle at 16% 12%, rgba(255, 246, 220, 0.72), transparent 24%),
+        radial-gradient(circle at 82% 36%, rgba(255, 255, 255, 0.34), transparent 30%),
+        radial-gradient(circle at 28% 78%, rgba(226, 238, 218, 0.5), transparent 32%),
+        linear-gradient(180deg, #fff5d9 0%, #fbfbf7 10%, #edf6fb 28%, #eaf6ed 60%, #e5efd9 82%, #d9f0fb 100%);
+      overflow: hidden;
     }
 
     .glide-stage {
       position: relative;
       width: min(1180px, calc(100% - clamp(48px, 8vw, 132px)));
       margin: 0 auto;
-      background: #fbfbf7;
+      background: transparent;
     }
 
     .glide-stage::after {
-      content: "";
-      position: absolute;
-      inset: -80px -6vw auto;
-      z-index: 0;
-      height: 520px;
-      background:
-        radial-gradient(circle at 80% 22%, rgba(218, 237, 250, 0.42), transparent 24%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(251, 251, 247, 0));
-      pointer-events: none;
+      content: none;
     }
 
     .case-showcase,
     .play-section {
       position: relative;
       z-index: 3;
-      width: min(980px, calc(100% - clamp(150px, 18vw, 250px)));
       margin: 0 auto;
+    }
+
+    .case-showcase {
+      width: min(var(--case-study-width), calc(100% - clamp(80px, 10vw, 140px)));
+    }
+
+    .play-section {
+      width: min(980px, calc(100% - clamp(150px, 18vw, 250px)));
     }
 
     .case-showcase h2,
@@ -270,20 +278,23 @@
 
     .case-grid {
       display: grid;
-      gap: clamp(54px, 8vw, 96px);
-      margin-top: clamp(36px, 6vw, 68px);
+      gap: clamp(64px, 9vw, 112px);
+      margin-top: 0;
     }
 
     .case-card {
-      border: 1px solid rgba(91, 112, 135, 0.16);
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.84);
-      box-shadow: 0 18px 44px rgba(84, 106, 126, 0.08);
-      overflow: hidden;
+      display: grid;
+      gap: clamp(18px, 3vw, 28px);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
     }
 
     .case-copy {
-      padding: clamp(24px, 4vw, 44px) clamp(24px, 4vw, 48px) clamp(18px, 3vw, 28px);
+      width: 100%;
+      padding: 0;
     }
 
     .case-year {
@@ -300,10 +311,10 @@
     }
 
     .case-title {
-      margin: 24px 0 12px;
+      margin: 18px 0 10px;
       color: #172233;
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: clamp(1.45rem, 2.5vw, 2.2rem);
+      font-size: clamp(1.35rem, 2.2vw, 1.95rem);
       line-height: 1.18;
       font-weight: 760;
       letter-spacing: -0.02em;
@@ -336,7 +347,7 @@
 
     .case-media {
       min-height: clamp(280px, 42vw, 560px);
-      margin: 0 clamp(18px, 3vw, 38px) clamp(18px, 3vw, 38px);
+      margin: 0;
       border-radius: 18px;
       background:
         linear-gradient(135deg, rgba(236, 222, 203, 0.84), rgba(255, 255, 255, 0.32)),
@@ -348,6 +359,15 @@
       color: rgba(23, 34, 51, 0.34);
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-weight: 700;
+      overflow: hidden;
+    }
+
+    .case-media video {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
     }
 
     .play-card {
@@ -422,7 +442,7 @@
     }
 
     .play-section {
-      min-height: 120vh;
+      min-height: auto;
       padding-top: clamp(110px, 16vw, 180px);
     }
 
@@ -571,12 +591,13 @@
       }
 
       .glide-stage {
+        width: 100%;
         min-height: 520px;
       }
 
       .case-showcase,
       .play-section {
-        width: min(100% - 260px, 420px);
+        width: calc(100% - 56px);
         margin-left: auto;
         margin-right: auto;
       }
@@ -593,15 +614,7 @@
       }
 
       .glide-cat {
-        --transition-cat-size: 154px;
-      }
-
-      .glide-cat.is-flight {
-        --transition-cat-size: clamp(96px, 22vw, 150px);
-      }
-
-      .glide-cat.is-run {
-        --transition-cat-size: clamp(210px, 48vw, 270px);
+        display: none;
       }
 
       .play-card:nth-child(n) {
@@ -664,44 +677,51 @@
   <section class="glide-transition" id="work" aria-label="Case study transition">
     <div class="glide-stage">
       <div class="case-showcase">
-        <h2>Case Study</h2>
-        <p class="section-note">A small shelf for selected UX stories, process notes, and design experiments.</p>
         <div class="case-grid" aria-label="Case study placeholders">
           <article class="case-card">
+            <div class="case-media">
+              <video src="case-study-videos/lyntra.mov" autoplay muted loop playsinline></video>
+
+            </div>
             <div class="case-copy">
-              <span class="case-year">2026</span>
-              <h3 class="case-title"><span>Project 01</span> · UX case study placeholder</h3>
-              <p class="case-desc">Short summary for the project, research question, audience, and design outcome.</p>
+              <h3 class="case-title"><span>Lyntra</span> · UX case study placeholder</h3>
+              <p class="case-desc">An AI-powered productivity app that syncs calendars and streamlines planning for high-performance users.</p>
               <a href="dandi.html" class="case-link">View Case -></a>
             </div>
-            <div class="case-media">Video / image placeholder</div>
           </article>
           <article class="case-card">
+            <div class="case-media">
+              <video src="case-study-videos/oshkosh.mp4" autoplay muted loop playsinline></video>
+           
+             
+            </div>
             <div class="case-copy">
-              <span class="case-year">2026</span>
-              <h3 class="case-title"><span>Project 02</span> · Product design placeholder</h3>
-              <p class="case-desc">A reserved space for a future process story with prototype footage or screenshots.</p>
+              <h3 class="case-title"><span>Oshkosh</span> · Product design placeholder</h3>
+              <p class="case-desc">A visual dashboard for truck performance monitoring.</p>
               <span class="case-link">View Case -></span>
             </div>
-            <div class="case-media">Video / image placeholder</div>
           </article>
           <article class="case-card">
+            <div class="case-media">
+              <video src="case-study-videos/mapwa.mp4" autoplay muted loop playsinline></video>
+         
+            </div>
             <div class="case-copy">
-              <span class="case-year">2025</span>
-              <h3 class="case-title"><span>Project 03</span> · Research to interaction</h3>
-              <p class="case-desc">Placeholder copy for a research-led case study and the final interaction direction.</p>
+              <h3 class="case-title"><span>Mapwa</span> · Research to interaction</h3>
+              <p class="case-desc">Redesigning the practicum selection and matching system for 200+ MA-LIS students.</p>
               <span class="case-link">View Case -></span>
             </div>
-            <div class="case-media">Video / image placeholder</div>
           </article>
           <article class="case-card">
+            <div class="case-media">
+              <video src="case-study-videos/web.mp4" autoplay muted loop playsinline></video>
+            
+            </div>
             <div class="case-copy">
-              <span class="case-year">2025</span>
-              <h3 class="case-title"><span>Project 04</span> · Service experience placeholder</h3>
-              <p class="case-desc">A space for the problem, approach, and design system or service flow highlights.</p>
+              <h3 class="case-title"><span>Productive Energy Solutions</span> · Service experience placeholder</h3>
+              <p class="case-desc">Redesigning the website for a Fan Manufacturing company.</p>
               <span class="case-link">View Case -></span>
             </div>
-            <div class="case-media">Video / image placeholder</div>
           </article>
         </div>
       </div>
@@ -1068,6 +1088,12 @@
     }
 
     function updateTransitionCat() {
+      if (window.innerWidth <= 760) {
+        transitionCat.classList.add("is-hidden");
+        transitionCat.style.transform = "translate(-999px, -999px)";
+        return;
+      }
+
       const rect = transition.getBoundingClientRect();
       const heroRect = document.querySelector(".hero").getBoundingClientRect();
       const scrollDelta = window.scrollY - transitionLastScrollY;
