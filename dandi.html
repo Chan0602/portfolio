@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dandi Case Study | Yilin Chen</title>
+  <style>
+    :root {
+      --page-max-width: 1180px;
+      --page-gutter-x: clamp(24px, 4vw, 52px);
+      --paper: #f5f5f5;
+      --ink: #0f0f0f;
+      --muted: #666;
+      --line: rgba(15, 15, 15, 0.16);
+      --accent: #e86fa5;
+      --serif: "Crimson Pro", Georgia, "Times New Roman", serif;
+      --sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+    }
+
+    .project-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: min(var(--page-max-width), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 24px 0;
+      color: rgba(15, 15, 15, 0.74);
+      font-size: 0.9rem;
+      font-weight: 520;
+      pointer-events: none;
+    }
+
+    .project-nav a {
+      pointer-events: auto;
+    }
+
+    .project-nav__links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .project-page {
+      width: 100%;
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    .case-study-layout {
+      width: 100%;
+    }
+
+    .case-study-layout__main {
+      min-width: 0;
+    }
+
+    .spy-nav-slot,
+    .spy-nav {
+      display: none;
+    }
+
+    .page-shell {
+      width: min(var(--page-max-width), 100%);
+      margin: 0 auto;
+      padding: 0 var(--page-gutter-x);
+      min-width: 0;
+    }
+
+    .hero-section {
+      padding-block: 16px 20px;
+    }
+
+    .media-card {
+      width: 100%;
+      max-width: 100%;
+      min-height: clamp(220px, 38vw, 520px);
+      border-radius: 8px;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background:
+        linear-gradient(135deg, rgba(232, 111, 165, 0.18), rgba(245, 245, 245, 0.2)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.72) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.72) 1px, transparent 1px),
+        #ece7e2;
+      background-size: auto, 72px 72px, 72px 72px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: rgba(15, 15, 15, 0.34);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .media-card--short {
+      min-height: clamp(180px, 26vw, 360px);
+    }
+
+    .hero-media-before {
+      clip-path: inset(100% 0 0 0);
+      animation: reveal-from-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes reveal-from-bottom {
+      to {
+        clip-path: inset(0);
+      }
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 42px;
+      padding: 38px 0 28px;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fade-up 900ms cubic-bezier(0.4, 0, 0.2, 1) 520ms forwards;
+    }
+
+    @keyframes fade-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .award {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 560;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 6.4rem);
+      line-height: 0.96;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-details {
+      display: grid;
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .detail-label,
+    .eyebrow,
+    .spy-nav__link {
+      font-size: 0.7rem;
+      line-height: 1.2;
+      font-weight: 430;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .detail-value {
+      margin-top: 4px;
+      font-size: 0.96rem;
+      line-height: 1.4;
+      font-weight: 560;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .hero-subtitle {
+      margin: 0;
+      max-width: 520px;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.62;
+      font-weight: 300;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border: 1px solid rgba(15, 15, 15, 0.15);
+      border-radius: 999px;
+      padding: 5px 13px;
+      background: rgba(15, 15, 15, 0.08);
+      font-size: 0.76rem;
+    }
+
+    .skip-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: min(100%, 360px);
+      border: 1px solid rgba(232, 111, 165, 0.35);
+      border-radius: 999px;
+      padding: 6px 16px 6px 6px;
+      color: var(--accent);
+      background:
+        repeating-linear-gradient(0deg, rgba(232, 111, 165, 0.12) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(232, 111, 165, 0.12) 0 1px, transparent 1px 3px);
+      background-size: 4px 4px;
+      font-size: 0.86rem;
+      font-weight: 620;
+      letter-spacing: 0.04em;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .skip-btn::before {
+      content: "";
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: 0 0 auto;
+      transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 320ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skip-btn:hover::before {
+      width: 100%;
+      border-radius: 999px;
+    }
+
+    .skip-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .skip-btn:hover span {
+      color: white;
+    }
+
+    .hero-media-after {
+      margin-top: 24px;
+      opacity: 0;
+      animation: fade-up 700ms cubic-bezier(0.4, 0, 0.2, 1) 1600ms forwards;
+    }
+
+    .section {
+      padding-block: 36px;
+    }
+
+    .section-content {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .context-top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 44px;
+      margin-bottom: 56px;
+    }
+
+    .context-item,
+    .feature,
+    .stat-card,
+    .next-card,
+    .reveal {
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 760ms cubic-bezier(0.4, 0, 0.2, 1), transform 760ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .context-item.is-visible,
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+    }
+
+    .context-title,
+    .large-heading {
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 600;
+      letter-spacing: -0.038em;
+      overflow-wrap: anywhere;
+    }
+
+    .body-copy {
+      margin: 18px 0 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .accent {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 650;
+    }
+
+    .impact-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      margin: 40px 0 22px;
+    }
+
+    .statement {
+      margin: 0;
+      font-size: clamp(1.7rem, 4.15vw, 4.25rem);
+      line-height: 1.02;
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      overflow-wrap: anywhere;
+    }
+
+    .media-placeholder {
+      width: 100%;
+      max-width: 100%;
+      min-height: clamp(260px, 42vw, 540px);
+      border-radius: 8px;
+      border: 1px solid rgba(15, 15, 15, 0.08);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(232, 111, 165, 0.38), transparent 38%),
+        linear-gradient(135deg, #f7e8ef, #f3f1ea);
+      display: grid;
+      place-items: center;
+      color: rgba(15, 15, 15, 0.38);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+
+    .story-text {
+      max-width: min(48rem, 100%);
+      margin: 0 0 36px;
+      font-size: 1rem;
+      line-height: 1.68;
+      font-weight: 300;
+    }
+
+    .story-text--right {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin: 34px 0;
+    }
+
+    .stat-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .stat-media {
+      width: 100%;
+      max-width: 100%;
+      min-height: 220px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #eee2dc, #f8f4ef);
+      display: grid;
+      place-items: center;
+      color: rgba(15, 15, 15, 0.36);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-lead {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .stat-metric {
+      display: block;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.86;
+      letter-spacing: -0.045em;
+      font-style: italic;
+      overflow-wrap: anywhere;
+    }
+
+    .solution-overview {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .flower-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .flower {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(232, 111, 165, 0.42), transparent 28%),
+        radial-gradient(circle at 36% 58%, rgba(77, 112, 79, 0.2), transparent 26%),
+        #f8f3ed;
+      transition: transform 650ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .flower:hover {
+      transform: rotate(18deg) scale(1.02);
+    }
+
+    .feature {
+      display: grid;
+      gap: 18px;
+      margin: 0 0 72px;
+    }
+
+    .feature-title {
+      margin: 26px 0 0;
+      font-size: 0.84rem;
+      font-weight: 430;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .feature-media {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 34px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .feature-video {
+      width: 100%;
+      max-width: 100%;
+      min-height: clamp(260px, 42vw, 560px);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(232, 111, 165, 0.5), transparent 44%),
+        #f2eee7;
+      display: grid;
+      place-items: center;
+      color: rgba(15, 15, 15, 0.36);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .feature-caption,
+    .next-description {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.66;
+      font-weight: 300;
+    }
+
+    .two-card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 72px;
+    }
+
+    .next-card {
+      border: 1px solid rgba(15, 15, 15, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    .next-card__image {
+      min-height: clamp(180px, 24vw, 320px);
+      background: linear-gradient(135deg, #e9edf1, #fbfbf7);
+    }
+
+    .next-card__body {
+      padding: clamp(22px, 3vw, 34px);
+    }
+
+    .next-card h4 {
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.24;
+      letter-spacing: -0.035em;
+      overflow-wrap: anywhere;
+    }
+
+    .next-card p {
+      margin: 12px 0 0;
+      font-size: 0.9rem;
+      line-height: 1.58;
+      font-weight: 300;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      margin: 36px 0 80px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1.25fr 1fr;
+        gap: 64px;
+      }
+
+      .hero-details {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+      }
+
+      .context-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 64px;
+      }
+
+      .stat-card {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .stat-card:nth-child(even) .stat-media {
+        order: 2;
+      }
+
+      .feature-media {
+        grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
+      }
+
+      .two-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .case-study-layout {
+        display: grid;
+        grid-template-columns: 10.5rem minmax(0, 1fr);
+        gap: 2.5rem;
+        width: min(var(--page-max-width), 100%);
+        margin: 0 auto;
+        padding: 0 var(--page-gutter-x);
+        align-items: start;
+      }
+
+      .page-shell {
+        width: 100%;
+        padding: 0;
+      }
+
+      .spy-nav-slot {
+        display: block;
+        position: sticky;
+        top: 112px;
+        align-self: start;
+        padding-top: 12px;
+      }
+
+      .spy-nav {
+        display: block;
+      }
+
+      .spy-nav__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .spy-nav__item {
+        opacity: 0;
+        transform: translateY(8px);
+        animation: nav-in 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: calc(0.2s + var(--i) * 0.07s);
+      }
+
+      @keyframes nav-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .spy-nav__link {
+        width: 100%;
+        border: 0;
+        padding: 3px 0;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        text-align: left;
+        font-family: var(--sans);
+        cursor: pointer;
+        transition: color 180ms ease, font-weight 180ms ease;
+      }
+
+      .spy-nav__dot {
+        display: block;
+        width: 8px;
+        height: 8px;
+        max-width: 0;
+        margin-right: 0;
+        border-radius: 2px;
+        background: currentColor;
+        opacity: 0;
+        transition: opacity 180ms ease, max-width 180ms ease, margin-right 180ms ease;
+      }
+
+      .spy-nav__link.is-active {
+        color: var(--accent);
+        font-weight: 760;
+      }
+
+      .spy-nav__link.is-active .spy-nav__dot {
+        max-width: 8px;
+        margin-right: 8px;
+        opacity: 1;
+      }
+
+      .hero-section,
+      .section {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --page-gutter-x: clamp(22px, 7vw, 34px);
+      }
+
+      .project-nav {
+        width: min(100% - 36px, 560px);
+        padding-top: 18px;
+        font-size: 0.86rem;
+      }
+
+      .project-nav__links {
+        gap: 14px;
+      }
+
+      .project-page {
+        padding-top: 72px;
+      }
+
+      .hero-section {
+        padding-top: 8px;
+        padding-bottom: 30px;
+      }
+
+      .hero-content {
+        gap: 30px;
+        padding: 30px 0 34px;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(2.7rem, 15vw, 4.4rem);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+      }
+
+      .hero-details {
+        margin-top: 28px;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .media-card {
+        min-height: clamp(190px, 62vw, 320px);
+        background-size: auto, 44px 44px, 44px 44px;
+      }
+
+      .media-card--short {
+        min-height: clamp(170px, 54vw, 280px);
+      }
+
+      .section {
+        padding-block: 44px;
+      }
+
+      .context-top {
+        gap: 36px;
+        margin-bottom: 58px;
+      }
+
+      .context-title,
+      .large-heading {
+        font-size: clamp(2rem, 10.5vw, 2.85rem);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+      }
+
+      .body-copy,
+      .story-text,
+      .feature-caption,
+      .next-description {
+        font-size: 0.98rem;
+        line-height: 1.72;
+      }
+
+      .eyebrow {
+        margin: 34px 0 20px;
+      }
+
+      .statement {
+        font-size: clamp(2.05rem, 10.8vw, 2.95rem);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+      }
+
+      .story-text--right {
+        margin-left: 0;
+        text-align: left;
+      }
+
+      .media-placeholder,
+      .feature-video {
+        min-height: clamp(210px, 62vw, 320px);
+      }
+
+      .stat-grid {
+        gap: 34px;
+        margin: 38px 0;
+      }
+
+      .stat-card {
+        gap: 22px;
+        padding-top: 30px;
+      }
+
+      .stat-media {
+        min-height: clamp(180px, 56vw, 260px);
+      }
+
+      .stat-metric {
+        font-size: clamp(4rem, 22vw, 6.25rem);
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+      }
+
+      .solution-overview {
+        margin-bottom: 56px;
+      }
+
+      .feature {
+        margin-bottom: 60px;
+      }
+
+      .two-card-grid {
+        gap: 20px;
+      }
+
+      .next-card__image {
+        min-height: clamp(160px, 48vw, 230px);
+      }
+
+      .next-card h4 {
+        font-size: 1.5rem;
+      }
+
+      .flower-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="project-nav">
+    <a href="index.html">Yilin Chen</a>
+    <div class="project-nav__links">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#scroll-footer">Contact</a>
+    </div>
+  </header>
+
+  <main class="project-page">
+    <div class="case-study-layout">
+      <aside class="spy-nav-slot" aria-label="Case study sections">
+        <nav class="spy-nav">
+          <ul class="spy-nav__list">
+            <li class="spy-nav__item" style="--i: 0"><button class="spy-nav__link is-active" data-target="hero"><span class="spy-nav__dot"></span><span>Overview</span></button></li>
+            <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="context"><span class="spy-nav__dot"></span><span>Context</span></button></li>
+            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="began"><span class="spy-nav__dot"></span><span>Where We Began</span></button></li>
+            <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="found"><span class="spy-nav__dot"></span><span>What We Found</span></button></li>
+            <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="solution"><span class="spy-nav__dot"></span><span>Solution</span></button></li>
+            <li class="spy-nav__item" style="--i: 5"><button class="spy-nav__link" data-target="next"><span class="spy-nav__dot"></span><span>Next Steps</span></button></li>
+            <li class="spy-nav__item" style="--i: 6"><button class="spy-nav__link" data-target="takeaway"><span class="spy-nav__dot"></span><span>Takeaway</span></button></li>
+            <li class="spy-nav__item" style="--i: 7"><button class="spy-nav__link" data-target="learn"><span class="spy-nav__dot"></span><span>Learn More</span></button></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="case-study-layout__main">
+        <section id="hero" class="hero-section page-shell">
+          <div class="media-card media-card--short hero-media-before">Hero before image / video</div>
+
+          <div class="hero-content">
+            <div>
+              <div class="hero-title-group">
+                <p class="award">Most Impact Winner - FigBuild 2026</p>
+                <h1>Dandi: A Bio-Smart Wearable for PCOS</h1>
+              </div>
+              <div class="hero-details">
+                <div>
+                  <div class="detail-label">Role</div>
+                  <div class="detail-value">Product Designer & Engineer</div>
+                </div>
+                <div>
+                  <div class="detail-label">Duration</div>
+                  <div class="detail-value">Mar 6-9, 2026</div>
+                </div>
+                <div>
+                  <div class="detail-label">Tools</div>
+                  <div class="detail-value">Figma, React, TypeScript</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-right">
+              <p class="hero-subtitle">Making hormonal health accessible through emotionally resonant design, real-time biosensing, and a companion app that feels like self-care.</p>
+              <div class="tag-list">
+                <span class="tag">Mobile</span>
+                <span class="tag">Wearable</span>
+                <span class="tag">Women's Health</span>
+              </div>
+              <button class="skip-btn" data-target="solution"><span>Skip to solution</span></button>
+            </div>
+          </div>
+
+          <div class="media-card media-card--short hero-media-after">Hero after image / video</div>
+        </section>
+
+        <section id="context" class="section page-shell">
+          <div class="section-content">
+            <div class="context-top">
+              <article class="context-item">
+                <h2 class="context-title">What is Dandi?</h2>
+                <p class="body-copy">Dandi is a speculative bio-smart wearable and companion app that makes invisible health signals visible, translating biometrics into clear patterns and actionable insights.</p>
+              </article>
+              <article class="context-item">
+                <h2 class="context-title">My Role</h2>
+                <p class="body-copy">As part of a small product team, I contributed to research, concept development, interaction design, and prototyping from low-fidelity flows to a polished experience.</p>
+              </article>
+            </div>
+
+            <div class="impact-block">
+              <p class="eyebrow reveal">Context</p>
+              <p class="statement reveal">Dandi reframes health tracking as a calm, emotionally intelligent ritual - not a clinical dashboard.</p>
+              <p class="body-copy reveal">The prompt was to design a speculative tool that tracks something intangible about the human sensory experience and supports wellness or behavior change.</p>
+              <div class="media-placeholder reveal">Impact / award image</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="began" class="section page-shell">
+          <p class="eyebrow reveal">Where We Began</p>
+          <p class="story-text reveal">She had always had irregular periods, stubborn acne, and a gut feeling something was wrong. For years she assumed, <span class="accent">"This is just how my body is."</span></p>
+          <div class="media-placeholder reveal">Origin story motion</div>
+          <p class="story-text story-text--right reveal">It was not until a routine checkup that a doctor mentioned PCOS almost in passing, but she still had no real understanding of what it meant.</p>
+          <p class="story-text reveal">This personal story became the foundation for the product direction.</p>
+        </section>
+
+        <section id="found" class="section page-shell">
+          <p class="eyebrow reveal">What We Found</p>
+          <p class="statement reveal">Health data only becomes meaningful when people can understand what their body is trying to say.</p>
+          <div class="stat-grid">
+            <figure class="stat-card reveal">
+              <div class="stat-media">Research visual</div>
+              <figcaption>
+                <p class="stat-lead">Yet,</p>
+                <span class="stat-metric">1 in 2</span>
+                <p class="body-copy">women see multiple doctors before receiving a diagnosis.</p>
+              </figcaption>
+            </figure>
+            <figure class="stat-card reveal">
+              <div class="stat-media">Research visual</div>
+              <figcaption>
+                <p class="stat-lead">and</p>
+                <span class="stat-metric">70%</span>
+                <p class="body-copy">experience hidden patterns without a clear way to track them.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <p class="body-copy reveal">The opportunity was to help users notice patterns without making them feel reduced to numbers.</p>
+        </section>
+
+        <section id="solution" class="section page-shell">
+          <p class="eyebrow reveal">Solution</p>
+          <div class="solution-overview reveal">
+            <h2 class="large-heading">Visual Identity</h2>
+            <p class="body-copy">An earthy palette, soft floral motifs, and gentle motion create a product language that feels closer to self-care than a medical dashboard.</p>
+            <div class="flower-grid">
+              <div class="flower"></div>
+              <div class="flower"></div>
+              <div class="flower"></div>
+              <div class="flower"></div>
+              <div class="flower"></div>
+              <div class="flower"></div>
+            </div>
+          </div>
+
+          <div class="solution-overview reveal">
+            <h2 class="large-heading">The Ear Cuff</h2>
+            <p class="body-copy">A discreet wearable component makes the concept feel fashionable enough to wear daily and functional enough to support continuous biosensing.</p>
+            <div class="media-placeholder">Product render placeholder</div>
+          </div>
+
+          <article class="feature reveal">
+            <p class="feature-title">Feature #1: Health tracking that feels like self-care</p>
+            <p class="statement">Your garden <span class="accent">reflects your body.</span></p>
+            <div class="feature-media">
+              <div class="feature-video">Feature video</div>
+              <p class="feature-caption">Heart rate, sleep, glucose, and body temperature can be translated into an animated garden that blooms when the user is thriving.</p>
+            </div>
+          </article>
+
+          <article class="feature reveal">
+            <p class="feature-title">Feature #2: See your whole health in one place</p>
+            <p class="statement">Everything your body is doing, <span class="accent">at a glance.</span></p>
+            <div class="feature-media">
+              <div class="feature-video">Feature video</div>
+              <p class="feature-caption">Key signals and cycle patterns are framed as a morning check-in rather than a dense medical report.</p>
+            </div>
+          </article>
+        </section>
+
+        <section id="next" class="section page-shell">
+          <p class="eyebrow reveal">What's Next</p>
+          <div class="reveal">
+            <h2 class="large-heading">Validate, expand, and scale.</h2>
+            <p class="next-description">The next step is clinical validation, followed by pilot testing with users and expansion into other conditions where the body sends continuous but difficult-to-interpret signals.</p>
+          </div>
+        </section>
+
+        <section id="takeaway" class="section page-shell">
+          <p class="eyebrow reveal">Key Takeaway</p>
+          <div class="reveal">
+            <h2 class="large-heading">Data means nothing without clarity.</h2>
+            <p class="next-description">The hardest part is not only collecting signals, but making them understandable, emotionally safe, and useful in daily life.</p>
+          </div>
+        </section>
+
+        <section id="learn" class="section page-shell">
+          <p class="feature-title reveal">Learn More About Dandi</p>
+          <div class="media-placeholder reveal">Demo embed placeholder</div>
+          <div class="two-card-grid">
+            <article class="next-card reveal">
+              <div class="next-card__image"></div>
+              <div class="next-card__body">
+                <h4>Next case study</h4>
+                <p>Reserved space for the next project card.</p>
+              </div>
+            </article>
+            <article class="next-card reveal">
+              <div class="next-card__image"></div>
+              <div class="next-card__body">
+                <h4>Another project</h4>
+                <p>Reserved space for another selected work story.</p>
+              </div>
+            </article>
+          </div>
+          <a class="footer-link" href="index.html#work">Back to all work</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const navButtons = Array.from(document.querySelectorAll("[data-target]"));
+    const spyLinks = Array.from(document.querySelectorAll(".spy-nav__link"));
+    const sections = spyLinks
+      .map(link => document.getElementById(link.dataset.target))
+      .filter(Boolean);
+
+    navButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const target = document.getElementById(button.dataset.target);
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal, .context-item").forEach(item => {
+      revealObserver.observe(item);
+    });
+
+    const spyObserver = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      spyLinks.forEach(link => {
+        link.classList.toggle("is-active", link.dataset.target === visible.target.id);
+      });
+    }, {
+      rootMargin: "-18% 0px -58% 0px",
+      threshold: [0.05, 0.2, 0.4, 0.7]
+    });
+
+    sections.forEach(section => spyObserver.observe(section));
+  </script>
+</body>
+</html>

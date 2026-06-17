@@ -672,7 +672,7 @@
               <span class="case-year">2026</span>
               <h3 class="case-title"><span>Project 01</span> · UX case study placeholder</h3>
               <p class="case-desc">Short summary for the project, research question, audience, and design outcome.</p>
-              <span class="case-link">View Case -></span>
+              <a href="dandi.html" class="case-link">View Case -></a>
             </div>
             <div class="case-media">Video / image placeholder</div>
           </article>
@@ -1093,15 +1093,20 @@
       const gap = 21;
       const isRunPhase = runT > 0 && !isPostRunGlide;
       const isLeftFlight = isPostRunGlide;
-      const rightFlightSize = Math.max(72, window.innerWidth - firstCase.right - gap * 2);
-      const leftFlightSize = Math.max(72, playGrid.left - gap * 2);
+      const maxFlightSize = window.innerWidth < 760 ? 150 : 260;
+      const maxRunSize = window.innerWidth < 760 ? 270 : 230;
+      const minTransitionSize = window.innerWidth < 760 ? 64 : 72;
+      const rightFlightSpace = Math.max(0, window.innerWidth - firstCase.right - gap * 2);
+      const leftFlightSpace = Math.max(0, playGrid.left - gap * 2);
+      const rightFlightSize = Math.max(minTransitionSize, Math.min(rightFlightSpace, maxFlightSize));
+      const leftFlightSize = Math.max(minTransitionSize, Math.min(leftFlightSpace, maxFlightSize));
       const runScale = 0.82;
-      const runSize = leftFlightSize * runScale;
+      const runSize = Math.max(minTransitionSize, Math.min(leftFlightSize * runScale, maxRunSize));
       const transitionSize = isRunPhase ? runSize : isLeftFlight ? leftFlightSize : rightFlightSize;
       transitionCat.style.setProperty("--transition-cat-size", `${transitionSize.toFixed(1)}px`);
-      const leftFlightCenterPx = gap + leftFlightSize / 2;
-      const rightRunCenterPx = window.innerWidth - gap - runSize / 2;
-      const rightFlightCenterPx = window.innerWidth - gap - rightFlightSize / 2;
+      const leftFlightCenterPx = playGrid.left - gap - leftFlightSize / 2;
+      const rightFlightCenterPx = firstCase.right + gap + rightFlightSize / 2;
+      const rightRunCenterPx = rightFlightCenterPx;
       const titleLineY = playTitle.bottom;
       const finalGlideEndScroll = transition.offsetTop + transition.offsetHeight - window.innerHeight * 0.08;
       const baseX = runT <= 0
