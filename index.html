@@ -12,6 +12,9 @@
       --art-ratio: 2548 / 965;
       --transition-top-radius: 42px;
       --case-study-width: 1000px;
+      --hero-artboard-x: -50%;
+      --hero-artboard-y: -50%;
+      --hero-artboard-scale: 1;
     }
 
     * {
@@ -93,7 +96,9 @@
       z-index: 0;
       width: max(100vw, calc(var(--hero-height) * var(--art-ratio)));
       aspect-ratio: var(--art-ratio);
-      transform: translate(-50%, -50%);
+      transform:
+        translate(var(--hero-artboard-x), var(--hero-artboard-y))
+        scale(var(--hero-artboard-scale));
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 252, 242, 0.42)),
         url("hero/sky.jpg") center / contain no-repeat;
@@ -552,7 +557,20 @@
       }
     }
 
+    @media (min-width: 761px) and (max-width: 1100px) {
+      :root {
+        --hero-artboard-x: clamp(-66%, calc(-50% - (1100px - 100vw) * 0.6), -50%);
+        --hero-artboard-y: -52%;
+      }
+    }
+
     @media (max-width: 760px) {
+      :root {
+        --hero-artboard-x: -72%;
+        --hero-artboard-y: -56%;
+        --hero-artboard-scale: 0.9;
+      }
+
       .site-nav {
         width: min(100% - 36px, 560px);
         padding-top: 22px;
@@ -583,7 +601,6 @@
 
       .hero-artboard {
         width: max(100vw, calc(var(--hero-height) * var(--art-ratio)));
-        transform: translate(-72%, -56%) scale(0.9);
       }
 
       .section-inner {
@@ -686,7 +703,7 @@
             <div class="case-copy">
               <h3 class="case-title"><span>Lyntra</span> · UX case study placeholder</h3>
               <p class="case-desc">An AI-powered productivity app that syncs calendars and streamlines planning for high-performance users.</p>
-              <a href="dandi.html" class="case-link">View Case -></a>
+              <a href="lyntra.html" class="case-link">View Case -></a>
             </div>
           </article>
           <article class="case-card">
@@ -698,7 +715,7 @@
             <div class="case-copy">
               <h3 class="case-title"><span>Oshkosh</span> · Product design placeholder</h3>
               <p class="case-desc">A visual dashboard for truck performance monitoring.</p>
-              <span class="case-link">View Case -></span>
+              <a href="oshkosh.html" class="case-link">View Case -></a>
             </div>
           </article>
           <article class="case-card">
@@ -709,7 +726,7 @@
             <div class="case-copy">
               <h3 class="case-title"><span>Mapwa</span> · Research to interaction</h3>
               <p class="case-desc">Redesigning the practicum selection and matching system for 200+ MA-LIS students.</p>
-              <span class="case-link">View Case -></span>
+              <a href="mapwa.html" class="case-link">View Case -></a>
             </div>
           </article>
           <article class="case-card">
@@ -720,7 +737,7 @@
             <div class="case-copy">
               <h3 class="case-title"><span>Productive Energy Solutions</span> · Service experience placeholder</h3>
               <p class="case-desc">Redesigning the website for a Fan Manufacturing company.</p>
-              <span class="case-link">View Case -></span>
+              <a href="productive-energy-solutions.html" class="case-link">View Case -></a>
             </div>
           </article>
         </div>

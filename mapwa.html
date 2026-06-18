@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dandi Case Study | Yilin Chen</title>
+  <title>Mapwa Case Study | Yilin Chen</title>
   <style>
     :root {
       --page-max-width: 1180px;
@@ -12,7 +12,7 @@
       --ink: #0f0f0f;
       --muted: #666;
       --line: rgba(15, 15, 15, 0.16);
-      --accent: #e86fa5;
+      --accent: #c5050c;
       --serif: "Crimson Pro", Georgia, "Times New Roman", serif;
       --sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -52,13 +52,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: min(var(--page-max-width), calc(100% - 48px));
+      width: 100%;
       margin: 0 auto;
-      padding: 24px 0;
+      padding: 20px max(24px, calc((100vw - var(--page-max-width)) / 2));
+      background: #fff;
       color: rgba(15, 15, 15, 0.74);
       font-size: 0.9rem;
       font-weight: 520;
       pointer-events: none;
+      transition:
+        background-color 260ms ease,
+        box-shadow 260ms ease,
+        backdrop-filter 260ms ease;
+    }
+
+    .project-nav.is-scrolled {
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: 0 1px 0 rgba(15, 15, 15, 0.08);
+      -webkit-backdrop-filter: saturate(180%) blur(8px);
+      backdrop-filter: saturate(180%) blur(18px);
     }
 
     .project-nav a {
@@ -107,7 +119,7 @@
       border-radius: 8px;
       border: 1px solid rgba(15, 15, 15, 0.08);
       background:
-        linear-gradient(135deg, rgba(232, 111, 165, 0.18), rgba(245, 245, 245, 0.2)),
+        linear-gradient(135deg, rgba(197, 5, 12, 0.16), rgba(245, 245, 245, 0.2)),
         linear-gradient(90deg, rgba(255, 255, 255, 0.72) 1px, transparent 1px),
         linear-gradient(0deg, rgba(255, 255, 255, 0.72) 1px, transparent 1px),
         #ece7e2;
@@ -175,7 +187,7 @@
       max-width: 760px;
       color: var(--ink);
       font-family: var(--serif);
-      font-size: clamp(3rem, 8vw, 6.4rem);
+      font-size: clamp(3rem, 8vw, 4.4rem);
       line-height: 0.96;
       font-weight: 500;
       letter-spacing: -0.045em;
@@ -241,13 +253,13 @@
       align-items: center;
       gap: 14px;
       min-width: min(100%, 360px);
-      border: 1px solid rgba(232, 111, 165, 0.35);
+      border: 1px solid rgba(197, 5, 12, 0.35);
       border-radius: 999px;
       padding: 6px 16px 6px 6px;
       color: var(--accent);
       background:
-        repeating-linear-gradient(0deg, rgba(232, 111, 165, 0.12) 0 1px, transparent 1px 3px),
-        repeating-linear-gradient(90deg, rgba(232, 111, 165, 0.12) 0 1px, transparent 1px 3px);
+        repeating-linear-gradient(0deg, rgba(197, 5, 12, 0.12) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(197, 5, 12, 0.12) 0 1px, transparent 1px 3px);
       background-size: 4px 4px;
       font-size: 0.86rem;
       font-weight: 620;
@@ -367,7 +379,7 @@
 
     .statement {
       margin: 0;
-      font-size: clamp(1.7rem, 4.15vw, 4.25rem);
+      font-size: clamp(1.7rem, 4.15vw, 3.25rem);
       line-height: 1.02;
       font-family: var(--serif);
       font-weight: 500;
@@ -382,14 +394,30 @@
       border-radius: 8px;
       border: 1px solid rgba(15, 15, 15, 0.08);
       background:
-        radial-gradient(circle at 50% 50%, rgba(232, 111, 165, 0.38), transparent 38%),
-        linear-gradient(135deg, #f7e8ef, #f3f1ea);
+        radial-gradient(circle at 50% 50%, rgba(197, 5, 12, 0.26), transparent 38%),
+        linear-gradient(135deg, #f8e9ea, #f3f1ea);
       display: grid;
       place-items: center;
       color: rgba(15, 15, 15, 0.38);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-size: 0.78rem;
+    }
+
+    .media-placeholder img,
+    .media-placeholder video,
+    .media-card img,
+    .media-card video {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+    }
+
+    .media-placeholder .pes-diagram {
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.72);
     }
 
     .story-text {
@@ -470,7 +498,7 @@
       aspect-ratio: 1;
       border-radius: 8px;
       background:
-        radial-gradient(circle at 50% 44%, rgba(232, 111, 165, 0.42), transparent 28%),
+        radial-gradient(circle at 50% 44%, rgba(197, 5, 12, 0.32), transparent 28%),
         radial-gradient(circle at 36% 58%, rgba(77, 112, 79, 0.2), transparent 26%),
         #f8f3ed;
       transition: transform 650ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -509,7 +537,7 @@
       min-height: clamp(260px, 42vw, 560px);
       border-radius: 8px;
       background:
-        radial-gradient(circle at 50% 50%, rgba(232, 111, 165, 0.5), transparent 44%),
+        radial-gradient(circle at 50% 50%, rgba(197, 5, 12, 0.38), transparent 44%),
         #f2eee7;
       display: grid;
       place-items: center;
@@ -571,6 +599,160 @@
       font-size: 0.85rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+    }
+
+    .pes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 34px;
+    }
+
+    .pes-grid--two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pes-card {
+      min-width: 0;
+      padding: clamp(22px, 3vw, 30px);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.64);
+      box-shadow: 0 12px 30px rgba(15, 15, 15, 0.06);
+    }
+
+    .pes-card h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.35;
+      font-weight: 720;
+    }
+
+    .pes-card p,
+    .pes-card li {
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 0.9rem;
+      line-height: 1.58;
+      font-weight: 300;
+    }
+
+    .pes-card p {
+      margin: 11px 0 0;
+    }
+
+    .pes-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pes-list li {
+      padding: 11px 0;
+      border-top: 1px solid rgba(15, 15, 15, 0.1);
+    }
+
+    .pes-list li:first-child {
+      border-top: 0;
+    }
+
+    .pes-card-label {
+      margin: 0 0 10px !important;
+      color: var(--muted) !important;
+      font-size: 0.7rem !important;
+      font-weight: 650 !important;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pes-card-label--red {
+      color: var(--accent) !important;
+    }
+
+    .pes-card-label--green {
+      color: #2a7a3b !important;
+    }
+
+    .pes-card--rejected {
+      opacity: 0.5;
+    }
+
+    .pes-media-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .pes-media-pair .media-placeholder {
+      min-height: 280px;
+      margin-top: 14px;
+    }
+
+    .pes-pill {
+      display: inline-flex;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #fbe8e9;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pes-pill--after {
+      background: #eaf6ed;
+      color: #2a7a3b;
+    }
+
+    .pes-caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .pes-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 34px;
+    }
+
+    .pes-stat {
+      padding: clamp(22px, 3vw, 30px);
+      border-radius: 8px;
+      background: #fbe8e9;
+    }
+
+    .pes-stat strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .pes-stat span {
+      display: block;
+      margin-top: 13px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .pes-stat strong .mapwa-before {
+      display: inline;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.68em;
+      font-weight: 400;
+    }
+
+    .pes-reflection {
+      max-width: 720px;
+      line-height: 1.85;
     }
 
     @media (min-width: 768px) {
@@ -707,8 +889,8 @@
       }
 
       .project-nav {
-        width: min(100% - 36px, 560px);
-        padding-top: 18px;
+        width: 100%;
+        padding: 18px;
         font-size: 0.86rem;
       }
 
@@ -839,6 +1021,13 @@
         font-size: 1.5rem;
       }
 
+      .pes-grid,
+      .pes-grid--two,
+      .pes-media-pair,
+      .pes-stat-grid {
+        grid-template-columns: 1fr;
+      }
+
       .flower-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -861,203 +1050,192 @@
           <ul class="spy-nav__list">
             <li class="spy-nav__item" style="--i: 0"><button class="spy-nav__link is-active" data-target="hero"><span class="spy-nav__dot"></span><span>Overview</span></button></li>
             <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="context"><span class="spy-nav__dot"></span><span>Context</span></button></li>
-            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="began"><span class="spy-nav__dot"></span><span>Where We Began</span></button></li>
-            <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="found"><span class="spy-nav__dot"></span><span>What We Found</span></button></li>
-            <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="solution"><span class="spy-nav__dot"></span><span>Solution</span></button></li>
-            <li class="spy-nav__item" style="--i: 5"><button class="spy-nav__link" data-target="next"><span class="spy-nav__dot"></span><span>Next Steps</span></button></li>
-            <li class="spy-nav__item" style="--i: 6"><button class="spy-nav__link" data-target="takeaway"><span class="spy-nav__dot"></span><span>Takeaway</span></button></li>
-            <li class="spy-nav__item" style="--i: 7"><button class="spy-nav__link" data-target="learn"><span class="spy-nav__dot"></span><span>Learn More</span></button></li>
+            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="began"><span class="spy-nav__dot"></span><span>Problem</span></button></li>
+            <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="found"><span class="spy-nav__dot"></span><span>Research</span></button></li>
+            <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="solution"><span class="spy-nav__dot"></span><span>Design Approach</span></button></li>
+            <li class="spy-nav__item" style="--i: 5"><button class="spy-nav__link" data-target="next"><span class="spy-nav__dot"></span><span>Solution</span></button></li>
+            <li class="spy-nav__item" style="--i: 6"><button class="spy-nav__link" data-target="takeaway"><span class="spy-nav__dot"></span><span>Results</span></button></li>
+            <li class="spy-nav__item" style="--i: 7"><button class="spy-nav__link" data-target="learn"><span class="spy-nav__dot"></span><span>Reflection</span></button></li>
           </ul>
         </nav>
       </aside>
 
       <div class="case-study-layout__main">
         <section id="hero" class="hero-section page-shell">
-          <div class="media-card media-card--short hero-media-before">Hero before image / video</div>
+          <div class="media-card media-card--short hero-media-before">MAPWA — Redesigned Homepage</div>
 
           <div class="hero-content">
             <div>
               <div class="hero-title-group">
-                <p class="award">Most Impact Winner - FigBuild 2026</p>
-                <h1>Dandi: A Bio-Smart Wearable for PCOS</h1>
+                <p class="award">Case Study · UX Design and Research</p>
+                <h1>MAPWA — Practicum Matching System Redesign</h1>
               </div>
               <div class="hero-details">
                 <div>
                   <div class="detail-label">Role</div>
-                  <div class="detail-value">Product Designer & Engineer</div>
+                  <div class="detail-value">UX Designer and Researcher</div>
                 </div>
                 <div>
-                  <div class="detail-label">Duration</div>
-                  <div class="detail-value">Mar 6-9, 2026</div>
+                  <div class="detail-label">Timeline</div>
+                  <div class="detail-value">8 months</div>
                 </div>
                 <div>
                   <div class="detail-label">Tools</div>
-                  <div class="detail-value">Figma, React, TypeScript</div>
+                  <div class="detail-value">Figma, Screen Recording</div>
                 </div>
               </div>
             </div>
 
             <div class="hero-right">
-              <p class="hero-subtitle">Making hormonal health accessible through emotionally resonant design, real-time biosensing, and a companion app that feels like self-care.</p>
+              <p class="hero-subtitle">Students were confused, administrators were buried in emails. I redesigned the student user flow and built an admin dashboard that turned a reactive, manual process into something legible and manageable.</p>
               <div class="tag-list">
-                <span class="tag">Mobile</span>
-                <span class="tag">Wearable</span>
-                <span class="tag">Women's Health</span>
+                <span class="tag">UX Design</span>
+                <span class="tag">Research</span>
+                <span class="tag">Education</span>
               </div>
               <button class="skip-btn" data-target="solution"><span>Skip to solution</span></button>
             </div>
           </div>
 
-          <div class="media-card media-card--short hero-media-after">Hero after image / video</div>
+          <div class="media-card media-card--short hero-media-after">MAPWA — Redesigned Homepage</div>
         </section>
 
         <section id="context" class="section page-shell">
           <div class="section-content">
             <div class="context-top">
               <article class="context-item">
-                <h2 class="context-title">What is Dandi?</h2>
-                <p class="body-copy">Dandi is a speculative bio-smart wearable and companion app that makes invisible health signals visible, translating biometrics into clear patterns and actionable insights.</p>
+                <h2 class="context-title">What is MAPWA?</h2>
+                <p class="body-copy">MAPWA is the practicum matching web app used by the MA-LIS program at the University of Wisconsin-Madison. Every semester, over 200 graduate students use it to apply for and get matched to library and information science placements.</p>
               </article>
               <article class="context-item">
                 <h2 class="context-title">My Role</h2>
-                <p class="body-copy">As part of a small product team, I contributed to research, concept development, interaction design, and prototyping from low-fidelity flows to a polished experience.</p>
+                <p class="body-copy">I led research synthesis, student workflow analysis, interaction design, prototyping, and the admin dashboard experience with a developer and team lead.</p>
               </article>
             </div>
 
             <div class="impact-block">
               <p class="eyebrow reveal">Context</p>
-              <p class="statement reveal">Dandi reframes health tracking as a calm, emotionally intelligent ritual - not a clinical dashboard.</p>
-              <p class="body-copy reveal">The prompt was to design a speculative tool that tracks something intangible about the human sensory experience and supports wellness or behavior change.</p>
-              <div class="media-placeholder reveal">Impact / award image</div>
+              <p class="statement reveal">A matching system that worked on paper but left everyone guessing.</p>
+              <p class="body-copy reveal">The system technically functioned, but the experience was opaque enough to generate constant confusion — students who did not know where they stood, and administrators spending hours each week dealing with the fallout.</p>
+              <div class="media-placeholder reveal">Original MAPWA Homepage</div>
+              <p class="pes-caption">The original MAPWA — functional entry points, but no guidance on what happened after each step</p>
             </div>
           </div>
         </section>
 
         <section id="began" class="section page-shell">
-          <p class="eyebrow reveal">Where We Began</p>
-          <p class="story-text reveal">She had always had irregular periods, stubborn acne, and a gut feeling something was wrong. For years she assumed, <span class="accent">"This is just how my body is."</span></p>
-          <div class="media-placeholder reveal">Origin story motion</div>
-          <p class="story-text story-text--right reveal">It was not until a routine checkup that a doctor mentioned PCOS almost in passing, but she still had no real understanding of what it meant.</p>
-          <p class="story-text reveal">This personal story became the foundation for the product direction.</p>
+          <p class="eyebrow reveal">Problem</p>
+          <p class="statement reveal">43 emails that told the whole story.</p>
+          <p class="body-copy reveal">After the first round of matching, the admin inbox received 43 emails from students. I read and categorized every single one. The pattern was immediate and unambiguous.</p>
+          <div class="media-placeholder reveal">Email Notification Visualization</div>
+          <p class="pes-caption">Student emails received after the first matching round — more than half asking the same two questions</p>
+          <div class="pes-grid pes-grid--two">
+            <article class="pes-card reveal"><p class="pes-card-label">20+ emails</p><h3>No idea what step they were on</h3><p>Students did not know whether their application had been submitted, whether they had been matched, or what was supposed to happen next. The system completed their action but gave them nothing to hold onto afterward.</p></article>
+            <article class="pes-card reveal"><p class="pes-card-label">Remaining emails</p><h3>Edge cases the flow never addressed</h3><p>Questions about finding placements outside the system, contacting sites before confirmation, and requests to switch after a match had already been made.</p></article>
+          </div>
+          <div class="media-placeholder reveal">Student Pain Points Overlaid on UI</div>
+          <p class="pes-caption">Real quotes from student emails mapped onto the interface — the gaps in the flow made visible</p>
+          <p class="body-copy reveal">On the admin side, there was no dashboard and no way to see match status at a glance. Every incoming question required someone to dig through spreadsheets to find an answer — consuming three to four hours every week.</p>
         </section>
 
         <section id="found" class="section page-shell">
-          <p class="eyebrow reveal">What We Found</p>
-          <p class="statement reveal">Health data only becomes meaningful when people can understand what their body is trying to say.</p>
-          <div class="stat-grid">
-            <figure class="stat-card reveal">
-              <div class="stat-media">Research visual</div>
-              <figcaption>
-                <p class="stat-lead">Yet,</p>
-                <span class="stat-metric">1 in 2</span>
-                <p class="body-copy">women see multiple doctors before receiving a diagnosis.</p>
-              </figcaption>
-            </figure>
-            <figure class="stat-card reveal">
-              <div class="stat-media">Research visual</div>
-              <figcaption>
-                <p class="stat-lead">and</p>
-                <span class="stat-metric">70%</span>
-                <p class="body-copy">experience hidden patterns without a clear way to track them.</p>
-              </figcaption>
-            </figure>
-          </div>
-          <p class="body-copy reveal">The opportunity was to help users notice patterns without making them feel reduced to numbers.</p>
+          <p class="eyebrow reveal">Research</p>
+          <p class="statement reveal">Reading the old flow to find exactly where it broke down.</p>
+          <p class="body-copy reveal">I interviewed admin staff to understand how they spent their time and what information they needed most often. Then I mapped the existing student workflow in full — not to document it, but to find every point where a student could complete an action and still have no idea what came next.</p>
+          <div class="media-placeholder reveal">Old Student Workflow Diagram</div>
+          <p class="pes-caption">The old student workflow — complete in steps, but silent at every transition point</p>
+          <p class="body-copy reveal">The flow itself was not wrong. Students were following the steps correctly. The problem was that nothing acknowledged when they had completed a step or told them what was coming next. Every transition was a black box. The brief became: do not rebuild the flow from scratch; close the gaps within it.</p>
         </section>
 
         <section id="solution" class="section page-shell">
-          <p class="eyebrow reveal">Solution</p>
+          <p class="eyebrow reveal">Design Approach</p>
           <div class="solution-overview reveal">
-            <h2 class="large-heading">Visual Identity</h2>
-            <p class="body-copy">An earthy palette, soft floral motifs, and gentle motion create a product language that feels closer to self-care than a medical dashboard.</p>
-            <div class="flower-grid">
-              <div class="flower"></div>
-              <div class="flower"></div>
-              <div class="flower"></div>
-              <div class="flower"></div>
-              <div class="flower"></div>
-              <div class="flower"></div>
-            </div>
-          </div>
-
-          <div class="solution-overview reveal">
-            <h2 class="large-heading">The Ear Cuff</h2>
-            <p class="body-copy">A discreet wearable component makes the concept feel fashionable enough to wear daily and functional enough to support continuous biosensing.</p>
-            <div class="media-placeholder">Product render placeholder</div>
+            <h2 class="large-heading">Two workstreams, one for students and one for admins.</h2>
+            <p class="body-copy">The redesign split into two parallel tracks. Before opening a frame, I established the design system that would carry both — grounded in the university's existing brand with UW red as the primary color and a clean typographic scale that worked across dense data views and simple confirmation states alike.</p>
+            <div class="media-placeholder">Design System — Colors and Typography</div>
+            <p class="pes-caption">Design system foundation — UW red as primary, consistent type scale across student and admin surfaces</p>
+            <div class="media-placeholder">Figma Design Overview — All Pages</div>
+            <p class="pes-caption">Full design overview in Figma — Homepage, Login, Student flow steps, Admin Dashboard, and data views</p>
           </div>
 
           <article class="feature reveal">
-            <p class="feature-title">Feature #1: Health tracking that feels like self-care</p>
-            <p class="statement">Your garden <span class="accent">reflects your body.</span></p>
-            <div class="feature-media">
-              <div class="feature-video">Feature video</div>
-              <p class="feature-caption">Heart rate, sleep, glucose, and body temperature can be translated into an animated garden that blooms when the user is thriving.</p>
+            <p class="feature-title">Two parallel workstreams</p>
+            <p class="statement">Communication for students. Visibility for admins.</p>
+            <div class="pes-grid pes-grid--two">
+              <article class="pes-card"><p class="pes-card-label">Student flow</p><h3>Closing every gap with an automated touchpoint</h3><p>Automated emails were added at the end of every major step. Students received confirmation summaries, match instructions, and a full walkthrough video before beginning the process.</p></article>
+              <article class="pes-card"><p class="pes-card-label">Admin dashboard</p><h3>Replacing spreadsheet archaeology with a single view</h3><p>A dashboard surfaced matched, pending, and unmatched students at once. Site popularity rankings and one-click export replaced the manual spreadsheet process.</p></article>
             </div>
           </article>
 
           <article class="feature reveal">
-            <p class="feature-title">Feature #2: See your whole health in one place</p>
-            <p class="statement">Everything your body is doing, <span class="accent">at a glance.</span></p>
-            <div class="feature-media">
-              <div class="feature-video">Feature video</div>
-              <p class="feature-caption">Key signals and cycle patterns are framed as a morning check-in rather than a dense medical report.</p>
-            </div>
+            <p class="feature-title">Admin tools</p>
+            <p class="statement">The shape of a cohort, visible at a glance.</p>
+            <div class="media-placeholder">Admin Dashboard Design</div>
+            <p class="pes-caption">Admin dashboard — match status distribution, site popularity ranking, and one-click export in one view</p>
+            <div class="media-placeholder">Student Data Table Component</div>
+            <p class="pes-caption">Student data table — interest submitted, contact release, and match status visible per row with export access</p>
           </article>
         </section>
 
         <section id="next" class="section page-shell">
-          <p class="eyebrow reveal">What's Next</p>
+          <p class="eyebrow reveal">Solution</p>
           <div class="reveal">
-            <h2 class="large-heading">Validate, expand, and scale.</h2>
-            <p class="next-description">The next step is clinical validation, followed by pilot testing with users and expansion into other conditions where the body sends continuous but difficult-to-interpret signals.</p>
+            <h2 class="large-heading">Final design</h2>
+            <p class="next-description">The redesigned system kept the same underlying structure students already knew, but wrapped every step in enough communication that no one needed to ask what happened next. The admin dashboard turned a reactive, weekly firefight into a five-minute check.</p>
+            <div class="pes-media-pair">
+              <div><div class="media-placeholder">Redesigned Homepage</div><p class="pes-caption">Redesigned homepage — same entry structure, clearer system state</p></div>
+              <div><div class="media-placeholder">Admin Dashboard</div><p class="pes-caption">Admin dashboard — all match statuses visible without opening a single spreadsheet</p></div>
+            </div>
+            <div class="media-placeholder">Auto Email Design</div>
+            <p class="pes-caption">Automated emails at each step transition — the core intervention that closed the information gaps</p>
           </div>
         </section>
 
         <section id="takeaway" class="section page-shell">
-          <p class="eyebrow reveal">Key Takeaway</p>
+          <p class="eyebrow reveal">Results</p>
           <div class="reveal">
-            <h2 class="large-heading">Data means nothing without clarity.</h2>
-            <p class="next-description">The hardest part is not only collecting signals, but making them understandable, emotionally safe, and useful in daily life.</p>
+            <h2 class="large-heading">The email count said everything.</h2>
+            <div class="pes-stat-grid">
+              <div class="pes-stat"><strong><span class="mapwa-before">43</span> → 5</strong><span>admin emails received after matching round</span></div>
+              <div class="pes-stat"><strong>3hrs</strong><span>saved per week for admin staff on manual follow-up</span></div>
+              <div class="pes-stat"><strong>200+</strong><span>MA-LIS students served each semester</span></div>
+            </div>
           </div>
         </section>
 
         <section id="learn" class="section page-shell">
-          <p class="feature-title reveal">Learn More About Dandi</p>
-          <div class="media-placeholder reveal">Demo embed placeholder</div>
-          <div class="two-card-grid">
-            <article class="next-card reveal">
-              <div class="next-card__image"></div>
-              <div class="next-card__body">
-                <h4>Next case study</h4>
-                <p>Reserved space for the next project card.</p>
-              </div>
-            </article>
-            <article class="next-card reveal">
-              <div class="next-card__image"></div>
-              <div class="next-card__body">
-                <h4>Another project</h4>
-                <p>Reserved space for another selected work story.</p>
-              </div>
-            </article>
-          </div>
-          <a class="footer-link" href="index.html#work">Back to all work</a>
+          <p class="eyebrow reveal">Reflection</p>
+          <h2 class="large-heading reveal">What I took away from this project</h2>
+          <p class="body-copy pes-reflection reveal">The most valuable thing I did on this project was not design a single screen. It was sitting down with 43 emails and reading every one of them. That exercise turned a vague sense that something was wrong into a precise map of where and why. It gave the whole team a shared language for the problem — instead of talking about student confusion as a general feeling, we could point to specific moments in the flow where the system went silent.</p>
+          <p class="body-copy pes-reflection reveal">That is what I keep coming back to: finding the gap is harder than filling it. Once you know exactly where the flow breaks down, the design decisions almost make themselves. The automated emails, walkthrough video, and dashboard were not complicated ideas. What made them effective was that they were aimed at real, documented problems rather than assumptions. The gap analysis was the design work. Everything else was execution.</p>
+          <a class="footer-link" href="index.html">Back to all work</a>
         </section>
       </div>
     </div>
   </main>
 
   <script>
+    const projectNav = document.querySelector(".project-nav");
     const navButtons = Array.from(document.querySelectorAll("[data-target]"));
     const spyLinks = Array.from(document.querySelectorAll(".spy-nav__link"));
     const sections = spyLinks
       .map(link => document.getElementById(link.dataset.target))
       .filter(Boolean);
 
+    function updateProjectNav() {
+      projectNav.classList.toggle("is-scrolled", window.scrollY > 12);
+    }
+
+    updateProjectNav();
+    window.addEventListener("scroll", updateProjectNav, { passive: true });
+
     navButtons.forEach(button => {
       button.addEventListener("click", () => {
         const target = document.getElementById(button.dataset.target);
         if (!target) return;
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        const navHeight = projectNav.getBoundingClientRect().height;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight - 21;
+        window.scrollTo({ top: targetTop, behavior: "smooth" });
       });
     });
 
