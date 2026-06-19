@@ -1,7 +1,12 @@
 const canvas = document.getElementById("scene-canvas");
 const ctx = canvas.getContext("2d");
 const footer = document.getElementById("scroll-footer");
-const thanks = document.getElementById("thanks");
+const footerScene = footer.querySelector(".footer-scene");
+const contactPanel = document.getElementById("contact-panel");
+const contactForm = document.getElementById("contact-form");
+const contactStatus = document.getElementById("contact-status");
+const contactArtboard = document.querySelector(".contact-artboard");
+const contactSend = document.querySelector(".contact-send");
 
 const assetSources = {
   catLay: [
@@ -545,10 +550,13 @@ function drawSeeds(finale) {
   ctx.restore();
 }
 
-function updateThanks() {
+function updateContact() {
   const show = smoothstep(0.9, 0.985, progress);
-  thanks.style.opacity = show.toFixed(3);
-  thanks.classList.toggle("is-visible", show > 0.03);
+  const active = show > 0.03;
+  contactPanel.style.opacity = show.toFixed(3);
+  contactPanel.classList.toggle("is-visible", active);
+  contactPanel.setAttribute("aria-hidden", String(!active));
+  footerScene.classList.toggle("contact-active", active);
 }
 
 function render(now) {
@@ -566,7 +574,7 @@ function render(now) {
   drawWatercolorGrass();
   drawCat(dt);
   drawFinale();
-  updateThanks();
+  updateContact();
 
   requestAnimationFrame(render);
 }
@@ -577,4 +585,43 @@ window.addEventListener("resize", resize, { passive: true });
 window.addEventListener("scroll", markScrolling, { passive: true });
 window.addEventListener("wheel", markScrolling, { passive: true });
 window.addEventListener("touchmove", markScrolling, { passive: true });
+contactForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  contactArtboard.classList.add("is-reacting");
+  window.setTimeout(() => {
+    contactArtboard.classList.remove("is-reacting");
+  }, 900);
+
+  if (!contactForm.reportValidity()) return;
+
+  const name = document.getElementById("contact-name").value.trim();
+  const email = document.getElementById("contact-email").value.trim();
+  const message = document.getElementById("contact-message").value.trim();
+  const subject = encodeURIComponent(`Portfolio message from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+
+  contactStatus.textContent = "Opening your email app…";
+  window.location.href = `mailto:yilinchan339@gmail.com?subject=${subject}&body=${body}`;
+});
+contactSend.addEventListener("pointerdown", () => {
+  contactArtboard.classList.add("is-reacting");
+});
+contactSend.addEventListener("click", () => {
+  contactArtboard.classList.add("is-reacting");
+  window.setTimeout(() => {
+    contactArtboard.classList.remove("is-reacting");
+  }, 900);
+});
+contactSend.addEventListener("pointerenter", () => {
+  contactArtboard.classList.add("is-reacting");
+});
+contactSend.addEventListener("pointerleave", () => {
+  contactArtboard.classList.remove("is-reacting");
+});
+contactSend.addEventListener("pointerup", () => {
+  window.setTimeout(() => {
+    contactArtboard.classList.remove("is-reacting");
+  }, 500);
+});
 requestAnimationFrame(render);

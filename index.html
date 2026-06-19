@@ -513,29 +513,197 @@
       display: block;
       width: 100%;
       height: 100%;
+      transition: filter 500ms ease, transform 500ms ease;
     }
 
-    .thanks {
+    .footer-scene.contact-active #scene-canvas {
+      filter: blur(12px) saturate(0.72) brightness(0.94);
+      transform: scale(1.035);
+    }
+
+    .contact-panel {
       position: absolute;
-      left: 50%;
-      bottom: clamp(72px, 12vh, 132px);
-      margin: 0;
-      color: rgba(65, 86, 55, 0.88);
-      font-size: clamp(42px, 7vw, 112px);
-      font-weight: 500;
-      letter-spacing: 0;
-      line-height: 0.95;
-      text-align: center;
-      text-shadow: 0 10px 34px rgba(255, 255, 255, 0.92);
-      transform: translate(-50%, 24px);
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: rgba(246, 250, 245, 0.16);
       opacity: 0;
       pointer-events: none;
-      white-space: nowrap;
-      transition: opacity 120ms linear, transform 120ms linear;
+      transition: opacity 420ms ease;
     }
 
-    .thanks.is-visible {
-      transform: translate(-50%, 0);
+    .contact-panel.is-visible {
+      pointer-events: auto;
+    }
+
+    .contact-title {
+      position: absolute;
+      top: clamp(28px, 5vh, 62px);
+      left: 50%;
+      z-index: 5;
+      margin: 0;
+      color: rgba(48, 67, 90, 0.9);
+      font-size: clamp(2rem, 4vw, 4.5rem);
+      font-weight: 500;
+      line-height: 1;
+      transform: translateX(-50%);
+      text-shadow: 0 8px 28px rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+    }
+
+    .contact-artboard {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: clamp(900px, 96vw, 1540px);
+      aspect-ratio: 2560 / 974;
+      transform: translate(-50%, -42%);
+    }
+
+    .contact-yarn {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .contact-cat-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 120ms ease;
+    }
+
+    .contact-cat-origin {
+      opacity: 1;
+    }
+
+    .contact-cat-hover {
+      opacity: 0;
+    }
+
+    .contact-artboard.is-reacting .contact-cat-origin {
+      opacity: 0;
+    }
+
+    .contact-artboard.is-reacting .contact-cat-hover {
+      opacity: 1;
+    }
+
+    .contact-form {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .contact-field {
+      position: absolute;
+      display: block;
+      margin: 0;
+    }
+
+    .contact-field--name {
+      left: 31%;
+      top: 12.5%;
+      width: 32%;
+      height: 12%;
+    }
+
+    .contact-field--email {
+      left: 30%;
+      top: 26%;
+      width: 34%;
+      height: 12%;
+    }
+
+    .contact-field--message {
+      left: 30%;
+      top: 41%;
+      width: 34%;
+      height: 18%;
+    }
+
+    .contact-field input,
+    .contact-field textarea {
+      width: 100%;
+      height: 100%;
+      padding: 8px 18px 12px;
+      border: 0;
+      outline: none;
+      color: #30435a;
+      background: transparent;
+      box-shadow: none;
+      font: inherit;
+      line-height: 1.4;
+      resize: none;
+      transition: color 180ms ease;
+    }
+
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder {
+      color: rgba(48, 67, 90, 0.62);
+      font-size: clamp(0.72rem, 0.9vw, 0.86rem);
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 1;
+      transition: opacity 140ms ease;
+    }
+
+    .contact-field input:focus::placeholder,
+    .contact-field textarea:focus::placeholder {
+      opacity: 0;
+    }
+
+    .contact-send {
+      position: absolute;
+      left: 50.4%;
+      top: 82%;
+      z-index: 5;
+      width: 6.2%;
+      aspect-ratio: 1;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      color: transparent;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .contact-send::after {
+      content: none;
+    }
+
+    .contact-send:focus-visible {
+      outline: 3px solid rgba(255, 255, 255, 0.9);
+      outline-offset: 4px;
+    }
+
+    .contact-status {
+      position: absolute;
+      left: 50%;
+      bottom: 1.5%;
+      z-index: 5;
+      margin: 0;
+      color: rgba(48, 67, 90, 0.78);
+      font-size: 0.78rem;
+      transform: translateX(-50%);
+      white-space: nowrap;
     }
 
     @keyframes intro-in {
@@ -646,10 +814,29 @@
         min-height: 420px;
       }
 
-      .thanks {
-        bottom: clamp(58px, 10vh, 96px);
-        width: min(88vw, 520px);
-        white-space: normal;
+      .contact-title {
+        top: 32px;
+      }
+
+      .contact-artboard {
+        width: 900px;
+        transform: translate(-50%, -40%);
+      }
+
+      .contact-field--name {
+        left: 32.5%;
+        width: 35%;
+      }
+
+      .contact-field--email,
+      .contact-field--message {
+        left: 32%;
+        width: 36%;
+      }
+
+      .contact-send {
+        left: 49.8%;
+        width: 7%;
       }
     }
   </style>
@@ -769,7 +956,27 @@
   <section class="scroll-footer" id="scroll-footer" aria-label="Animated footer">
     <div class="footer-scene">
       <canvas id="scene-canvas"></canvas>
-      <p class="thanks" id="thanks">Thanks for visiting</p>
+      <section class="contact-panel" id="contact-panel" aria-hidden="true" aria-label="Contact me">
+        <h2 class="contact-title">Contact me</h2>
+        <div class="contact-artboard">
+          <img class="contact-yarn" src="footer/contact-yarn.png" alt="">
+          <img class="contact-cat-frame contact-cat-origin" src="footer/contact-cat-origin.png" alt="">
+          <img class="contact-cat-frame contact-cat-hover" src="footer/contact-cat-hover.png" alt="">
+          <form class="contact-form" id="contact-form">
+            <label class="contact-field contact-field--name">
+              <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Name" aria-label="Name" required>
+            </label>
+            <label class="contact-field contact-field--email">
+              <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="Email" aria-label="Email" required>
+            </label>
+            <label class="contact-field contact-field--message">
+              <textarea id="contact-message" name="message" placeholder="Message" aria-label="Message" required></textarea>
+            </label>
+            <button class="contact-send" type="submit" aria-label="Send message">Send</button>
+            <p class="contact-status" id="contact-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
     </div>
   </section>
 
