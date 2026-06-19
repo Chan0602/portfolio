@@ -6,7 +6,7 @@
   <title>Lyntra Case Study | Yilin Chen</title>
   <style>
     :root {
-      --page-max-width: 1180px;
+      --page-max-width: 1380px;
       --page-gutter-x: clamp(24px, 4vw, 52px);
       --paper: #f5f5f5;
       --ink: #0f0f0f;
@@ -15,6 +15,8 @@
       --accent: #427a76;
       --accent-soft: #edfbfa;
       --accent-rgb: 66, 122, 118;
+      --color-background-info: var(--accent-soft);
+      --color-text-info: var(--accent);
       --serif: "Crimson Pro", Georgia, "Times New Roman", serif;
       --sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -857,7 +859,7 @@
 
     .feature-strip {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
       margin-top: 30px;
     }
@@ -889,6 +891,295 @@
       font-size: 0.85rem;
       line-height: 1.35;
       font-weight: 500;
+    }
+
+    .research-media {
+      margin-top: 34px;
+    }
+
+    .research-media .media-placeholder,
+    #solution .pes-media-pair .media-placeholder {
+      min-height: 280px;
+    }
+
+    #solution .design-approach-media {
+      min-height: 0;
+      border: 0;
+      background: none;
+    }
+
+    #solution .design-approach-media img {
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .research-card {
+      margin-top: 34px;
+    }
+
+    .comparison-table-wrap {
+      margin-top: 34px;
+      overflow-x: auto;
+      border: 1px solid rgba(15, 15, 15, 0.1);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .comparison-table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.88rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(15, 15, 15, 0.08);
+    }
+
+    .comparison-table tr:last-child th,
+    .comparison-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .comparison-table th {
+      font-weight: 600;
+    }
+
+    .comparison-table th:first-child {
+      width: 32%;
+      text-align: left;
+    }
+
+    .comparison-table tbody th {
+      color: rgba(15, 15, 15, 0.72);
+      font-weight: 450;
+    }
+
+    .comparison-table .is-lyntra {
+      color: var(--color-text-info);
+      background: var(--color-background-info);
+      font-weight: 650;
+    }
+
+    .comparison-table .ti {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .comparison-table .ti-check::before {
+      content: "✓";
+      color: var(--accent);
+    }
+
+    .comparison-table .ti-x::before {
+      content: "×";
+      color: rgba(15, 15, 15, 0.34);
+    }
+
+    .comparison-table .is-lyntra .ti-check::before {
+      color: var(--color-text-info);
+    }
+
+    .approach-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 34px;
+    }
+
+    .approach-tile {
+      min-width: 0;
+      padding: 26px 22px;
+      border: 1px solid rgba(15, 15, 15, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.64);
+      text-align: center;
+    }
+
+    .approach-tile .ti {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 16px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-style: normal;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .approach-tile .ti-calendar-event::before {
+      content: "▦";
+    }
+
+    .approach-tile .ti-focus-2::before {
+      content: "◎";
+    }
+
+    .approach-tile .ti-message-circle::before {
+      content: "◌";
+    }
+
+    .approach-tile h3 {
+      font-size: 13px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .approach-tile p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    .approach-followup {
+      margin-top: 34px;
+    }
+
+    .solution-features {
+      display: grid;
+      gap: 0;
+      margin-top: 72px;
+    }
+
+    .solution-feature {
+      display: grid;
+      grid-template-areas:
+        "number"
+        "title"
+        "body";
+      row-gap: 0;
+      min-height: 820px;
+      padding: 70px 0 110px;
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+    }
+
+    .solution-feature:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .solution-feature__media {
+      display: grid;
+      place-items: start center;
+      min-width: 0;
+      align-self: start;
+    }
+
+    .solution-feature__body {
+      grid-area: body;
+      display: grid;
+      grid-template-columns: minmax(0, 700px) minmax(240px, 0.55fr);
+      column-gap: 28px;
+      align-items: center;
+      padding: 28px;
+      border: 1px solid rgba(15, 15, 15, 0.07);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .solution-feature__phone {
+      width: min(100%, 500px);
+      overflow: hidden;
+    }
+
+    .solution-feature__phone video {
+      width: calc(100% + 10px);
+      max-width: none;
+      height: auto;
+      display: block;
+      margin: -5px;
+      object-fit: contain;
+    }
+
+    .solution-feature__placeholder {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 32%, rgba(var(--accent-rgb), 0.22), transparent 34%),
+        var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .solution-feature__copy {
+      max-width: 500px;
+      align-self: center;
+    }
+
+    .solution-feature__number {
+      grid-area: number;
+      display: block;
+      margin-bottom: 38px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 450;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .solution-feature > h3 {
+      grid-area: title;
+      max-width: 980px;
+      margin: 0 auto 68px;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.038em;
+    }
+
+    .title-accent {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: inherit;
+    }
+
+    .solution-feature__copy p {
+      margin: 22px 0 0;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    .solution-feature__points {
+      display: grid;
+      gap: 12px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .solution-feature__points li {
+      padding-top: 12px;
+      border-top: 1px solid rgba(15, 15, 15, 0.1);
+      color: rgba(15, 15, 15, 0.68);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 350;
     }
 
     @media (min-width: 768px) {
@@ -929,10 +1220,10 @@
       .case-study-layout {
         display: grid;
         grid-template-columns: 10.5rem minmax(0, 1fr);
-        gap: 2.5rem;
-        width: min(var(--page-max-width), 100%);
+        gap: clamp(4rem, 6vw, 6rem);
+        width: min(var(--page-max-width), calc(100% - 48px));
         margin: 0 auto;
-        padding: 0 var(--page-gutter-x);
+        padding: 0;
         align-items: start;
       }
 
@@ -944,9 +1235,9 @@
       .spy-nav-slot {
         display: block;
         position: sticky;
-        top: 112px;
+        top: 80px;
         align-self: start;
-        padding-top: 12px;
+        padding-top: 0;
       }
 
       .spy-nav {
@@ -1168,6 +1459,58 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .approach-tiles {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-table-wrap {
+        margin-right: calc(var(--page-gutter-x) * -1);
+      }
+
+      .solution-features {
+        gap: 20px;
+        margin-top: 32px;
+      }
+
+      .solution-feature {
+        grid-template-areas:
+          "number"
+          "title"
+          "body";
+        gap: 0;
+        min-height: 0;
+        padding: 54px 0 70px;
+      }
+
+      .solution-feature__body {
+        grid-template-columns: 1fr;
+        gap: 34px;
+        padding: 28px 12px 34px;
+      }
+
+      .solution-feature__phone {
+        width: min(100%, 360px); /* Mobile feature video size */
+        margin: 0 auto;
+      }
+
+      .solution-feature__placeholder {
+        border-radius: 27px;
+      }
+
+      .solution-feature__number {
+        margin-bottom: 22px;
+      }
+
+      .solution-feature > h3 {
+        margin: 0 0 38px;
+        text-align: left;
+        font-size: clamp(2rem, 10.5vw, 2.85rem);
+      }
+
+      .solution-feature__copy {
+        margin-top: 0;
+      }
+
       .flower-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -1203,14 +1546,13 @@
       <div class="case-study-layout__main">
         <section id="hero" class="hero-section page-shell">
           <div class="media-card media-card--short hero-media-before">
-            <img src="lyntra/hifi-screens.jpg" alt="Lyntra final UI screens" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-            <span>Lyntra Final UI Screens</span>
+            <img src="lyntra/1.jpg" alt="Lyntra product overview">
           </div>
 
           <div class="hero-content">
             <div>
               <div class="hero-title-group">
-                <p class="award">Case Study · UX and Product Design</p>
+                <p class="award">AI Start-up · Design from 0 to 1</p>
                 <h1>Lyntra — AI Powered Study Planner</h1>
               </div>
               <div class="hero-details">
@@ -1240,13 +1582,12 @@
                 <span class="tag">Product Design</span>
                 <span class="tag">AI Productivity</span>
               </div>
-              <button class="skip-btn" data-target="solution"><span>Skip to solution</span></button>
+              <button class="skip-btn" data-target="next"><span>Skip to solution</span></button>
             </div>
           </div>
 
           <div class="media-card media-card--short hero-media-after">
-            <img src="lyntra/hifi-screens.jpg" alt="Lyntra final UI screens" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-            <span>Lyntra Final UI Screens</span>
+            <video src="lyntra/2.mov" autoplay muted loop playsinline preload="metadata" aria-label="Lyntra product demonstration"></video>
           </div>
         </section>
 
@@ -1284,92 +1625,179 @@
 
         <section id="found" class="section page-shell">
           <p class="eyebrow reveal">Research</p>
-          <p class="statement reveal">Interviews, surveys, and competitive analysis all pointed in the same direction.</p>
-          <p class="body-copy reveal">We interviewed students, ran surveys, and analyzed Notion, Todoist, Google Calendar, and Motion. Students did not abandon productivity apps because they lacked features. They abandoned them because setup was too heavy and maintenance was too manual.</p>
-          <div class="pes-grid pes-grid--two">
-            <article class="pes-card reveal"><p class="pes-card-label">Student interviews and surveys</p><h3>What we heard</h3><p>Existing tools required too much upfront work. Students wanted something that understood their schedule without setup from scratch. Deadline visibility and a sense of progress mattered most.</p></article>
-            <article class="pes-card reveal"><p class="pes-card-label">Competitive analysis</p><h3>What the market missed</h3><p>Tools were either too manual or too rigid. The gap was a planner that did the heavy lifting while keeping the student in charge of the final call.</p></article>
+          <p class="statement reveal">Interviews, surveys, and competitive analysis all pointing the same direction</p>
+          <p class="body-copy reveal">We interviewed students and ran surveys to understand how they actually managed their workload, what they had tried before, and where those tools fell short. Alongside that, we mapped the competitive landscape across four adjacent markets: task management, scheduling, learning management systems, and habit building apps, a combined opportunity north of twelve billion dollars in the US alone. Within that space, we compared Lyntra directly against the three closest competitors: Motion, Reclaim AI, and the calendar app 31.</p>
+
+          <div class="research-media reveal">
+            <div class="media-placeholder">
+              <img src="lyntra/competition.jpg" alt="Competitive landscape map" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
+              <span>Competitive Landscape Map</span>
+            </div>
+            <p class="pes-caption">Competitive landscape — Lyntra sits at the intersection of task management, scheduling, and skill building, markets worth a combined twelve billion dollars in the US</p>
           </div>
+
+          <article class="pes-card research-card reveal">
+            <p class="pes-card-label">Student interviews and surveys</p>
+            <h3>What students told us directly</h3>
+            <p>Students described setting up productivity tools as its own chore, one they often abandoned within a week. The two things they consistently asked for were a clear sense of what to do first and confirmation that they were not falling behind, not more views or more configuration options.</p>
+          </article>
+
+          <div class="comparison-table-wrap reveal">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" class="is-lyntra">Lyntra</th>
+                  <th scope="col">Motion</th>
+                  <th scope="col">Reclaim AI</th>
+                  <th scope="col">31</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Calendar sync</th>
+                  <td class="is-lyntra"><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-check" aria-label="Yes"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">Adaptive scheduling</th>
+                  <td class="is-lyntra"><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">Habit aware scheduling</th>
+                  <td class="is-lyntra"><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                  <td><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">Automated task breakdown</th>
+                  <td class="is-lyntra"><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">Subtask coaching</th>
+                  <td class="is-lyntra"><i class="ti ti-check" aria-label="Yes"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                  <td><i class="ti ti-x" aria-label="No"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="pes-caption reveal">Every competitor syncs a calendar. None of them break a task down or coach a student through it</p>
+          <p class="body-copy reveal">The pattern from the interviews, the surveys, and the competitive scan was consistent. Students did not abandon productivity apps because the apps lacked features. They abandoned them because setup was too heavy and the apps stopped at scheduling, never helping with the actual work inside each task. That gap, between organizing a calendar and getting a task started, was where Lyntra needed to live.</p>
         </section>
 
         <section id="solution" class="section page-shell">
           <p class="eyebrow reveal">Design Approach</p>
           <div class="solution-overview reveal">
-            <h2 class="large-heading">Four rounds of lo-fi before a single hi-fi frame</h2>
-            <p class="body-copy">We ran four rounds of lo-fi wireframing before moving to high fidelity. Each round added only what research justified. Features that could not be defended by interview data or survey findings got cut, regardless of how interesting they were to design.</p>
+            <h2 class="large-heading">Three features, not seven</h2>
+            <p class="body-copy">Of the original seven planned features, research and team debate narrowed the product down to three that we could defend with evidence: a smart agenda that handles the planning a student would otherwise do manually, a focus mode that supports them while they work, and an AI chat that helps when they get stuck. Everything else, including a full analytics dashboard and a separate micro learning scheduler, was cut or folded into these three.</p>
           </div>
 
-          <article class="feature reveal">
-            <div class="media-placeholder">
-              <img src="lyntra/iterations.jpg" alt="Four low fidelity iteration rounds" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-              <span>Four Lo-fi Iteration Rounds</span>
-            </div>
-            <p class="pes-caption">Four lo-fi iteration rounds showing how the feature set grew only when research justified it</p>
+          <div class="approach-tiles reveal">
+            <article class="approach-tile">
+              <i class="ti ti-calendar-event" aria-hidden="true"></i>
+              <h3>Smart Agenda</h3>
+              <p>Breaks deadlines into subtasks and drafts a weekly schedule the student can accept or adjust</p>
+            </article>
+            <article class="approach-tile">
+              <i class="ti ti-focus-2" aria-hidden="true"></i>
+              <h3>Focus Mode</h3>
+              <p>Launches when a student starts a subtask, tracks time, and prompts the next step on completion</p>
+            </article>
+            <article class="approach-tile">
+              <i class="ti ti-message-circle" aria-hidden="true"></i>
+              <h3>AI Chat</h3>
+              <p>Answers questions about a task, surfaces course resources, and helps when a student is stuck</p>
+            </article>
+          </div>
 
-            <div class="media-placeholder">
-              <img src="lyntra/mvp2.jpg" alt="Second round MVP screens" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-              <span>Second Round MVP Screens</span>
-            </div>
-            <p class="pes-caption">Second round MVP, with continued expansion as new validated features were added</p>
+          <p class="body-copy approach-followup reveal">With three features instead of seven, every screen had a clearer job to do. Smart Agenda needed to feel trustworthy enough that a student would accept its suggestion instead of rebuilding their schedule by hand. Focus Mode needed to feel supportive rather than like a productivity scoreboard. AI Chat needed to feel like a quick answer, not another app to learn.</p>
 
-            <p class="body-copy">With the core flow validated, we built out the design system before moving into hi-fi screens, ensuring visual consistency across what had grown into a complex product with many moving parts.</p>
-
-            <div class="media-placeholder">
-              <img src="lyntra/design-system.jpg" alt="Lyntra design system" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-              <span>Design System</span>
+          <div class="research-media reveal">
+            <div class="media-placeholder design-approach-media">
+              <img src="lyntra/design approach.png" alt="Lyntra design approach and feature flows">
             </div>
-            <p class="pes-caption">Design system with type scale, color tokens, and component library established before hi-fi work began</p>
-
-            <p class="body-copy">The final product shipped with four core features, each designed to require minimal setup and deliver value immediately.</p>
-            <div class="feature-strip">
-              <div class="feature-tile"><div class="feature-tile-icon">01</div><span>AI Task Breakdown</span></div>
-              <div class="feature-tile"><div class="feature-tile-icon">02</div><span>Draft Agenda Preview</span></div>
-              <div class="feature-tile"><div class="feature-tile-icon">03</div><span>Focus Mode</span></div>
-              <div class="feature-tile"><div class="feature-tile-icon">04</div><span>Weekly Insights</span></div>
-            </div>
-          </article>
+            <p class="pes-caption">Design approach — Smart Agenda, Focus Mode, and AI Chat working together as one focused student workflow</p>
+          </div>
         </section>
 
         <section id="next" class="section page-shell">
           <p class="eyebrow reveal">Solution</p>
           <div class="reveal">
-            <h2 class="large-heading">Final design</h2>
-            <p class="next-description">The finished app connects a student's existing calendar and task sources, uses AI to break down deadlines into manageable subtasks, and suggests time blocks automatically. Students can accept, adjust, or override any suggestion, keeping them in control without requiring them to plan everything from scratch.</p>
+            <h2 class="large-heading">Three features, one lighter planning loop.</h2>
+            <p class="next-description">Lyntra moves students from an overwhelming list of deadlines to a clear plan, a focused work session, and contextual support when they get stuck—without taking control away from them.</p>
+          </div>
 
-            <div class="media-placeholder">
-              <img src="lyntra/draft-agenda.jpg" alt="Draft agenda preview" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-              <span>Draft Agenda Preview</span>
-            </div>
-            <p class="pes-caption">Draft Agenda Preview, where AI generates a two week schedule that students can refine or accept</p>
-
-            <div class="media-placeholder">
-              <img src="lyntra/focus-mode.jpg" alt="Focus mode flow" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-              <span>Focus Mode Flow</span>
-            </div>
-            <p class="pes-caption">Focus Mode launches when a student starts a subtask, tracks progress, and prompts the next micro task on completion</p>
-
-            <div class="pes-media-pair">
-              <div>
-                <div class="media-placeholder">
-                  <img src="lyntra/analytics.jpg" alt="Weekly summary and productivity insights" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-                  <span>Weekly Summary</span>
+          <div class="solution-features">
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Feature 01 · Smart Agenda</span>
+              <h3>Turn deadlines into a <em class="title-accent">workable agenda.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media">
+                  <div class="solution-feature__phone">
+                    <video src="lyntra/overview.mov?v=20260619-145805" autoplay muted loop playsinline preload="metadata" aria-label="Smart Agenda feature demonstration"></video>
+                  </div>
                 </div>
-                <p class="pes-caption">Weekly Summary with time saved, tasks completed, and AI generated reflection prompts</p>
-              </div>
-              <div>
-                <div class="media-placeholder">
-                  <img src="lyntra/ai-tutor.jpg" alt="AI tutor chatbot" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-                  <span>AI Tutor Chatbot</span>
+                <div class="solution-feature__copy">
+                  <p>Smart Agenda connects a student's calendar and coursework, breaks large assignments into manageable subtasks, and proposes a two-week schedule. Instead of starting with a blank planner, students begin with a draft they can trust and edit.</p>
+                  <ul class="solution-feature__points">
+                    <li>Syncs existing calendar and task sources</li>
+                    <li>Uses AI to break down complex assignments</li>
+                    <li>Lets students accept, adjust, or override every suggestion</li>
+                  </ul>
                 </div>
-                <p class="pes-caption">AI Tutor with contextual guidance and resources surfaced within each subtask</p>
               </div>
-            </div>
+            </article>
 
-            <div class="media-placeholder">
-              <img src="lyntra/settings.jpg" alt="Lyntra settings screens" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
-              <span>Settings</span>
-            </div>
-            <p class="pes-caption">Settings for calendar sync, AI customization, focus preferences, and subscription tiers</p>
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Feature 02 · Focus Mode</span>
+              <h3>Make the next step feel <em class="title-accent">small enough to start.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media">
+                  <div class="solution-feature__phone">
+                    <video src="lyntra/focus mode.mov?v=20260619-145913" autoplay muted loop playsinline preload="metadata" aria-label="Focus Mode feature demonstration"></video>
+                  </div>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>Focus Mode removes the noise of the full schedule and brings one micro-task forward at a time. Students can track progress, access contextual help, and move directly into the next step without rebuilding their plan.</p>
+                  <ul class="solution-feature__points">
+                    <li>Surfaces one clear task instead of the entire workload</li>
+                    <li>Keeps progress visible during each study session</li>
+                    <li>Offers contextual AI guidance when students get stuck</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Feature 03 · AI Chat</span>
+              <h3>Get <em class="title-accent">unstuck</em> without leaving the task.</h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media">
+                  <div class="solution-feature__phone">
+                    <video src="lyntra/ai chat.mov?v=20260619-145007" autoplay muted loop playsinline preload="metadata" aria-label="AI Chat feature demonstration"></video>
+                  </div>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>AI Chat gives students contextual support inside the work they are already doing. It understands the current task, answers questions, and surfaces useful guidance without forcing students to switch tools or rebuild the context of their assignment.</p>
+                  <ul class="solution-feature__points">
+                    <li>Responds with awareness of the active task and subtask</li>
+                    <li>Surfaces explanations and resources in the same workflow</li>
+                    <li>Reduces the friction of switching between study tools</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 

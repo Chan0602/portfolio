@@ -6,7 +6,7 @@
   <title>Productive Energy Solutions Case Study | Yilin Chen</title>
   <style>
     :root {
-      --page-max-width: 1180px;
+      --page-max-width: 1380px;
       --page-gutter-x: clamp(24px, 4vw, 52px);
       --paper: #f5f5f5;
       --ink: #0f0f0f;
@@ -785,10 +785,10 @@
       .case-study-layout {
         display: grid;
         grid-template-columns: 10.5rem minmax(0, 1fr);
-        gap: 2.5rem;
-        width: min(var(--page-max-width), 100%);
+        gap: clamp(4rem, 6vw, 6rem);
+        width: min(var(--page-max-width), calc(100% - 48px));
         margin: 0 auto;
-        padding: 0 var(--page-gutter-x);
+        padding: 0;
         align-items: start;
       }
 
@@ -800,9 +800,9 @@
       .spy-nav-slot {
         display: block;
         position: sticky;
-        top: 112px;
+        top: 80px;
         align-self: start;
-        padding-top: 12px;
+        padding-top: 0;
       }
 
       .spy-nav {
@@ -1054,7 +1054,9 @@
 
       <div class="case-study-layout__main">
         <section id="hero" class="hero-section page-shell">
-          <div class="media-card media-card--short hero-media-before">Final Design — Homepage</div>
+          <div class="media-card media-card--short hero-media-before">
+            <img src="webredesign/1.jpg" alt="Productive Energy Solutions website overview">
+          </div>
 
           <div class="hero-content">
             <div>
@@ -1085,11 +1087,13 @@
                 <span class="tag">Visual Design</span>
                 <span class="tag">B2B</span>
               </div>
-              <button class="skip-btn" data-target="solution"><span>Skip to solution</span></button>
+              <button class="skip-btn" data-target="next"><span>Skip to solution</span></button>
             </div>
           </div>
 
-          <div class="media-card media-card--short hero-media-after">Final Design — Homepage</div>
+          <div class="media-card media-card--short hero-media-after">
+            <img src="webredesign/2.png" alt="Productive Energy Solutions website design">
+          </div>
         </section>
 
         <section id="context" class="section page-shell">

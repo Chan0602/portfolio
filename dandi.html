@@ -6,7 +6,7 @@
   <title>Dandi Case Study | Yilin Chen</title>
   <style>
     :root {
-      --page-max-width: 1180px;
+      --page-max-width: 1380px;
       --page-gutter-x: clamp(24px, 4vw, 52px);
       --paper: #f5f5f5;
       --ink: #0f0f0f;
@@ -611,10 +611,10 @@
       .case-study-layout {
         display: grid;
         grid-template-columns: 10.5rem minmax(0, 1fr);
-        gap: 2.5rem;
-        width: min(var(--page-max-width), 100%);
+        gap: clamp(4rem, 6vw, 6rem);
+        width: min(var(--page-max-width), calc(100% - 48px));
         margin: 0 auto;
-        padding: 0 var(--page-gutter-x);
+        padding: 0;
         align-items: start;
       }
 
@@ -626,9 +626,9 @@
       .spy-nav-slot {
         display: block;
         position: sticky;
-        top: 112px;
+        top: 80px;
         align-self: start;
-        padding-top: 12px;
+        padding-top: 0;
       }
 
       .spy-nav {
