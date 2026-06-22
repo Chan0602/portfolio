@@ -897,6 +897,24 @@
       margin-top: 34px;
     }
 
+    .research-media--competition {
+      width: min(100%, 820px);
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    #found .research-media--competition .media-placeholder {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    #found .research-media--competition .media-placeholder img {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
     .research-media .media-placeholder,
     #solution .pes-media-pair .media-placeholder {
       min-height: 280px;
@@ -988,14 +1006,50 @@
       color: var(--color-text-info);
     }
 
-    .approach-tiles {
+    .approach-comparison {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      grid-template-columns: minmax(0, 0.58fr) minmax(360px, 1fr);
+      align-items: stretch;
+      gap: 24px;
       margin-top: 34px;
     }
 
+    .approach-original,
+    .approach-final {
+      min-width: 0;
+    }
+
+    .approach-direction-label {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 11px;
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .approach-original__image {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(15, 15, 15, 0.1);
+      border-radius: 8px;
+    }
+
+    .approach-tiles {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      height: calc(100% - 27px);
+    }
+
     .approach-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       min-width: 0;
       padding: 26px 22px;
       border: 1px solid rgba(15, 15, 15, 0.1);
@@ -1004,30 +1058,12 @@
       text-align: center;
     }
 
-    .approach-tile .ti {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
+    .approach-tile__icon {
+      display: block;
+      width: 48px;
+      height: 48px;
       margin: 0 auto 16px;
-      border-radius: 8px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-style: normal;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    .approach-tile .ti-calendar-event::before {
-      content: "▦";
-    }
-
-    .approach-tile .ti-focus-2::before {
-      content: "◎";
-    }
-
-    .approach-tile .ti-message-circle::before {
-      content: "◌";
+      object-fit: contain;
     }
 
     .approach-tile h3 {
@@ -1461,6 +1497,12 @@
 
       .approach-tiles {
         grid-template-columns: 1fr;
+        grid-template-rows: none;
+        height: auto;
+      }
+
+      .approach-comparison {
+        grid-template-columns: 1fr;
       }
 
       .comparison-table-wrap {
@@ -1516,6 +1558,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="case-study-footer.css">
 </head>
 <body>
   <header class="project-nav">
@@ -1626,11 +1669,11 @@
         <section id="found" class="section page-shell">
           <p class="eyebrow reveal">Research</p>
           <p class="statement reveal">Interviews, surveys, and competitive analysis all pointing the same direction</p>
-          <p class="body-copy reveal">We interviewed students and ran surveys to understand how they actually managed their workload, what they had tried before, and where those tools fell short. Alongside that, we mapped the competitive landscape across four adjacent markets: task management, scheduling, learning management systems, and habit building apps, a combined opportunity north of twelve billion dollars in the US alone. Within that space, we compared Lyntra directly against the three closest competitors: Motion, Reclaim AI, and the calendar app 31.</p>
+          <p class="body-copy reveal">We interviewed students and ran surveys to understand how they actually managed their workload, what they had tried before, and where those tools fell short. Alongside that, we mapped the competitive landscape across four adjacent markets: task management, scheduling, learning management systems, and habit building apps, a combined opportunity north of twelve billion dollars in the US alone. Within that space, we compared Lyntra directly against the three closest competitors: Motion, Reclaim AI, and Google Calendar.</p>
 
-          <div class="research-media reveal">
+          <div class="research-media research-media--competition reveal">
             <div class="media-placeholder">
-              <img src="lyntra/competition.jpg" alt="Competitive landscape map" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
+              <img src="lyntra/competition.png" alt="Competitive landscape map" onload="this.nextElementSibling.hidden=true" onerror="this.remove()">
               <span>Competitive Landscape Map</span>
             </div>
             <p class="pes-caption">Competitive landscape — Lyntra sits at the intersection of task management, scheduling, and skill building, markets worth a combined twelve billion dollars in the US</p>
@@ -1650,7 +1693,7 @@
                   <th scope="col" class="is-lyntra">Lyntra</th>
                   <th scope="col">Motion</th>
                   <th scope="col">Reclaim AI</th>
-                  <th scope="col">31</th>
+                  <th scope="col">Google Calendar</th>
                 </tr>
               </thead>
               <tbody>
@@ -1703,22 +1746,31 @@
             <p class="body-copy">Of the original seven planned features, research and team debate narrowed the product down to three that we could defend with evidence: a smart agenda that handles the planning a student would otherwise do manually, a focus mode that supports them while they work, and an AI chat that helps when they get stuck. Everything else, including a full analytics dashboard and a separate micro learning scheduler, was cut or folded into these three.</p>
           </div>
 
-          <div class="approach-tiles reveal">
-            <article class="approach-tile">
-              <i class="ti ti-calendar-event" aria-hidden="true"></i>
-              <h3>Smart Agenda</h3>
-              <p>Breaks deadlines into subtasks and drafts a weekly schedule the student can accept or adjust</p>
-            </article>
-            <article class="approach-tile">
-              <i class="ti ti-focus-2" aria-hidden="true"></i>
-              <h3>Focus Mode</h3>
-              <p>Launches when a student starts a subtask, tracks time, and prompts the next step on completion</p>
-            </article>
-            <article class="approach-tile">
-              <i class="ti ti-message-circle" aria-hidden="true"></i>
-              <h3>AI Chat</h3>
-              <p>Answers questions about a task, surfaces course resources, and helps when a student is stuck</p>
-            </article>
+          <div class="approach-comparison reveal">
+            <div class="approach-original">
+              <p class="approach-direction-label">Original direction · 7 features</p>
+              <img class="approach-original__image" src="lyntra/original-seven-features.png" alt="Original Lyntra product specification showing seven planned features">
+            </div>
+            <div class="approach-final">
+              <p class="approach-direction-label">Final direction · 3 features</p>
+              <div class="approach-tiles">
+                <article class="approach-tile">
+                  <img class="approach-tile__icon" src="lyntra/smart-agenda-icon.png" alt="">
+                  <h3>Smart Agenda</h3>
+                  <p>Breaks deadlines into subtasks and drafts a weekly schedule the student can accept or adjust</p>
+                </article>
+                <article class="approach-tile">
+                  <img class="approach-tile__icon" src="lyntra/focus-icon.png" alt="">
+                  <h3>Focus Mode</h3>
+                  <p>Launches when a student starts a subtask, tracks time, and prompts the next step on completion</p>
+                </article>
+                <article class="approach-tile">
+                  <img class="approach-tile__icon" src="lyntra/ai-chat-icon.png" alt="">
+                  <h3>AI Chat</h3>
+                  <p>Answers questions about a task, surfaces course resources, and helps when a student is stuck</p>
+                </article>
+              </div>
+            </div>
           </div>
 
           <p class="body-copy approach-followup reveal">With three features instead of seven, every screen had a clearer job to do. Smart Agenda needed to feel trustworthy enough that a student would accept its suggestion instead of rebuilding their schedule by hand. Focus Mode needed to feel supportive rather than like a productivity scoreboard. AI Chat needed to feel like a quick answer, not another app to learn.</p>
@@ -1823,6 +1875,11 @@
       </div>
     </div>
   </main>
+
+  <footer class="case-study-grass-footer" aria-label="Portfolio footer">
+    <canvas class="case-study-grass-footer__canvas" aria-label="Click anywhere in the scene and the cat will move there"></canvas>
+  </footer>
+  <script src="case-study-footer.js"></script>
 
   <script>
     const projectNav = document.querySelector(".project-nav");
