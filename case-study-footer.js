@@ -47,7 +47,7 @@
         context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         if (!catX) {
-          catX = width * 0.34;
+          catX = width * 0.86;
           targetX = catX;
         } else {
           catX = Math.min(catX, width - 50);

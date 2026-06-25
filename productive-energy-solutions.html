@@ -420,6 +420,18 @@
       background: rgba(255, 255, 255, 0.72);
     }
 
+    .media-placeholder--transparent {
+      min-height: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .media-placeholder .pes-diagram--transparent {
+      height: auto;
+      min-height: 0;
+      background: transparent;
+    }
+
     .story-text {
       max-width: min(48rem, 100%);
       margin: 0 0 36px;
@@ -1114,10 +1126,10 @@
               <p class="eyebrow reveal">Context</p>
               <p class="statement reveal">A company with 25 years of expertise, and a website that showed none of it.</p>
               <p class="body-copy reveal">Unless you already knew their name, you would never find them. Their website had not been updated in over a decade, search engines could barely read it, dozens of links were broken, and there was no clear way for a visitor to understand what the company did or how to reach them.</p>
-              <div class="media-placeholder reveal">Before — Old Homepage</div>
-              <p class="pes-caption">Old homepage — no hierarchy, no clear entry point, no obvious next step</p>
-              <div class="media-placeholder reveal">Before — Service Page</div>
-              <p class="pes-caption">Old service page — walls of text, every section treated with equal visual weight</p>
+              <div class="media-placeholder media-placeholder--transparent reveal">
+                <img class="pes-diagram pes-diagram--transparent" src="webredesign/before.png" alt="Before state of the Productive Energy Solutions website showing old homepage, training, services, and contact pages">
+              </div>
+              <p class="pes-caption">Before — outdated homepage, training, service, and contact pages with unclear hierarchy and scattered navigation</p>
             </div>
           </div>
         </section>
@@ -1170,15 +1182,18 @@
             <h2 class="large-heading">I started with structure, not screens.</h2>
             <p class="body-copy">The old site had grown organically over years without anyone stepping back to look at it as a whole. Before opening Figma, I mapped every existing page and connection. Pages nested inside pages, navigation branched in too many directions, and there was no clear route from landing to contact. The redesign started by simplifying all of that down to four core sections.</p>
             <div class="pes-media-pair">
-              <div><span class="pes-pill">Before</span><div class="media-placeholder"><img class="pes-diagram" src="webredesign/old-flow.png" alt="Old website user flow"></div><p class="pes-caption">Over 20 pages, overlapping navigation, no clear primary path</p></div>
-              <div><span class="pes-pill pes-pill--after">After</span><div class="media-placeholder"><img class="pes-diagram" src="webredesign/new sitemap.png" alt="Simplified Productive Energy Solutions sitemap"></div><p class="pes-caption">Simplified to Home, Services, About, and Contact</p></div>
+              <div><span class="pes-pill">Before</span><div class="media-placeholder media-placeholder--transparent"><img class="pes-diagram pes-diagram--transparent" src="webredesign/old-flow.png" alt="Old website user flow"></div><p class="pes-caption">Over 20 pages, overlapping navigation, no clear primary path</p></div>
+              <div><span class="pes-pill pes-pill--after">After</span><div class="media-placeholder media-placeholder--transparent"><img class="pes-diagram pes-diagram--transparent" src="webredesign/new sitemap.png" alt="Simplified Productive Energy Solutions sitemap"></div><p class="pes-caption">Simplified to Home, Services, About, and Contact</p></div>
             </div>
           </div>
 
           <div class="solution-overview reveal">
             <h2 class="large-heading">Exploration and iteration</h2>
             <p class="body-copy">With the structure locked in, I moved into design exploration. Each page went through multiple iterations before committing to a direction.</p>
-            <div class="media-placeholder">Figma overview — multiple iterations across Home, Services, About, and Contact</div>
+            <div class="media-placeholder media-placeholder--transparent">
+              <img class="pes-diagram pes-diagram--transparent" src="webredesign/figma-overview-iterations.png" alt="Figma overview showing multiple iterations across Home, Services, About, and Contact pages">
+            </div>
+            <p class="pes-caption">Figma overview — multiple iterations across Home, Services, About, and Contact</p>
           </div>
 
           <article class="feature reveal">

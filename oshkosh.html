@@ -420,6 +420,18 @@
       background: rgba(255, 255, 255, 0.72);
     }
 
+    .oshkosh-project-image {
+      min-height: 0;
+      background: transparent;
+    }
+
+    .oshkosh-project-image img {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
     .story-text {
       max-width: min(48rem, 100%);
       margin: 0 0 36px;
@@ -1140,8 +1152,8 @@
         <nav class="spy-nav">
           <ul class="spy-nav__list">
             <li class="spy-nav__item" style="--i: 0"><button class="spy-nav__link is-active" data-target="hero"><span class="spy-nav__dot"></span><span>Overview</span></button></li>
-            <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="context"><span class="spy-nav__dot"></span><span>The Challenge</span></button></li>
-            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="began"><span class="spy-nav__dot"></span><span>Research</span></button></li>
+            <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="began"><span class="spy-nav__dot"></span><span>Research</span></button></li>
+            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="context"><span class="spy-nav__dot"></span><span>The Challenge</span></button></li>
             <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="found"><span class="spy-nav__dot"></span><span>Design Approach</span></button></li>
             <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="solution"><span class="spy-nav__dot"></span><span>Iteration</span></button></li>
             <li class="spy-nav__item" style="--i: 5"><button class="spy-nav__link" data-target="next"><span class="spy-nav__dot"></span><span>Solution</span></button></li>
@@ -1194,34 +1206,19 @@
             </div>
           </div>
 
-          <div class="media-card media-card--short hero-media-after">Final UI — Dashboard Overview</div>
-        </section>
+          <div class="context-top">
+            <article class="context-item">
+              <h2 class="context-title">What is Project CANnonball?</h2>
+              <p class="body-copy">Project CANnonball is a unified desktop diagnostics application for engineers working with real-time CAN bus data across heavy-duty defense and commercial vehicles.</p>
+            </article>
+            <article class="context-item">
+              <h2 class="context-title">My Role</h2>
+              <p class="body-copy">I designed the full user interface across research, workflow definition, low-fidelity wireframes, visual design, and two rounds of usability testing with Oshkosh engineers.</p>
+            </article>
+          </div>
 
-        <section id="context" class="section page-shell">
-          <div class="section-content">
-            <div class="context-top">
-              <article class="context-item">
-                <h2 class="context-title">What is Project CANnonball?</h2>
-                <p class="body-copy">Project CANnonball is a unified desktop diagnostics application for engineers working with real-time CAN bus data across heavy-duty defense and commercial vehicles.</p>
-              </article>
-              <article class="context-item">
-                <h2 class="context-title">My Role</h2>
-                <p class="body-copy">I designed the full user interface across research, workflow definition, low-fidelity wireframes, visual design, and two rounds of usability testing with Oshkosh engineers.</p>
-              </article>
-            </div>
-
-            <div class="impact-block">
-              <p class="eyebrow reveal">The Challenge</p>
-              <p class="statement reveal">One system, two users, completely different needs.</p>
-              <p class="body-copy reveal">Oshkosh Corporation builds heavy-duty defense and commercial vehicles. Their engineers interact with CAN bus data daily, but two very different types of engineers were using the same diagnostic tools in fundamentally different ways.</p>
-              <div class="pes-grid pes-grid--two">
-                <article class="user-split-card user-split-card--test reveal"><span class="user-split-label">Test Engineer</span><h3>Needs status at a glance</h3><p>Working in real time, often in the field. Needs to immediately spot warnings, anomalies, and signal states without digging through data. Speed and clarity are everything.</p></article>
-                <article class="user-split-card user-split-card--developer reveal"><span class="user-split-label">Developer</span><h3>Needs depth and precision</h3><p>Working at the code level. Needs detailed data tables, error logs, trace playback, and DBC file management. Cares about exact values, timestamps, and signal history.</p></article>
-              </div>
-              <div class="tension-callout reveal">The existing tools forced both groups into the same fragmented workflow — switching between CANalyzer for logging, Vector CANopy for debugging, and custom Python scripts for merging DBC files. Neither user got what they actually needed, and everyone was losing time.</div>
-              <div class="media-placeholder reveal">Existing Tool Workflow — Fragmented</div>
-              <p class="pes-caption">Engineers switching between multiple tools to complete a single diagnostic workflow</p>
-            </div>
+          <div class="media-card media-card--short hero-media-after oshkosh-project-image">
+            <img src="oshkosh/final.png" alt="Final Project CANnonball dashboard designs">
           </div>
         </section>
 
@@ -1239,22 +1236,41 @@
           <p class="body-copy reveal">The interviews confirmed what the user split had suggested: test engineers needed immediacy and clarity, developers needed depth and precision. Designing for one without the other would mean the tool only served half its users well.</p>
         </section>
 
+        <section id="context" class="section page-shell">
+          <div class="section-content">
+            <div class="impact-block">
+              <p class="eyebrow reveal">The Challenge</p>
+              <p class="statement reveal">One system, two users, completely different needs.</p>
+              <p class="body-copy reveal">Oshkosh Corporation builds heavy-duty defense and commercial vehicles. Their engineers interact with CAN bus data daily, but two very different types of engineers were using the same diagnostic tools in fundamentally different ways.</p>
+              <div class="pes-grid pes-grid--two">
+                <article class="user-split-card user-split-card--test reveal"><span class="user-split-label">Test Engineer</span><h3>Needs status at a glance</h3><p>Working in real time, often in the field. Needs to immediately spot warnings, anomalies, and signal states without digging through data. Speed and clarity are everything.</p></article>
+                <article class="user-split-card user-split-card--developer reveal"><span class="user-split-label">Developer</span><h3>Needs depth and precision</h3><p>Working at the code level. Needs detailed data tables, error logs, trace playback, and DBC file management. Cares about exact values, timestamps, and signal history.</p></article>
+              </div>
+              <div class="tension-callout reveal">The existing tools forced both groups into the same fragmented workflow — switching between CANalyzer for logging, Vector CANopy for debugging, and custom Python scripts for merging DBC files. Neither user got what they actually needed, and everyone was losing time.</div>
+              <div class="media-placeholder oshkosh-project-image reveal">
+                <img src="oshkosh/workflow.png" alt="Developer and tester diagnostic workflows">
+              </div>
+              <p class="pes-caption">Engineers switching between multiple tools to complete a single diagnostic workflow</p>
+            </div>
+          </div>
+        </section>
+
         <section id="found" class="section page-shell">
           <p class="eyebrow reveal">Design Approach</p>
           <p class="statement reveal">Two interfaces inside one system.</p>
           <p class="body-copy reveal">Before opening Figma, I sketched the full structure in Balsamiq to establish hierarchy and flow. The design split into two interface modes — each tuned to how that user works — while sharing the same underlying data and navigation shell.</p>
-          <div class="media-placeholder reveal">Wireframes — Balsamiq Lo-fi</div>
-          <p class="pes-caption">Lo-fi wireframes — structure and layout locked before any visual decisions</p>
+          <div class="media-placeholder oshkosh-project-image reveal">
+            <img src="oshkosh/design-approach-sketch.png" alt="Early sketches exploring role switching, signal summaries, and modular layouts">
+          </div>
+          <p class="pes-caption">Early design exploration — role switching, signal summaries, and modular views sketched before moving into wireframes</p>
           <div class="pes-grid pes-grid--two">
             <article class="user-split-card user-split-card--test reveal"><span class="user-split-label">Test Engineer Interface</span><h3>Built for speed</h3><p>Overview dashboard with connection status, bus load, warning flags, and key signal states at the top level. Real-time updates, live and pause mode, and color-coded status indicators.</p></article>
             <article class="user-split-card user-split-card--developer reveal"><span class="user-split-label">Developer Interface</span><h3>Built for depth</h3><p>Detailed receive view, error logs, trace playback with timeline annotation, and integrated DBC file management for merging and editing across manufacturers.</p></article>
           </div>
-          <div class="pes-media-pair">
-            <div><div class="media-placeholder">Test Engineer View</div></div>
-            <div><div class="media-placeholder">Developer View</div></div>
+          <div class="media-placeholder oshkosh-project-image reveal">
+            <img src="oshkosh/design-approach-wireframes.png" alt="Low-fidelity dashboard and signal detail flows">
           </div>
-          <div class="media-placeholder reveal">Figma Design Overview — All Views</div>
-          <p class="pes-caption">Full design overview in Figma — both interface modes across all functional views</p>
+          <p class="pes-caption">Low-fidelity wireframes — dashboard states, warning details, filters, and signal inspection flows defined before visual design</p>
         </section>
 
         <section id="solution" class="section page-shell">
@@ -1279,7 +1295,9 @@
           <div class="reveal">
             <h2 class="large-heading">Final design</h2>
             <p class="next-description">The final application unified what had previously required multiple tools into a single desktop interface — with two distinct modes that meet each user type exactly where they work.</p>
-            <div class="media-placeholder">Final UI — Dashboard Overview</div>
+            <div class="media-placeholder oshkosh-project-image">
+              <img src="oshkosh/final.png" alt="Final Project CANnonball dashboard designs">
+            </div>
             <p class="pes-caption">Final dashboard — system status, live signal monitoring, and real-time visualization in one view</p>
             <div class="pes-media-pair">
               <div><div class="media-placeholder">Trace Playback View</div><p class="pes-caption">Trace playback — developer view with timeline scrubbing and event annotation</p></div>
