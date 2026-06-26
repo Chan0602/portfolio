@@ -485,7 +485,7 @@ button {
   justify-content: center;
   align-items: start;
   width: min(914px, calc(100% - 48px));
-  margin: 0 auto;
+  margin: -100px auto 0;
 }
 
 .outside-card {
@@ -500,11 +500,13 @@ button {
 .outside-card--baking {
   grid-area: baking;
   margin-top: 34px;
+  transform: translateX(-50px);
 }
 
 .outside-card--photo {
   grid-area: photo;
   margin-top: 92px;
+  transform: translateX(50px);
 }
 
 .outside-card--cat {
@@ -531,6 +533,7 @@ button {
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 14px 22px rgba(62, 53, 46, 0.14));
+  animation: notebook-cover-idle 4.8s ease-in-out infinite alternate;
 }
 
 .outside-card .notebook-cover-image--bakery {
@@ -539,10 +542,24 @@ button {
 
 .outside-card .notebook-cover-image--photo {
   --cover-scale: 1;
+  animation-duration: 5.4s;
+  animation-delay: -1.2s;
 }
 
 .outside-card .notebook-cover-image--cat {
   --cover-scale: 1;
+  animation-duration: 5.1s;
+  animation-delay: -2.1s;
+}
+
+@keyframes notebook-cover-idle {
+  from {
+    transform: rotate(-2.8deg) scale(var(--cover-scale));
+  }
+
+  to {
+    transform: rotate(1.4deg) scale(var(--cover-scale));
+  }
 }
 
 .about-cat-playground {
@@ -550,6 +567,7 @@ button {
   grid-area: catfield;
   height: 230px;
   margin-top: 170px;
+  --about-cat-scale: 1.3;
   overflow: visible;
   cursor: none;
 }
@@ -560,7 +578,7 @@ button {
   top: 50%;
   width: clamp(68px, 6vw, 104px);
   aspect-ratio: 191 / 179;
-  transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0) scale(var(--about-cat-scale, 1));
   filter: drop-shadow(0 14px 18px rgba(62, 53, 46, 0.14));
   pointer-events: none;
 }
@@ -656,6 +674,7 @@ button {
 }
 
 .notebook-cover:hover .notebook-cover-image {
+  animation: none;
   transform: rotate(0.8deg) translateY(-4px) scale(var(--cover-scale));
   filter: drop-shadow(0 26px 42px rgba(62, 53, 46, 0.2));
 }
@@ -1079,6 +1098,7 @@ button {
       "photo"
       "cats";
     justify-items: center;
+    margin-top: -100px;
   }
 
   .outside-card--baking,
@@ -1086,6 +1106,14 @@ button {
   .outside-card--cat,
   .about-cat-playground {
     margin-top: 22px;
+  }
+
+  .outside-card--baking {
+    transform: translateX(-50px);
+  }
+
+  .outside-card--photo {
+    transform: translateX(50px);
   }
 
   .outside-card {
@@ -1188,6 +1216,7 @@ button {
 
   .outside-grid {
     width: min(100% - 64px, 360px);
+    margin: 0 auto;
     grid-template-columns: 1fr;
     grid-template-areas:
       "baking"
@@ -1207,6 +1236,8 @@ button {
   .outside-card--cat {
     width: 100%;
     margin-top: 0;
+    margin-left: 0;
+    transform: none;
   }
 
   .outside-card--cat {
@@ -1226,9 +1257,11 @@ button {
     max-height: none;
     object-fit: contain;
     transform: rotate(-1deg) scale(var(--cover-scale));
+    animation: notebook-cover-idle 4.8s ease-in-out infinite alternate;
   }
 
   .outside-card .notebook-cover:hover .notebook-cover-image {
+    animation: none;
     transform: rotate(0.8deg) translateY(-4px) scale(var(--cover-scale));
   }
 

@@ -314,6 +314,11 @@
       margin-bottom: 56px;
     }
 
+    .hero-context-after {
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+
     .context-item,
     .feature,
     .stat-card,
@@ -595,6 +600,143 @@
       font-size: 0.9rem;
       line-height: 1.58;
       font-weight: 300;
+    }
+
+    .solution-features {
+      display: grid;
+      gap: 64px;
+      margin-top: 64px;
+    }
+
+    .solution-feature {
+      display: grid;
+      grid-template-areas:
+        "number"
+        "title"
+        "body";
+      row-gap: 0;
+      padding-top: 56px;
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+    }
+
+    .solution-feature:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .solution-feature__number {
+      grid-area: number;
+      display: block;
+      margin-bottom: 36px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 450;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .solution-feature > h3 {
+      grid-area: title;
+      max-width: 980px;
+      margin: 0 auto 56px;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.038em;
+    }
+
+    .title-accent {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: inherit;
+    }
+
+    .solution-feature__body {
+      grid-area: body;
+      display: grid;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .solution-feature__media {
+      min-width: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 14px 34px rgba(15, 15, 15, 0.07);
+    }
+
+    .solution-feature__media img,
+    .solution-feature__media video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .solution-feature__placeholder {
+      display: grid;
+      min-height: clamp(260px, 32vw, 420px);
+      place-items: center;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(197, 5, 12, 0.2), transparent 34%),
+        #f8f3ed;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .solution-feature__media--framed-video {
+      position: relative;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 2045 / 1119;
+      background: url("mapwa/solution-video-background.png") center / cover no-repeat;
+    }
+
+    .solution-feature__media--framed-video video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(88%, 720px);
+      border-radius: 14px;
+      box-shadow: 0 22px 46px rgba(78, 0, 0, 0.24);
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    .solution-feature__copy {
+      min-width: 0;
+    }
+
+    .solution-feature__copy p {
+      margin: 20px 0 0;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    .solution-feature__points {
+      display: grid;
+      gap: 12px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .solution-feature__points li {
+      padding-top: 12px;
+      border-top: 1px solid rgba(15, 15, 15, 0.1);
+      color: rgba(15, 15, 15, 0.68);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 350;
     }
 
     .story-text {
@@ -964,6 +1106,11 @@
       .two-card-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .solution-feature__body {
+        grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.65fr);
+        gap: 42px;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -1203,6 +1350,7 @@
       .pes-media-pair,
       .mapwa-design-system,
       .mapwa-solution-modules,
+      .solution-feature__body,
       .pes-stat-grid {
         grid-template-columns: 1fr;
       }
@@ -1253,7 +1401,7 @@
           <div class="hero-content">
             <div>
               <div class="hero-title-group">
-                <p class="award">Case Study · UX Design and Research</p>
+                <p class="award">System Design · UX Design and Research</p>
                 <h1>MAPWA — Practicum Matching System Redesign</h1>
               </div>
               <div class="hero-details">
@@ -1286,21 +1434,21 @@
           <div class="media-card media-card--short hero-media-after">
             <video src="mapwa/2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA product demonstration"></video>
           </div>
+
+          <div class="context-top hero-context-after">
+            <article class="context-item">
+              <h2 class="context-title">What is MAPWA?</h2>
+              <p class="body-copy">MAPWA is the practicum matching web app used by the MA-LIS program at the University of Wisconsin-Madison. Every semester, over 200 graduate students use it to apply for and get matched to library and information science placements.</p>
+            </article>
+            <article class="context-item">
+              <h2 class="context-title">My Role</h2>
+              <p class="body-copy">I led research synthesis, student workflow analysis, interaction design, prototyping, and the admin dashboard experience with a developer and team lead.</p>
+            </article>
+          </div>
         </section>
 
         <section id="context" class="section page-shell">
           <div class="section-content">
-            <div class="context-top">
-              <article class="context-item">
-                <h2 class="context-title">What is MAPWA?</h2>
-                <p class="body-copy">MAPWA is the practicum matching web app used by the MA-LIS program at the University of Wisconsin-Madison. Every semester, over 200 graduate students use it to apply for and get matched to library and information science placements.</p>
-              </article>
-              <article class="context-item">
-                <h2 class="context-title">My Role</h2>
-                <p class="body-copy">I led research synthesis, student workflow analysis, interaction design, prototyping, and the admin dashboard experience with a developer and team lead.</p>
-              </article>
-            </div>
-
             <div class="impact-block">
               <p class="eyebrow reveal">Context</p>
               <p class="statement reveal">A matching system that worked on paper but left everyone guessing.</p>
@@ -1382,27 +1530,64 @@
         <section id="next" class="section page-shell">
           <p class="eyebrow reveal">Solution</p>
           <div class="reveal">
-            <h2 class="large-heading">Final design</h2>
-            <p class="next-description">The redesigned system kept the same underlying structure students already knew, but wrapped every step in enough communication that no one needed to ask what happened next. The admin dashboard turned a reactive, weekly firefight into a five-minute check.</p>
-            <div class="mapwa-solution-modules">
-              <article class="mapwa-solution-module">
-                <div class="media-placeholder">Student Interface</div>
-                <h3>Student interface</h3>
-                <p>Clear entry points, confirmation states, and automated next-step communication helped students understand where they were in the practicum process.</p>
-              </article>
-              <article class="mapwa-solution-module">
-                <div class="media-placeholder">Admin Interface</div>
-                <h3>Admin interface</h3>
-                <p>The admin dashboard brought match status, site popularity, student records, and export actions into one place instead of scattered spreadsheets.</p>
-              </article>
-              <article class="mapwa-solution-module">
-                <div class="media-placeholder">Walkthrough Video</div>
-                <h3>Walkthrough video</h3>
-                <p>A recorded overview introduced the full flow before students began, reducing uncertainty before it turned into another email.</p>
-              </article>
-            </div>
-            <div class="media-placeholder">Auto Email Design</div>
-            <p class="pes-caption">Automated emails at each step transition — the core intervention that closed the information gaps</p>
+            <h2 class="large-heading">Three interventions, one calmer matching process.</h2>
+            <p class="next-description">The redesign focused on the three places where the system needed the most support: administrator visibility, student flow clarity, and a walkthrough that explained the process before confusion turned into emails.</p>
+          </div>
+
+          <div class="solution-features">
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Solution 01 · Admin Interface</span>
+              <h3>Give administrators a <em class="title-accent">single operating view.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media solution-feature__media--framed-video">
+                  <video src="mapwa/2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA admin interface walkthrough"></video>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>I added an admin-facing dashboard so staff could see match status, student records, site popularity, and export actions in one place. Instead of piecing together updates from spreadsheets and email threads, administrators could scan the system and act from a single interface.</p>
+                  <ul class="solution-feature__points">
+                    <li>Surfaced matched, pending, and unmatched students together</li>
+                    <li>Added site popularity and student record visibility</li>
+                    <li>Reduced weekly manual follow-up and spreadsheet checking</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Solution 02 · Flow Optimization</span>
+              <h3>Close the gaps in the <em class="title-accent">student workflow.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media">
+                  <div class="solution-feature__placeholder">Flow optimization placeholder</div>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>The flow itself did not need to be rebuilt from scratch. The bigger problem was that students could complete a step and still not know what happened next. I optimized the existing process by adding clearer confirmation points, expectations, and next-step guidance at each transition.</p>
+                  <ul class="solution-feature__points">
+                    <li>Kept the familiar practicum application structure intact</li>
+                    <li>Added confirmation and status cues after key actions</li>
+                    <li>Made waiting periods and next steps more explicit</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Solution 03 · Walkthrough Video</span>
+              <h3>Explain the process <em class="title-accent">before students begin.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media">
+                  <div class="solution-feature__placeholder">Walkthrough video placeholder</div>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>The walkthrough video gave students a preview of the full process before they started applying. Instead of discovering each step only when they reached it, students could understand the overall sequence, what information they needed, and what would happen after submission.</p>
+                  <ul class="solution-feature__points">
+                    <li>Introduced the full process before students began</li>
+                    <li>Reduced uncertainty around application and matching steps</li>
+                    <li>Gave administrators a reusable explanation instead of repeated emails</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 

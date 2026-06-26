@@ -314,6 +314,11 @@
       margin-bottom: 56px;
     }
 
+    .hero-context-after {
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+
     .context-item,
     .feature,
     .stat-card,
@@ -430,6 +435,95 @@
       height: auto;
       min-height: 0;
       object-fit: contain;
+    }
+
+    .oshkosh-hero-mockup {
+      border: 0;
+      background: transparent;
+    }
+
+    .oshkosh-interview-image {
+      margin-top: 34px;
+      border: 0;
+      border-radius: 16px;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .old-ui-gallery {
+      margin-top: 34px;
+    }
+
+    .old-ui-scroll {
+      display: flex;
+      gap: 18px;
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding: 6px 0 10px;
+      scrollbar-width: none;
+    }
+
+    .old-ui-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .old-ui-frame {
+      flex: 0 0 min(82vw, 760px);
+      margin: 0;
+      scroll-snap-align: start;
+      border: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .old-ui-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #found .pes-grid + .media-placeholder {
+      margin-top: 24px;
+    }
+
+    .oshkosh-iteration-image {
+      min-height: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .oshkosh-iteration-image img {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .old-ui-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .old-ui-dot {
+      width: 9px;
+      height: 9px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0;
+      background: rgba(15, 15, 15, 0.22);
+      cursor: pointer;
+      transition: background-color 180ms ease, transform 180ms ease;
+    }
+
+    .old-ui-dot.is-active {
+      background: var(--accent);
+      transform: scale(1.22);
     }
 
     .story-text {
@@ -1172,7 +1266,7 @@
           <div class="hero-content">
             <div>
               <div class="hero-title-group">
-                <p class="award">Case Study · UX-Madison Capstone · UX and Visual Design</p>
+                <p class="award">UX-Madison Capstone · Dashboard and Visual Design</p>
                 <h1>Project CANnonball — Vehicle Diagnostics Dashboard</h1>
               </div>
               <div class="hero-details">
@@ -1206,7 +1300,11 @@
             </div>
           </div>
 
-          <div class="context-top">
+          <div class="media-card media-card--short hero-media-after oshkosh-project-image oshkosh-hero-mockup">
+            <img src="oshkosh/oshkosh-mockup.jpg" alt="Project CANnonball dashboard mockup shown on two laptops in front of a truck">
+          </div>
+
+          <div class="context-top hero-context-after">
             <article class="context-item">
               <h2 class="context-title">What is Project CANnonball?</h2>
               <p class="body-copy">Project CANnonball is a unified desktop diagnostics application for engineers working with real-time CAN bus data across heavy-duty defense and commercial vehicles.</p>
@@ -1216,23 +1314,16 @@
               <p class="body-copy">I designed the full user interface across research, workflow definition, low-fidelity wireframes, visual design, and two rounds of usability testing with Oshkosh engineers.</p>
             </article>
           </div>
-
-          <div class="media-card media-card--short hero-media-after oshkosh-project-image">
-            <img src="oshkosh/final.png" alt="Final Project CANnonball dashboard designs">
-          </div>
         </section>
 
         <section id="began" class="section page-shell">
           <p class="eyebrow reveal">Research</p>
           <p class="statement reveal">Learning from scratch, through the people who actually do the work.</p>
-          <p class="body-copy reveal">I came into this project with no background in CAN protocols, DBC files, or vehicle diagnostics. Rather than trying to self-study my way in, I treated the engineers as my primary source of truth. We interviewed autonomous developers, controls engineers, test engineers, and embedded systems leads from Oshkosh Corporation and Pratt Miller.</p>
-          <div class="media-placeholder reveal">Interview Notes and Research Documentation</div>
-          <p class="pes-caption">Interviews across Oshkosh and Pratt Miller — the foundation for every design decision that followed</p>
-          <div class="quote-list">
-            <figure class="pull-quote reveal"><blockquote>“We use a custom Python script to combine DBC files because no tool handles multiple manufacturers cleanly.”</blockquote><figcaption>Software engineer, Pratt Miller</figcaption></figure>
-            <figure class="pull-quote reveal"><blockquote>“When the main controller runs on a 5ms execution rate, having instant visual feedback is essential for catching voltage and safety issues.”</blockquote><figcaption>Controls engineer, Oshkosh</figcaption></figure>
-            <figure class="pull-quote reveal"><blockquote>“I need to use CANalyzer for logging and Vector CANopy for debugging. Switching between them slows down diagnostics significantly.”</blockquote><figcaption>Controls engineer, Oshkosh</figcaption></figure>
+          <p class="body-copy reveal">I came into this project with no background in CAN protocols, DBC files, or vehicle diagnostics. Rather than trying to self-study my way in, I treated the engineering team as my primary source of truth. We interviewed 10+ people across developer, tester, controls, autonomous, and embedded systems roles to understand how they diagnosed vehicle data in real working conditions.</p>
+          <div class="media-placeholder oshkosh-project-image oshkosh-interview-image reveal">
+            <img src="oshkosh/interview.png" alt="Interview synthesis illustration showing engineering pain points">
           </div>
+          <p class="pes-caption">Interviews with 10+ developers, testers, and engineering stakeholders — the foundation for every design decision that followed</p>
           <p class="body-copy reveal">The interviews confirmed what the user split had suggested: test engineers needed immediacy and clarity, developers needed depth and precision. Designing for one without the other would mean the tool only served half its users well.</p>
         </section>
 
@@ -1246,11 +1337,32 @@
                 <article class="user-split-card user-split-card--test reveal"><span class="user-split-label">Test Engineer</span><h3>Needs status at a glance</h3><p>Working in real time, often in the field. Needs to immediately spot warnings, anomalies, and signal states without digging through data. Speed and clarity are everything.</p></article>
                 <article class="user-split-card user-split-card--developer reveal"><span class="user-split-label">Developer</span><h3>Needs depth and precision</h3><p>Working at the code level. Needs detailed data tables, error logs, trace playback, and DBC file management. Cares about exact values, timestamps, and signal history.</p></article>
               </div>
-              <div class="tension-callout reveal">The existing tools forced both groups into the same fragmented workflow — switching between CANalyzer for logging, Vector CANopy for debugging, and custom Python scripts for merging DBC files. Neither user got what they actually needed, and everyone was losing time.</div>
+              <div class="tension-callout reveal">The existing tools forced both groups into the same fragmented workflow — switching between CANalyzer for logging, Vector CANopy for debugging, and custom Python scripts for merging DBC files. The original UI also lacked visual priority: dense tables, repeated controls, and unstructured panes made it hard to see what needed attention first. Neither user got what they actually needed, and everyone was losing time.</div>
               <div class="media-placeholder oshkosh-project-image reveal">
                 <img src="oshkosh/workflow.png" alt="Developer and tester diagnostic workflows">
               </div>
               <p class="pes-caption">Engineers switching between multiple tools to complete a single diagnostic workflow</p>
+              <div class="old-ui-gallery reveal" aria-label="Original interface screenshots">
+                <div class="old-ui-scroll">
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-1.png" alt="Original Project CANnonball receive and transmit pane with dense tables"></figure>
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-2.png" alt="Original Project CANnonball signal configuration screen"></figure>
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-3.png" alt="Original Project CANnonball multiplexor configuration screen"></figure>
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-4.png" alt="Original Project CANnonball message definition screen with notes"></figure>
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-5.png" alt="Original Project CANnonball message detail screen"></figure>
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-6.png" alt="Original Project CANnonball CAN receive transmit screen"></figure>
+                  <figure class="old-ui-frame"><img src="oshkosh/old-ui-7.png" alt="Original Project CANnonball trace screen"></figure>
+                </div>
+                <div class="old-ui-dots" aria-label="Original UI gallery navigation">
+                  <button class="old-ui-dot is-active" type="button" data-old-ui-index="0" aria-label="Show original UI screenshot 1"></button>
+                  <button class="old-ui-dot" type="button" data-old-ui-index="1" aria-label="Show original UI screenshot 2"></button>
+                  <button class="old-ui-dot" type="button" data-old-ui-index="2" aria-label="Show original UI screenshot 3"></button>
+                  <button class="old-ui-dot" type="button" data-old-ui-index="3" aria-label="Show original UI screenshot 4"></button>
+                  <button class="old-ui-dot" type="button" data-old-ui-index="4" aria-label="Show original UI screenshot 5"></button>
+                  <button class="old-ui-dot" type="button" data-old-ui-index="5" aria-label="Show original UI screenshot 6"></button>
+                  <button class="old-ui-dot" type="button" data-old-ui-index="6" aria-label="Show original UI screenshot 7"></button>
+                </div>
+                <p class="pes-caption">Original UI review — dense panes and repeated table layouts made priority, status, and next action difficult to scan</p>
+              </div>
             </div>
           </div>
         </section>
@@ -1283,8 +1395,8 @@
           <article class="feature reveal">
             <p class="statement">A number shows a value. A line shows what is about to happen.</p>
             <div class="pes-media-pair">
-              <div><span class="pes-pill">Before</span><div class="media-placeholder">Numeric display only</div><p class="pes-caption">Static numbers — no sense of whether a value was rising, falling, or stable</p></div>
-              <div><span class="pes-pill pes-pill--after">After</span><div class="media-placeholder">Line graph added</div><p class="pes-caption">Real-time line graphs added — direction of change visible at a glance</p></div>
+              <div><span class="pes-pill">Before</span><div class="media-placeholder oshkosh-iteration-image"><img src="oshkosh/iteration-number-only.png" alt="Number-only dashboard cards without trend lines"></div><p class="pes-caption">Static numbers — no sense of whether a value was rising, falling, or stable</p></div>
+              <div><span class="pes-pill pes-pill--after">After</span><div class="media-placeholder oshkosh-iteration-image"><img src="oshkosh/iteration-line.png" alt="Dashboard cards with line graphs showing real-time trends"></div><p class="pes-caption">Real-time line graphs added — direction of change visible at a glance</p></div>
             </div>
             <p class="body-copy">The fix was specific to the test engineer interface, where speed of interpretation matters most. The developer interface kept its dense tabular format because developers need precision. The second test round returned a 5 out of 5 satisfaction score.</p>
           </article>
@@ -1299,12 +1411,6 @@
               <img src="oshkosh/final.png" alt="Final Project CANnonball dashboard designs">
             </div>
             <p class="pes-caption">Final dashboard — system status, live signal monitoring, and real-time visualization in one view</p>
-            <div class="pes-media-pair">
-              <div><div class="media-placeholder">Trace Playback View</div><p class="pes-caption">Trace playback — developer view with timeline scrubbing and event annotation</p></div>
-              <div><div class="media-placeholder">DBC File Management</div><p class="pes-caption">DBC file management — merge and edit files across manufacturers without external scripts</p></div>
-            </div>
-            <div class="media-placeholder">Receive View — Live Signal Monitoring</div>
-            <p class="pes-caption">Receive view — live decoded CAN messages with expandable signal rows and live or pause mode</p>
           </div>
         </section>
 
@@ -1373,6 +1479,46 @@
 
     document.querySelectorAll(".reveal, .context-item").forEach(item => {
       revealObserver.observe(item);
+    });
+
+    document.querySelectorAll(".old-ui-gallery").forEach(gallery => {
+      const scroller = gallery.querySelector(".old-ui-scroll");
+      const frames = Array.from(gallery.querySelectorAll(".old-ui-frame"));
+      const dots = Array.from(gallery.querySelectorAll(".old-ui-dot"));
+
+      if (!scroller || !frames.length || !dots.length) return;
+
+      function setActiveDot(activeIndex) {
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("is-active", index === activeIndex);
+        });
+      }
+
+      function getNearestFrameIndex() {
+        return frames.reduce((nearest, frame, index) => {
+          const distance = Math.abs(frame.offsetLeft - scroller.scrollLeft);
+          return distance < nearest.distance ? { index, distance } : nearest;
+        }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
+      }
+
+      let dotFrame = 0;
+      scroller.addEventListener("scroll", () => {
+        window.cancelAnimationFrame(dotFrame);
+        dotFrame = window.requestAnimationFrame(() => {
+          setActiveDot(getNearestFrameIndex());
+        });
+      }, { passive: true });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          frames[index].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start"
+          });
+          setActiveDot(index);
+        });
+      });
     });
 
     const spyObserver = new IntersectionObserver(entries => {

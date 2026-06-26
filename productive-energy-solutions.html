@@ -137,6 +137,49 @@
       min-height: clamp(180px, 26vw, 360px);
     }
 
+    .external-preview-link {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .external-preview-link::after {
+      content: "View live site";
+      position: absolute;
+      left: var(--cursor-x, 50%);
+      top: var(--cursor-y, 50%);
+      z-index: 2;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 620;
+      letter-spacing: 0;
+      text-transform: none;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, calc(-100% - 14px));
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .external-preview-link:hover::after,
+    .external-preview-link:focus-visible::after {
+      opacity: 1;
+      transform: translate(-50%, calc(-100% - 18px));
+    }
+
+    .external-preview-link img {
+      transition: transform 220ms ease, filter 220ms ease;
+    }
+
+    .external-preview-link:hover img,
+    .external-preview-link:focus-visible img {
+      filter: brightness(0.92);
+      transform: scale(1.01);
+    }
+
     .hero-media-before {
       clip-path: inset(100% 0 0 0);
       animation: reveal-from-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -312,6 +355,11 @@
       grid-template-columns: 1fr;
       gap: 44px;
       margin-bottom: 56px;
+    }
+
+    .hero-context-after {
+      margin-top: 24px;
+      margin-bottom: 0;
     }
 
     .context-item,
@@ -574,6 +622,127 @@
       margin-bottom: 72px;
     }
 
+    .solution-features {
+      display: grid;
+      gap: 64px;
+      margin-top: 64px;
+    }
+
+    .solution-feature {
+      display: grid;
+      grid-template-areas:
+        "number"
+        "title"
+        "body";
+      row-gap: 0;
+      padding-top: 56px;
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+    }
+
+    .solution-feature:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .solution-feature__body {
+      grid-area: body;
+      display: grid;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .solution-feature__media {
+      min-width: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .solution-feature__media img,
+    .solution-feature__media video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .solution-feature__media--framed-video {
+      position: relative;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1841 / 1070;
+      padding: clamp(24px, 5vw, 52px);
+      background: url("webredesign/solution-video-background.png") center / cover no-repeat;
+    }
+
+    .solution-feature__media--framed-video video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(78%, 640px);
+      border-radius: 14px;
+      box-shadow: 0 22px 46px rgba(58, 18, 18, 0.22);
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    .solution-feature__copy {
+      min-width: 0;
+    }
+
+    .solution-feature__number {
+      grid-area: number;
+      display: block;
+      margin-bottom: 36px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 450;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .solution-feature > h3 {
+      grid-area: title;
+      max-width: 980px;
+      margin: 0 auto 56px;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.038em;
+    }
+
+    .title-accent {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: inherit;
+    }
+
+    .solution-feature__copy p {
+      margin: 20px 0 0;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    .solution-feature__points {
+      display: grid;
+      gap: 12px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .solution-feature__points li {
+      padding-top: 12px;
+      border-top: 1px solid rgba(15, 15, 15, 0.1);
+      color: rgba(15, 15, 15, 0.68);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 350;
+    }
+
     .next-card {
       border: 1px solid rgba(15, 15, 15, 0.2);
       border-radius: 8px;
@@ -790,6 +959,11 @@
 
       .two-card-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .solution-feature__body {
+        grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.65fr);
+        gap: 42px;
       }
     }
 
@@ -1074,7 +1248,7 @@
           <div class="hero-content">
             <div>
               <div class="hero-title-group">
-                <p class="award">Case Study · UX / Visual Design</p>
+                <p class="award">Web Design · Visual Design</p>
                 <h1>Productive Energy Solutions</h1>
               </div>
               <div class="hero-details">
@@ -1105,23 +1279,25 @@
           </div>
 
           <div class="media-card media-card--short hero-media-after">
-            <img src="webredesign/2.png" alt="Productive Energy Solutions website design">
+            <a class="external-preview-link" href="https://www.productiveenergy.com/services/consulting" target="_blank" rel="noopener noreferrer" aria-label="Open the Productive Energy Solutions consulting website">
+              <img src="webredesign/2.png" alt="Productive Energy Solutions website design">
+            </a>
+          </div>
+
+          <div class="context-top hero-context-after">
+            <article class="context-item">
+              <h2 class="context-title">What is Productive Energy Solutions?</h2>
+              <p class="body-copy">Productive Energy Solutions has been optimizing industrial fan, pump, and blower systems since 1998. They offer online courses and in-person consulting to engineers and facility managers across North America.</p>
+            </article>
+            <article class="context-item">
+              <h2 class="context-title">My Role</h2>
+              <p class="body-copy">I led the UX and visual design across research, information architecture, interaction design, prototyping, and the final website direction.</p>
+            </article>
           </div>
         </section>
 
         <section id="context" class="section page-shell">
           <div class="section-content">
-            <div class="context-top">
-              <article class="context-item">
-                <h2 class="context-title">What is Productive Energy Solutions?</h2>
-                <p class="body-copy">Productive Energy Solutions has been optimizing industrial fan, pump, and blower systems since 1998. They offer online courses and in-person consulting to engineers and facility managers across North America.</p>
-              </article>
-              <article class="context-item">
-                <h2 class="context-title">My Role</h2>
-                <p class="body-copy">I led the UX and visual design across research, information architecture, interaction design, prototyping, and the final website direction.</p>
-              </article>
-            </div>
-
             <div class="impact-block">
               <p class="eyebrow reveal">Context</p>
               <p class="statement reveal">A company with 25 years of expertise, and a website that showed none of it.</p>
@@ -1206,23 +1382,69 @@
             </div>
           </article>
 
-          <article class="feature reveal">
-            <p class="feature-title">Building trust through evidence</p>
-            <p class="statement">Credibility had to be visible in the page flow.</p>
-            <div class="pes-grid pes-grid--two">
-              <article class="pes-card"><p class="pes-card-label">Trust module 01</p><h3>Animated client map</h3><p>An interactive map showing where clients have been served across North America, making scale visible in a way a number alone could not.</p><div class="media-placeholder" style="min-height: 180px;"><video src="webredesign/Trust.m4v" autoplay muted loop playsinline></video></div></article>
-              <article class="pes-card"><p class="pes-card-label">Trust module 02</p><h3>Testimonials in the conversion flow</h3><p>Client testimonials placed directly in the page flow so they do their job at the moment it matters.</p><div class="media-placeholder" style="min-height: 180px;">Testimony module</div></article>
-            </div>
-          </article>
         </section>
 
         <section id="next" class="section page-shell">
           <p class="eyebrow reveal">Solution</p>
           <div class="reveal">
-            <h2 class="large-heading">Final design</h2>
-            <p class="next-description">The visual direction pulls from the company's existing logo, with a deep red used as the primary accent. The homepage leads with a clear value statement, surfaces key impact numbers immediately, and gives visitors a direct path to contact.</p>
-            <div class="media-placeholder">New homepage</div>
-            <p class="pes-caption">New homepage — value statement up front, impact numbers in the hero, one clear call to action</p>
+            <h2 class="large-heading">A clearer site built around credibility, structure, and action.</h2>
+            <p class="next-description">The final direction turns a fragmented legacy site into a focused B2B experience: visitors understand what the company does, see proof that the company can be trusted, and have a clear route toward contact or training.</p>
+          </div>
+
+          <div class="solution-features">
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Solution 01 · Consolidating Redundant Content</span>
+              <h3>Turn scattered pages into a <em class="title-accent">clearer site structure.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media solution-feature__media--framed-video">
+                  <video src="webredesign/content-consolidation.mov" autoplay muted loop playsinline preload="metadata" aria-label="Productive Energy Solutions content consolidation walkthrough"></video>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>The original site had more than 20 pages with overlapping navigation and repeated information. I consolidated the structure into four core sections so visitors could quickly understand the company, compare services, and move forward without digging through outdated pages.</p>
+                  <ul class="solution-feature__points">
+                    <li>Reduced the sitemap to Home, Services, About, and Contact</li>
+                    <li>Grouped training and consulting content into clearer entry points</li>
+                    <li>Removed duplicate paths that made the site feel larger but less useful</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Solution 02 · Enhancing Trust</span>
+              <h3>Make credibility <em class="title-accent">visible in the page flow.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media solution-feature__media--framed-video">
+                  <video src="webredesign/Trust.m4v" autoplay muted loop playsinline preload="metadata" aria-label="Animated client map trust module"></video>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>For a technically skeptical B2B audience, credibility had to appear inside the page flow instead of being hidden on a separate About page. The redesign uses evidence modules like client geography, impact numbers, testimonials, and industry-specific language to make expertise visible while people scan.</p>
+                  <ul class="solution-feature__points">
+                    <li>Added an animated client map to show scale across North America</li>
+                    <li>Placed testimonials where visitors are already evaluating the company</li>
+                    <li>Used concrete proof points instead of broad marketing claims</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="solution-feature reveal">
+              <span class="solution-feature__number">Solution 03 · Clarifying the Conversion Path</span>
+              <h3>Give each visitor a <em class="title-accent">clear next step.</em></h3>
+              <div class="solution-feature__body">
+                <div class="solution-feature__media solution-feature__media--framed-video">
+                  <video src="webredesign/conversion-path.mov" autoplay muted loop playsinline preload="metadata" aria-label="Productive Energy Solutions conversion path walkthrough"></video>
+                </div>
+                <div class="solution-feature__copy">
+                  <p>The new homepage leads with a direct value statement, surfaces impact numbers early, and gives visitors a clear next step. Instead of making users interpret the site structure themselves, the redesign guides them toward the most useful action: learning about services, exploring training, or contacting the team.</p>
+                  <ul class="solution-feature__points">
+                    <li>Moved the primary CTA into the first viewport</li>
+                    <li>Separated consulting and training paths so different visitors can self-select</li>
+                    <li>Kept contact access visible after credibility has been established</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -1290,6 +1512,19 @@
 
     document.querySelectorAll(".reveal, .context-item").forEach(item => {
       revealObserver.observe(item);
+    });
+
+    document.querySelectorAll(".external-preview-link").forEach(link => {
+      link.addEventListener("pointermove", event => {
+        const rect = link.getBoundingClientRect();
+        link.style.setProperty("--cursor-x", `${event.clientX - rect.left}px`);
+        link.style.setProperty("--cursor-y", `${event.clientY - rect.top}px`);
+      });
+
+      link.addEventListener("pointerleave", () => {
+        link.style.removeProperty("--cursor-x");
+        link.style.removeProperty("--cursor-y");
+      });
     });
 
     const spyObserver = new IntersectionObserver(entries => {
