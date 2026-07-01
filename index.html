@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yilin Chen Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #30435a;
@@ -15,6 +18,14 @@
       --hero-artboard-x: -50%;
       --hero-artboard-y: -50%;
       --hero-artboard-scale: 1;
+      --case-paper: #f5f5f5;
+      --case-ink: #0f0f0f;
+      --case-muted: #666;
+      --case-line: rgba(15, 15, 15, 0.16);
+      --case-accent: #db4a2f;
+      --case-serif: "Crimson Pro", Georgia, "Times New Roman", serif;
+      --case-sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --play-modal-font: "Nunito Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * {
@@ -32,6 +43,10 @@
       color: var(--ink);
       background: #f8fbff;
       font-family: ui-serif, Georgia, "Times New Roman", serif;
+    }
+
+    body.play-modal-open {
+      overflow: hidden;
     }
 
     a {
@@ -382,6 +397,7 @@
       background: rgba(255, 255, 255, 0.78);
       box-shadow: 0 12px 34px rgba(84, 106, 126, 0.08);
       overflow: hidden;
+      color: inherit;
     }
 
     .play-card::before {
@@ -400,6 +416,50 @@
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 0.92rem;
       font-weight: 620;
+    }
+
+    .play-card:has(.play-card__cover)::before,
+    .play-card:has(.play-card__cover) span {
+      display: none;
+    }
+
+    .play-card__cover {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: transparent;
+    }
+
+    .play-card__cover--contain {
+      object-fit: contain;
+    }
+
+    .play-card__cover--inset-crop {
+      width: calc(100% + 6px);
+      height: calc(100% + 6px);
+      margin: -3px;
+    }
+
+    .play-card-button,
+    .play-card-link {
+      display: block;
+      padding: 0;
+      text-align: left;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    .play-card-button:hover,
+    .play-card-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(84, 106, 126, 0.14);
+    }
+
+    .play-card-button:focus-visible,
+    .play-card-link:focus-visible {
+      outline: 3px solid rgba(219, 74, 47, 0.38);
+      outline-offset: 4px;
     }
 
     .glide-cat {
@@ -457,23 +517,37 @@
 
     .play-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: clamp(16px, 2vw, 24px);
+      grid-template-columns: minmax(0, 452px) minmax(0, 452px);
+      align-items: start;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .play-column {
+      display: grid;
+      gap: 30px;
     }
 
     .play-card {
-      min-height: clamp(220px, 26vw, 330px);
+      width: 100%;
+      min-height: 0;
+      transform: none;
     }
 
-    .play-card:nth-child(3n + 2) {
-      transform: translateY(36px);
+    .play-card--wide {
+      aspect-ratio: 452 / 235;
     }
 
-    .play-card:nth-child(4n) {
-      transform: translateY(-18px);
+    .play-card--tall {
+      width: min(100%, 447px);
+      aspect-ratio: 447 / 298;
     }
 
-    .play-card:nth-child(even)::before {
+    .play-card--project-03 {
+      justify-self: end;
+    }
+
+    .play-card--alt::before {
       background:
         linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(48, 67, 90, 0.08)),
         radial-gradient(circle at 62% 38%, rgba(48, 67, 90, 0.15), transparent 24%);
@@ -492,6 +566,228 @@
     .play-intro .section-note {
       margin-left: 0;
       text-align: left;
+    }
+
+    .play-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      padding: clamp(18px, 4vw, 48px);
+      background: rgba(20, 28, 38, 0.48);
+      overflow-y: auto;
+    }
+
+    .play-modal.is-open {
+      display: block;
+    }
+
+    .play-modal__panel {
+      position: relative;
+      width: min(760px, 100%);
+      margin: 0 auto;
+      border-radius: 8px;
+      background: var(--case-paper);
+      box-shadow: 0 28px 80px rgba(20, 28, 38, 0.24);
+      overflow: hidden;
+    }
+
+    .play-modal__close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(245, 245, 245, 0.92);
+      color: var(--case-ink);
+      cursor: pointer;
+      font-family: var(--play-modal-font);
+      font-size: 1.35rem;
+      line-height: 1;
+      box-shadow: 0 8px 22px rgba(15, 15, 15, 0.12);
+    }
+
+    .play-modal__cover {
+      width: 100%;
+      height: clamp(180px, 28vw, 260px);
+      display: block;
+      object-fit: cover;
+      background: #ece7e2;
+    }
+
+    .play-modal__body {
+      display: grid;
+      gap: 16px;
+      padding: clamp(28px, 5vw, 42px);
+      color: var(--case-ink);
+      font-family: var(--play-modal-font);
+    }
+
+    .play-modal__title {
+      margin: 0;
+      max-width: 620px;
+      color: var(--case-ink);
+      font-family: var(--case-serif);
+      font-size: clamp(2.1rem, 5vw, 3rem);
+      line-height: 1.02;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      overflow-wrap: anywhere;
+    }
+
+    .play-modal__hook {
+      margin: -4px 0 6px;
+      max-width: 560px;
+      color: var(--case-ink);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.62;
+      font-weight: 300;
+    }
+
+    .play-modal__label {
+      justify-self: start;
+      margin: 12px 0 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--case-ink);
+      font-family: var(--play-modal-font);
+      font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+
+    .play-modal__copy {
+      margin: 0;
+      max-width: 640px;
+      color: var(--case-ink);
+      font-size: 1rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .play-modal__copy + .play-modal__copy {
+      margin-top: -4px;
+    }
+
+    .play-modal__image {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      background: #ece7e2;
+      object-fit: cover;
+    }
+
+    .play-modal__video {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      background: #000;
+    }
+
+    .play-modal__two,
+    .play-modal__three,
+    .play-modal__steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .play-modal__two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .play-modal__three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .play-modal__ritual {
+      height: 144px;
+    }
+
+    .play-modal__wide-image {
+      max-height: 280px;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .play-modal__image-stack {
+      display: grid;
+      gap: 0;
+    }
+
+    .play-modal__image-stack figure + figure {
+      margin-top: 18px;
+    }
+
+    .play-modal__image-note + figure {
+      margin-top: 0;
+    }
+
+    .play-modal__full-image {
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .play-modal__concept img {
+      height: auto;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .play-modal__step-image {
+      height: 200px;
+    }
+
+    .play-modal__step-caption {
+      margin: 8px 0 0;
+      color: var(--case-ink);
+      font-size: 0.78rem;
+      font-weight: 560;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+    }
+
+    .play-modal__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .play-modal__step--wide {
+      grid-column: 1 / -1;
+    }
+
+    .play-modal__step--wide .play-modal__step-image {
+      height: 260px;
+    }
+
+    .play-modal figure {
+      margin: 0;
+    }
+
+    .play-modal__caption {
+      margin: 8px 0 0;
+      color: var(--case-ink);
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .play-modal__image-note {
+      margin: 18px 0 0;
+      color: var(--case-ink);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.7;
     }
 
     .scroll-footer {
@@ -793,6 +1089,21 @@
         width: 100%;
       }
 
+      .play-card--project-01 { order: 1; }
+      .play-card--project-02 { order: 2; }
+      .play-card--project-03 { order: 3; }
+      .play-card--project-04 { order: 4; }
+
+      .play-column {
+        display: contents;
+      }
+
+      .play-card--tall,
+      .play-card--wide {
+        width: 100%;
+        justify-self: stretch;
+      }
+
       .case-card,
       .play-card {
         min-height: 220px;
@@ -804,6 +1115,22 @@
 
       .play-card:nth-child(n) {
         transform: none;
+      }
+
+      .play-modal {
+        padding: 14px;
+      }
+
+      .play-modal__panel {
+        border-radius: 8px;
+      }
+
+      .play-modal__cover {
+        height: 180px;
+      }
+
+      .play-modal__body {
+        padding: 26px 20px 30px;
       }
 
       .scroll-footer {
@@ -941,18 +1268,131 @@
           <p class="section-note">A looser playground for prototypes, visual systems, coding sketches, and tiny interactive ideas.</p>
         </div>
         <div class="play-grid" aria-label="Play project placeholders">
-          <article class="play-card"><span>Play Project 01</span></article>
-          <article class="play-card"><span>Play Project 02</span></article>
-          <article class="play-card"><span>Play Project 03</span></article>
-          <article class="play-card"><span>Play Project 04</span></article>
-          <article class="play-card"><span>Play Project 05</span></article>
-          <article class="play-card"><span>Play Project 06</span></article>
-          <article class="play-card"><span>Play Project 07</span></article>
-          <article class="play-card"><span>Play Project 08</span></article>
+          <div class="play-column">
+            <button class="play-card play-card-button play-card--wide play-card--project-01" type="button" data-play-modal-open="vr-focus" aria-label="Open VR Focus Game project">
+              <video class="play-card__cover play-card__cover--contain play-card__cover--inset-crop" src="play_project_covers/pro2.mp4" autoplay muted loop playsinline></video>
+              <span>VR Focus Game</span>
+            </button>
+            <a class="play-card play-card-link play-card--tall play-card--alt play-card--project-03" href="https://ai-chatbot-six-tau-13.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open AI chatbot project">
+              <video class="play-card__cover play-card__cover--contain" src="play_project_covers/pro3.mov" autoplay muted loop playsinline></video>
+              <span>AI Chatbot</span>
+            </a>
+          </div>
+          <div class="play-column">
+            <button class="play-card play-card-button play-card--tall play-card--alt play-card--project-02" type="button" data-play-modal-open="led-cards" aria-label="Open LED Enhanced Cards project">
+              <img class="play-card__cover play-card__cover--inset-crop" src="play_project_covers/pro1.png" alt="">
+              <span>LED Enhanced Cards</span>
+            </button>
+            <a class="play-card play-card-link play-card--wide play-card--project-04" href="https://text-explosion-p5.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Text Booming app">
+              <video class="play-card__cover play-card__cover--contain" src="play_project_covers/pro4.mov" autoplay muted loop playsinline></video>
+              <span>Text Booming App</span>
+            </a>
+          </div>
         </div>
       </section>
     </div>
   </section>
+
+  <div class="play-modal" id="led-cards-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="led-cards-title">
+    <div class="play-modal__panel" role="document">
+      <button class="play-modal__close" type="button" data-play-modal-close aria-label="Close LED Cards case study">×</button>
+      <img class="play-modal__cover" src="led_cards_modal_assets/cover.png" alt="">
+      <div class="play-modal__body">
+        <h2 class="play-modal__title" id="led-cards-title">Transforming luck with LED enhanced cards</h2>
+        <p class="play-modal__hook">A fortune card you have to draw on to change your luck.</p>
+
+        <div class="play-modal__label">Why</div>
+        <p class="play-modal__copy">
+
+People tend to rely on fortune telling instead of taking action, but the ritual itself carries real anticipation and a sense of mystery. The question was how to keep that feeling, while nudging people to realize their luck is something they shape, not just receive.</p>
+        <div class="play-modal__two">
+          <img class="play-modal__image play-modal__ritual" src="led_cards_modal_assets/ritual_left.png" alt="">
+          <img class="play-modal__image play-modal__ritual" src="led_cards_modal_assets/ritual_right.png" alt="">
+        </div>
+        <p class="play-modal__copy">
+
+The idea came from watching people draw on talisman paper while chanting, turning an intangible wish into something done by hand. That ritual became the model for the card.</p>
+        <img class="play-modal__image play-modal__wide-image" src="led_cards_modal_assets/ritual_model.png" alt="">
+
+        <div class="play-modal__label">How</div>
+        <p class="play-modal__copy">
+
+Each card hides a circuit under a traditional pattern. Solving a small maze with a conductive pen completes it, switching the LED from the old fortune to a new one.</p>
+        <div class="play-modal__three">
+          <figure class="play-modal__concept">
+            <img class="play-modal__image" src="led_cards_modal_assets/concept_metaphors.png" alt="">
+          </figure>
+          <figure class="play-modal__concept">
+            <img class="play-modal__image" src="led_cards_modal_assets/concept_puzzle.png" alt="">
+          </figure>
+          <figure class="play-modal__concept">
+            <img class="play-modal__image" src="led_cards_modal_assets/concept_lights.png" alt="">
+          </figure>
+        </div>
+
+        <p class="play-modal__copy">The cover carries the starting fortune. Underneath, brass tape and a button battery form the circuit along a symmetric traditional pattern.</p>
+        <div class="play-modal__steps">
+          <figure class="play-modal__step">
+            <img class="play-modal__image play-modal__step-image" src="led_cards_modal_assets/step_1.png" alt="">
+            <figcaption class="play-modal__step-caption">1. Draw the lots</figcaption>
+          </figure>
+          <figure class="play-modal__step">
+            <img class="play-modal__image play-modal__step-image" src="led_cards_modal_assets/step_2.png" alt="">
+            <figcaption class="play-modal__step-caption">2. Read the initial fortune</figcaption>
+          </figure>
+          <figure class="play-modal__step">
+            <img class="play-modal__image play-modal__step-image" src="led_cards_modal_assets/step_3.png" alt="">
+            <figcaption class="play-modal__step-caption">3. Rip the cover</figcaption>
+          </figure>
+          <figure class="play-modal__step">
+            <img class="play-modal__image play-modal__step-image" src="led_cards_modal_assets/step_4.png" alt="">
+            <figcaption class="play-modal__step-caption">4. Trace the maze with the conductive pen</figcaption>
+          </figure>
+          <figure class="play-modal__step play-modal__step--wide">
+            <img class="play-modal__image play-modal__step-image" src="led_cards_modal_assets/step_5.png" alt="">
+            <figcaption class="play-modal__step-caption">5. Light off the initial fortune and light up the hoped fortune</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="play-modal" id="vr-focus-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vr-focus-title">
+    <div class="play-modal__panel" role="document">
+      <button class="play-modal__close" type="button" data-play-modal-close aria-label="Close VR Focus case study">×</button>
+      <img class="play-modal__cover" src="vr_focus_modal_assets/hero.png" alt="">
+      <div class="play-modal__body">
+        <h2 class="play-modal__title" id="vr-focus-title">An engaging VR game enhancing focus and attention skills</h2>
+        <p class="play-modal__hook">A three chapter VR experience that uses color and immersion to gradually sharpen attention, not through treatment, but through play.</p>
+
+        <div class="play-modal__label">Why</div>
+        <p class="play-modal__copy">Attention deficits are difficult to fully cure. In a fast paced digital world where distractions multiply, people who are highly inattentive are told to manage symptoms rather than build skills. The question was whether a game environment could actually train focus in a way that feels engaging rather than clinical.</p>
+        <img class="play-modal__image play-modal__full-image" src="vr_focus_modal_assets/why.png" alt="">
+
+        <div class="play-modal__label">How</div>
+        <p class="play-modal__copy">The core idea is that color directly affects mental state. Green calms and relieves stress, blue boosts focus and cognitive performance, pink sustains steady concentration, orange activates energy and creativity. Each chapter of the game uses a different color environment to target a different attention state, starting easier and gradually increasing in difficulty as the player builds capacity.</p>
+        <div class="play-modal__image-stack">
+          <figure>
+            <img class="play-modal__image play-modal__full-image" src="vr_focus_modal_assets/how1.png" alt="">
+          </figure>
+          <p class="play-modal__image-note">The four chapters are structured as a progression: players move through increasingly complex interactive tasks inside each color environment, with the space and challenges designed to match what that color is meant to cultivate.</p>
+          <figure>
+            <img class="play-modal__image play-modal__full-image" src="vr_focus_modal_assets/how2.png" alt="">
+            <figcaption class="play-modal__caption">Four chapters of the game</figcaption>
+          </figure>
+          <figure>
+            <img class="play-modal__image play-modal__full-image" src="vr_focus_modal_assets/how3.png" alt="">
+            <figcaption class="play-modal__caption">Interactive map</figcaption>
+          </figure>
+          <figure>
+            <img class="play-modal__image play-modal__full-image" src="vr_focus_modal_assets/how4.png" alt="">
+            <figcaption class="play-modal__caption">Game play</figcaption>
+          </figure>
+        </div>
+        <video class="play-modal__video" src="vr_focus_modal_assets/vr.mp4" controls playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </div>
 
   <section class="scroll-footer" id="scroll-footer" aria-label="Animated footer">
     <div class="footer-scene">
@@ -1049,6 +1489,56 @@
     let transitionFinalGlideStartY = null;
     let transitionFinalGlideStartScroll = null;
     const transitionProcessedFrames = new Map();
+    const playModals = document.querySelectorAll(".play-modal");
+    const playModalOpeners = document.querySelectorAll("[data-play-modal-open]");
+    let activePlayModalOpener = null;
+
+    function closePlayModal(updateFocus = true) {
+      playModals.forEach(modal => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+      });
+      document.body.classList.remove("play-modal-open");
+      if (updateFocus) activePlayModalOpener?.focus();
+      activePlayModalOpener = null;
+    }
+
+    function openPlayModal(modalName, opener) {
+      const playModal = document.getElementById(`${modalName}-modal`);
+      if (!playModal) return;
+      closePlayModal(false);
+      activePlayModalOpener = opener;
+      playModal.classList.add("is-open");
+      playModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("play-modal-open");
+      playModal.querySelector("[data-play-modal-close]")?.focus();
+    }
+
+    playModalOpeners.forEach(opener => {
+      opener.addEventListener("click", () => openPlayModal(opener.dataset.playModalOpen, opener));
+    });
+    document.querySelectorAll("[data-play-modal-close]").forEach(closeButton => {
+      closeButton.addEventListener("click", () => closePlayModal());
+    });
+    playModals.forEach(modal => {
+      modal.addEventListener("click", event => {
+        if (event.target === modal) closePlayModal();
+      });
+    });
+    window.addEventListener("keydown", event => {
+      if (event.key === "Escape" && document.querySelector(".play-modal.is-open")) {
+        closePlayModal();
+      }
+    });
+    document.querySelectorAll(".play-modal img").forEach(image => {
+      image.addEventListener("error", () => {
+        const tries = Number(image.dataset.extensionTry || "0");
+        const nextExtensions = ["png", "jpeg", "webp"];
+        if (tries >= nextExtensions.length) return;
+        image.dataset.extensionTry = String(tries + 1);
+        image.src = image.src.replace(/\.(jpg|jpeg|png|webp)$/i, `.${nextExtensions[tries]}`);
+      });
+    });
 
     function makeTransparentCloud(source) {
       const cloud = document.createElement("canvas");
