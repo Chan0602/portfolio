@@ -559,6 +559,18 @@ function updateContact() {
   footerScene.classList.toggle("contact-active", active);
 }
 
+function scrollToContactPanel(behavior = "smooth") {
+  const scrollable = Math.max(1, footer.offsetHeight - window.innerHeight);
+  const targetProgressRatio = 0.985;
+  const targetTop = footer.offsetTop + scrollable * targetProgressRatio;
+  targetProgress = targetProgressRatio;
+  progress = Math.max(progress, targetProgressRatio);
+  updateContact();
+  window.scrollTo({ top: targetTop, behavior });
+}
+
+window.portfolioScrollToContact = scrollToContactPanel;
+
 function render(now) {
   const dt = Math.min(50, now - lastTime);
   lastTime = now;
@@ -585,6 +597,21 @@ window.addEventListener("resize", resize, { passive: true });
 window.addEventListener("scroll", markScrolling, { passive: true });
 window.addEventListener("wheel", markScrolling, { passive: true });
 window.addEventListener("touchmove", markScrolling, { passive: true });
+document.addEventListener("click", (event) => {
+  const contactLink = event.target.closest('a[href="#contact-me"]');
+  if (!contactLink) return;
+  event.preventDefault();
+  history.pushState(null, "", "#contact-me");
+  scrollToContactPanel("auto");
+});
+window.addEventListener("load", () => {
+  if (window.location.hash === "#contact-me") {
+    window.setTimeout(() => scrollToContactPanel("auto"), 120);
+  }
+});
+window.addEventListener("hashchange", () => {
+  if (window.location.hash === "#contact-me") scrollToContactPanel("auto");
+});
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
 

@@ -1211,16 +1211,25 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="site-nav.css?v=20260701-nav-bg">
   <link rel="stylesheet" href="case-study-footer.css">
 </head>
 <body>
-  <header class="project-nav">
-    <a href="index.html">Yilin Chen</a>
-    <div class="project-nav__links">
+    <nav class="portfolio-nav project-nav" data-portfolio-nav aria-label="Main navigation">
+    <a class="portfolio-nav__brand" href="index.html">Yilin Chen</a>
+    <button class="portfolio-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="portfolio-nav-links" data-portfolio-nav-toggle>
+      <img class="portfolio-nav__icon portfolio-nav__icon--hamburger" src="images/nav/hamburger-icon.png" alt="" aria-hidden="true">
+      <img class="portfolio-nav__icon portfolio-nav__icon--close" src="images/nav/menu-close.png" alt="" aria-hidden="true">
+    </button>
+    <div class="portfolio-nav__panel" id="portfolio-nav-links">
       <a href="index.html#work">Work</a>
-      <a href="index.html#scroll-footer">Contact</a>
+      <a href="index.html#play">Play</a>
+      <a href="about.html">About</a>
+      <a class="portfolio-nav__contact" href="index.html#contact-me" aria-label="Contact">
+        <img src="images/nav/contact-icon.png" alt="">
+      </a>
     </div>
-  </header>
+  </nav>
 
   <main class="project-page">
     <div class="case-study-layout">
@@ -1474,6 +1483,7 @@
   <footer class="case-study-grass-footer" aria-label="Portfolio footer">
     <canvas class="case-study-grass-footer__canvas" aria-label="Click anywhere in the scene and the cat will move there"></canvas>
   </footer>
+  <script src="site-nav.js?v=20260701-contact-target-3"></script>
   <script src="case-study-footer.js"></script>
 
   <script>

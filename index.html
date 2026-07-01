@@ -83,6 +83,43 @@
       font-weight: 520;
     }
 
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      min-height: 42px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.68);
+      color: currentColor;
+      box-shadow: 0 12px 30px rgba(48, 67, 90, 0.12);
+      cursor: pointer;
+    }
+
+    .nav-toggle__line {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .site-nav.is-open .nav-toggle__line:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .site-nav.is-open .nav-toggle__line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.is-open .nav-toggle__line:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
     .hero {
       position: relative;
       height: var(--hero-height);
@@ -835,6 +872,7 @@
     }
 
     .contact-title {
+      display: none;
       position: absolute;
       top: clamp(28px, 5vh, 62px);
       left: 50%;
@@ -855,7 +893,7 @@
       top: 50%;
       width: clamp(900px, 96vw, 1540px);
       aspect-ratio: 2560 / 974;
-      transform: translate(-50%, -42%);
+      transform: translate(-46%, -50%);
     }
 
     .contact-yarn {
@@ -1036,13 +1074,40 @@
       }
 
       .site-nav {
+        position: absolute;
         width: min(100% - 36px, 560px);
-        padding-top: 22px;
+        padding: 22px 0;
       }
 
       .nav-links {
-        gap: 16px;
-        font-size: 0.86rem;
+        position: absolute;
+        top: 72px;
+        right: 0;
+        display: grid;
+        gap: 12px;
+        min-width: 156px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 18px 42px rgba(48, 67, 90, 0.16);
+        font-size: 0.9rem;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity 180ms ease, transform 180ms ease;
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+      }
+
+      .site-nav.is-open .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-toggle {
+        display: grid;
+        place-items: center;
       }
 
       .hero-inner {
@@ -1134,20 +1199,22 @@
       }
 
       .scroll-footer {
-        height: 260vh;
+        height: 260svh;
       }
 
       .footer-scene {
-        min-height: 420px;
+        height: 100svh;
+        min-height: 560px;
       }
 
       .contact-title {
-        top: 32px;
+        top: max(28px, calc(env(safe-area-inset-top) + 18px));
+        font-size: clamp(2.1rem, 10vw, 3.25rem);
       }
 
       .contact-artboard {
-        width: 900px;
-        transform: translate(-50%, -40%);
+        width: min(900px, 232vw);
+        transform: translate(-46%, -50%);
       }
 
       .contact-field--name {
@@ -1165,18 +1232,65 @@
         left: 49.8%;
         width: 7%;
       }
+
+      .contact-field input,
+      .contact-field textarea {
+        font-size: 16px;
+      }
+
+      .contact-status {
+        bottom: max(12px, env(safe-area-inset-bottom));
+      }
     }
   </style>
+  <link rel="stylesheet" href="site-nav.css?v=20260701-nav-bg">
 </head>
 <body>
-  <nav class="site-nav" aria-label="Main navigation">
-    <a class="brand" href="#">Yilin Chen</a>
-    <div class="nav-links">
+  <nav class="portfolio-nav" data-portfolio-nav aria-label="Main navigation">
+    <a class="portfolio-nav__brand" href="index.html">Yilin Chen</a>
+    <button class="portfolio-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="portfolio-nav-links" data-portfolio-nav-toggle>
+      <img class="portfolio-nav__icon portfolio-nav__icon--hamburger" src="images/nav/hamburger-icon.png" alt="" aria-hidden="true">
+      <img class="portfolio-nav__icon portfolio-nav__icon--close" src="images/nav/menu-close.png" alt="" aria-hidden="true">
+    </button>
+    <div class="portfolio-nav__panel" id="portfolio-nav-links">
       <a href="#work">Work</a>
+      <a href="#play">Play</a>
       <a href="about.html">About</a>
-      <a href="#scroll-footer">Contact</a>
+      <a class="portfolio-nav__contact" href="#contact-me" aria-label="Contact">
+        <img src="images/nav/contact-icon.png" alt="">
+      </a>
     </div>
   </nav>
+  <script>
+    document.addEventListener("click", (event) => {
+      const contactLink = event.target.closest('.portfolio-nav__contact[href="#contact-me"]');
+      if (!contactLink) return;
+
+      const footer = document.getElementById("scroll-footer");
+      if (!footer) return;
+
+      event.preventDefault();
+      const nav = document.querySelector("[data-portfolio-nav]");
+      const toggle = document.querySelector("[data-portfolio-nav-toggle]");
+      nav?.classList.remove("is-open");
+      document.body.classList.remove("portfolio-nav-open");
+      toggle?.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-label", "Open navigation");
+
+      history.pushState(null, "", "#contact-me");
+      const targetTop = footer.offsetTop + Math.max(1, footer.offsetHeight - window.innerHeight);
+      window.scrollTo({ top: targetTop, behavior: "auto" });
+
+      const contactPanel = document.getElementById("contact-panel");
+      const footerScene = footer.querySelector(".footer-scene");
+      if (contactPanel) {
+        contactPanel.style.opacity = "1";
+        contactPanel.classList.add("is-visible");
+        contactPanel.setAttribute("aria-hidden", "false");
+      }
+      footerScene?.classList.add("contact-active");
+    }, true);
+  </script>
 
   <section class="hero" aria-label="Intro hero">
     <div class="soft-grain"></div>
@@ -2029,6 +2143,7 @@ Each card hides a circuit under a traditional pattern. Solving a small maze with
     preloadTransitionFrames();
     playCat();
   </script>
-  <script src="footer/footer-scene.js"></script>
+  <script src="site-nav.js?v=20260701-contact-target-3"></script>
+  <script src="footer/footer-scene.js?v=20260701-contact-target-3"></script>
 </body>
 </html>

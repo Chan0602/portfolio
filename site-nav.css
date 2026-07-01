@@ -1,0 +1,154 @@
+.portfolio-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px max(24px, calc((100vw - 1380px) / 2));
+  background: #fff;
+  color: rgba(15, 15, 15, 0.76);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 560;
+  pointer-events: none;
+  transition:
+    background-color 260ms ease,
+    box-shadow 260ms ease,
+    backdrop-filter 260ms ease;
+}
+
+.portfolio-nav a,
+.portfolio-nav button {
+  pointer-events: auto;
+}
+
+.portfolio-nav__brand {
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.portfolio-nav__panel {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.portfolio-nav__contact {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 24px;
+}
+
+.portfolio-nav__contact img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.portfolio-nav__toggle {
+  display: none;
+}
+
+.portfolio-nav.is-scrolled,
+.portfolio-nav.project-nav.is-scrolled {
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 1px 0 rgba(15, 15, 15, 0.08);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  backdrop-filter: saturate(180%) blur(18px);
+}
+
+.portfolio-nav__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.portfolio-nav__icon--close {
+  display: none;
+}
+
+.portfolio-nav.is-open .portfolio-nav__icon--hamburger {
+  display: none;
+}
+
+.portfolio-nav.is-open .portfolio-nav__icon--close {
+  display: block;
+}
+
+body.portfolio-nav-open {
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .portfolio-nav {
+    padding: max(20px, calc(env(safe-area-inset-top) + 14px)) 40px 20px;
+    color: #000;
+  }
+
+  .portfolio-nav__brand {
+    position: relative;
+    z-index: 2;
+  }
+
+  .portfolio-nav__toggle {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .portfolio-nav__panel {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 34px;
+    min-height: 100svh;
+    padding: 92px 28px 48px;
+    background: rgba(255, 255, 255, 0.96);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+
+  .portfolio-nav.is-open .portfolio-nav__panel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .portfolio-nav__panel a {
+    color: #000;
+    font-size: clamp(1.25rem, 12vw, 1.50rem);
+    font-weight: 650;
+    line-height: 1;
+  }
+
+  .portfolio-nav__contact {
+    width: clamp(58px, 16vw, 76px);
+    height: clamp(46px, 13vw, 62px);
+  }
+
+  .portfolio-nav__contact img {
+    width: 80%;
+    height: 80%;
+  }
+}

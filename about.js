@@ -149,6 +149,32 @@ class AboutMouseCat {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const aboutNav = document.querySelector(".about-nav");
+  const aboutNavToggle = document.querySelector(".about-nav__toggle");
+  const aboutNavLinks = document.querySelectorAll(".about-nav__links a");
+
+  function closeAboutNav() {
+    aboutNav?.classList.remove("is-open");
+    aboutNavToggle?.setAttribute("aria-expanded", "false");
+    aboutNavToggle?.setAttribute("aria-label", "Open navigation");
+  }
+
+  aboutNavToggle?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = aboutNav.classList.toggle("is-open");
+    aboutNavToggle.setAttribute("aria-expanded", String(isOpen));
+    aboutNavToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+
+  aboutNavLinks.forEach((link) => link.addEventListener("click", closeAboutNav));
+  document.addEventListener("click", (event) => {
+    if (!aboutNav?.classList.contains("is-open") || aboutNav.contains(event.target)) return;
+    closeAboutNav();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeAboutNav();
+  });
+
   document.querySelectorAll("[data-notebook-section]").forEach((root) => new NotebookSection(root));
   document.querySelectorAll("[data-draggable]").forEach((item) => new DraggableItem(item));
   document.querySelectorAll("[data-about-cat-stage]").forEach((stage) => new AboutMouseCat(stage));

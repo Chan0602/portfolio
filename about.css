@@ -71,6 +71,43 @@ button {
   gap: 22px;
 }
 
+.about-nav__toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 250, 240, 0.9);
+  color: currentColor;
+  box-shadow: 0 12px 28px rgba(62, 53, 46, 0.14);
+  cursor: pointer;
+}
+
+.about-nav__toggle-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 4px auto;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.about-nav.is-open .about-nav__toggle-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.about-nav.is-open .about-nav__toggle-line:nth-child(2) {
+  opacity: 0;
+}
+
+.about-nav.is-open .about-nav__toggle-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
 .about-page {
   width: 100%;
   margin: 0 auto;
@@ -738,8 +775,13 @@ button {
   place-items: center;
   width: 46px;
   height: 46px;
+  min-width: 46px;
+  min-height: 46px;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  padding: 0;
   border: 0;
-  border-radius: 50%;
+  border-radius: 999px;
   background: rgba(255, 250, 240, 0.9);
   color: var(--ink);
   box-shadow: 0 12px 28px rgba(62, 53, 46, 0.18);
@@ -1139,11 +1181,38 @@ button {
 
 @media (max-width: 680px) {
   .about-nav {
+    position: sticky;
     width: min(100% - 32px, 1180px);
   }
 
   .about-nav__links {
-    gap: 14px;
+    position: absolute;
+    top: 68px;
+    right: 0;
+    display: grid;
+    gap: 12px;
+    min-width: 156px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(255, 250, 240, 0.92);
+    box-shadow: 0 18px 42px rgba(62, 53, 46, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .about-nav.is-open .about-nav__links {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .about-nav__toggle {
+    display: grid;
+    place-items: center;
   }
 
   .about-page {
@@ -1312,6 +1381,17 @@ button {
   .notebook-modal .scrapbook-art {
     width: min(96vw, calc(82vh * 2048 / 1447));
     margin-left: 0;
+  }
+
+  .notebook-modal__close {
+    top: max(14px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    aspect-ratio: 1 / 1;
+    font-size: 1.8rem;
   }
 
   .draggable-item {
