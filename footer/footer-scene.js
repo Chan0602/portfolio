@@ -310,28 +310,11 @@ async function loadAssets() {
 
 function drawSky() {
   const reveal = smoothstep(timing.sceneInStart, timing.sceneInEnd, progress);
-  if (reveal <= 0) return;
+  if (reveal <= 0 || !assets.layers.sky) return;
 
   ctx.save();
   ctx.globalAlpha = reveal;
-
-  if (assets.layers.sky) {
-    drawCoverImage(assets.layers.sky, 0, 0, vw, vh);
-    ctx.restore();
-    return;
-  }
-
-  const sky = ctx.createLinearGradient(0, 0, 0, vh);
-  sky.addColorStop(0, "#bfe8fb");
-  sky.addColorStop(0.56, "#e3f5fb");
-  sky.addColorStop(1, "#fff3dc");
-  ctx.fillStyle = sky;
-  ctx.fillRect(0, 0, vw, vh);
-
-  ctx.globalAlpha = 0.46;
-  drawCloud(vw * 0.15 - progress * 24, vh * 0.2, vw * 0.2);
-  drawCloud(vw * 0.68 - progress * 40, vh * 0.12, vw * 0.12);
-  drawCloud(vw * 0.88 - progress * 30, vh * 0.38, vw * 0.16);
+  drawCoverImage(assets.layers.sky, 0, 0, vw, vh);
   ctx.restore();
 }
 
@@ -348,52 +331,14 @@ function drawCloud(x, y, scale) {
 
 function drawWatercolorGrass() {
   const reveal = smoothstep(timing.sceneInStart, timing.sceneInEnd, progress);
-
-  if (assets.layers.grass) {
-    ctx.save();
-    ctx.globalAlpha = reveal;
-    ctx.filter = `blur(${lerp(14, 0, reveal)}px)`;
-    ctx.translate(0, lerp(vh * 0.18, 0, easeOutCubic(reveal)));
-    drawCoverImage(assets.layers.grass, 0, 0, vw, vh);
-    ctx.filter = "none";
-    ctx.restore();
-    return;
-  }
-
-  const hillTop = lerp(vh * 1.08, vh * 0.56, reveal);
+  if (reveal <= 0 || !assets.layers.grass) return;
 
   ctx.save();
-  ctx.globalAlpha = 0.45 * reveal;
-  ctx.filter = `blur(${lerp(28, 12, reveal)}px)`;
-  for (let i = 0; i < 12; i += 1) {
-    const t = i / 11;
-    const x = lerp(-vw * 0.12, vw * 1.08, t);
-    const y = hillTop + Math.sin(t * Math.PI * 2.3) * vh * 0.04;
-    const w = vw * (0.18 + ((Math.sin(i * 12.989) + 1) * 0.012));
-    const h = vh * 0.28;
-    ctx.fillStyle = i % 2 ? "rgba(143, 198, 94, 0.48)" : "rgba(183, 220, 114, 0.52)";
-    ctx.beginPath();
-    ctx.ellipse(x, y, w, h, -0.08, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.filter = "none";
-
-  const grass = ctx.createLinearGradient(0, hillTop, 0, vh);
-  grass.addColorStop(0, "rgba(212, 231, 145, 0.34)");
-  grass.addColorStop(0.45, "rgba(154, 207, 102, 0.74)");
-  grass.addColorStop(1, "rgba(96, 154, 78, 0.9)");
-  ctx.fillStyle = grass;
-  ctx.beginPath();
-  ctx.moveTo(0, vh);
-  ctx.lineTo(0, hillTop + vh * 0.06);
-  ctx.bezierCurveTo(vw * 0.22, hillTop - vh * 0.04, vw * 0.43, hillTop + vh * 0.08, vw * 0.68, hillTop);
-  ctx.bezierCurveTo(vw * 0.82, hillTop - vh * 0.06, vw * 0.94, hillTop - vh * 0.02, vw, hillTop - vh * 0.04);
-  ctx.lineTo(vw, vh);
-  ctx.closePath();
-  ctx.fill();
-
   ctx.globalAlpha = reveal;
-  drawGrassDetails(hillTop, reveal);
+  ctx.filter = `blur(${lerp(14, 0, reveal)}px)`;
+  ctx.translate(0, lerp(vh * 0.18, 0, easeOutCubic(reveal)));
+  drawCoverImage(assets.layers.grass, 0, 0, vw, vh);
+  ctx.filter = "none";
   ctx.restore();
 }
 
@@ -430,7 +375,7 @@ function drawCat(dt) {
   const canSleep = !isScrolling && progress > timing.catStart + 0.06 && progress < timing.catRunEnd && assets.catLay.length;
   sleepBlend += ((canSleep ? 1 : 0) - sleepBlend) * 0.055;
   const sleeping = sleepBlend > 0.5;
-  if (!assets.catRun.length && !assets.catLay.length) return drawCatFallback(catX, groundY, catHeight, sleeping);
+  if (!assets.catRun.length && !assets.catLay.length) return;
 
   if (sleepBlend < 0.95 && assets.catRun.length) {
     runFrameClock += dt * (0.0048 + Math.abs(targetProgress - progress) * 0.12);
@@ -502,40 +447,15 @@ function drawCatFallback(x, y, size, sleeping) {
 
 function drawFinale() {
   const finale = smoothstep(timing.dandelionStart, timing.dandelionEnd, progress);
-  if (finale <= 0) return;
-
-  if (assets.layers.dandelion) {
-    ctx.save();
-    ctx.globalAlpha = finale;
-    ctx.translate(0, lerp(vh * 0.04, 0, easeOutCubic(finale)));
-    drawCoverImage(assets.layers.dandelion, 0, 0, vw, vh);
-    ctx.restore();
-
-    if (assets.fly) drawSeeds(smoothstep(0.82, 1, progress));
-    return;
-  }
+  if (finale <= 0 || !assets.layers.dandelion) return;
 
   ctx.save();
   ctx.globalAlpha = finale;
-  for (const flower of flowers) {
-    const grow = smoothstep(flower.delay, 1, finale);
-    const img = assets.dandelions[flower.img % assets.dandelions.length];
-    if (!img || grow <= 0) continue;
-    const size = flower.size * lerp(0.2, vw < 760 ? 1.25 : 1.8, grow);
-    const scale = size / img.height;
-    const dw = img.width * scale;
-    const dh = img.height * scale;
-    const x = flower.x * vw;
-    const y = lerp(vh + 60, flower.y * vh, grow);
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(Math.sin(flower.spin + finale * 2) * 0.05);
-    ctx.drawImage(img, -dw / 2, -dh, dw, dh);
-    ctx.restore();
-  }
+  ctx.translate(0, lerp(vh * 0.04, 0, easeOutCubic(finale)));
+  drawCoverImage(assets.layers.dandelion, 0, 0, vw, vh);
   ctx.restore();
 
-  if (assets.fly) drawSeeds(finale);
+  if (assets.fly) drawSeeds(smoothstep(0.82, 1, progress));
 }
 
 function drawSeeds(finale) {
