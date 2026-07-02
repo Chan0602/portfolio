@@ -24,9 +24,9 @@ const assetSources = {
   fallbackCatLay: [],
   fallbackCatRun: [],
   layers: {
-    sky: "footer/sky.jpg",
-    grass: "footer/grass.jpg",
-    dandelion: "footer/dandelion.jpg",
+    sky: "footer/sky.png",
+    grass: "footer/grass.png",
+    dandelion: "footer/dandelion.png",
   },
   dandelions: ["footer/dandelion-seed-1.png", "footer/dandelion-seed-2.png"],
   fly: ["footer/fly.png"],
