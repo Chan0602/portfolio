@@ -432,6 +432,13 @@
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-weight: 700;
       overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .case-media:focus-visible {
+      outline: 3px solid rgba(219, 74, 47, 0.58);
+      outline-offset: 6px;
     }
 
     .case-media video {
@@ -1066,6 +1073,34 @@
       }
     }
 
+
+    .ai-chatbot-embed {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      width: 180px;
+      height: 180px;
+      border: 0;
+      background: transparent;
+      pointer-events: auto;
+      transition: width 260ms ease, height 260ms ease;
+    }
+
+    .ai-chatbot-embed.is-open,
+    .ai-chatbot-embed:focus-within {
+      width: min(408px, 100vw);
+      height: min(660px, 100vh);
+    }
+
+    .ai-chatbot-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      display: block;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .intro {
         animation-duration: 1ms;
@@ -1261,6 +1296,17 @@
       .contact-status {
         bottom: max(12px, env(safe-area-inset-bottom));
       }
+
+      .ai-chatbot-embed {
+        width: 168px;
+        height: 168px;
+      }
+
+      .ai-chatbot-embed.is-open,
+      .ai-chatbot-embed:focus-within {
+        width: 100vw;
+        height: 100vh;
+      }
     }
   </style>
   <link rel="stylesheet" href="site-nav.css?v=20260702-nav-size-split">
@@ -1345,10 +1391,10 @@
       <div class="case-showcase">
         <div class="case-grid" aria-label="Case study placeholders">
           <article class="case-card">
-            <div class="case-media">
+            <a class="case-media" href="lyntra.html" aria-label="View Lyntra case study">
               <video src="case-study-videos/lyntra.mov" autoplay muted loop playsinline></video>
 
-            </div>
+            </a>
             <div class="case-copy">
               <h3 class="case-title"><span>Lyntra</span> · Designing a product from 0 to 1</h3>
               <p class="case-desc">An AI-powered productivity app that syncs calendars and streamlines planning for high-performance users.</p>
@@ -1356,11 +1402,11 @@
             </div>
           </article>
           <article class="case-card">
-            <div class="case-media">
+            <a class="case-media" href="oshkosh.html" aria-label="View Oshkosh case study">
               <video src="case-study-videos/oshkosh.mp4" autoplay muted loop playsinline></video>
            
              
-            </div>
+            </a>
             <div class="case-copy">
               <h3 class="case-title"><span>Oshkosh</span> · One dashboard for two different engineers</h3>
               <p class="case-desc">A visual dashboard for truck performance monitoring.</p>
@@ -1368,10 +1414,10 @@
             </div>
           </article>
           <article class="case-card">
-            <div class="case-media">
+            <a class="case-media" href="mapwa.html" aria-label="View Mapwa case study">
               <video src="case-study-videos/mapwa.mp4" autoplay muted loop playsinline></video>
          
-            </div>
+            </a>
             <div class="case-copy">
               <h3 class="case-title"><span>Mapwa</span> · System redesign</h3>
               <p class="case-desc">Redesigning the practicum selection and matching system for 200+ MA-LIS students.</p>
@@ -1379,10 +1425,10 @@
             </div>
           </article>
           <article class="case-card">
-            <div class="case-media">
+            <a class="case-media" href="productive-energy-solutions.html" aria-label="View Productive Energy Solutions case study">
               <video src="case-study-videos/web.mp4" autoplay muted loop playsinline></video>
             
-            </div>
+            </a>
             <div class="case-copy">
               <h3 class="case-title"><span>Productive Energy Solutions</span> · Website redesign</h3>
               <p class="case-desc">Redesigning the website for a Fan Manufacturing company.</p>
@@ -1554,6 +1600,19 @@ Each card hides a circuit under a traditional pattern. Solving a small maze with
       </section>
     </div>
   </section>
+
+  <div class="ai-chatbot-embed" id="ai-chatbot-embed">
+    <iframe src="https://ai-chatbot-six-tau-13.vercel.app/" title="Yilin AI design assistant" allow="clipboard-write"></iframe>
+  </div>
+
+
+  <script>
+    const chatbotEmbed = document.getElementById("ai-chatbot-embed");
+    window.addEventListener("message", event => {
+      if (!event.data || event.data.type !== "yilin-chatbot-open-state") return;
+      chatbotEmbed.classList.toggle("is-open", Boolean(event.data.open));
+    });
+  </script>
 
   <script>
     const catFrameA = document.getElementById("cat-frame-a");

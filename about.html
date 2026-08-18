@@ -124,6 +124,35 @@
     <canvas class="case-study-grass-footer__canvas" aria-label="Click anywhere in the scene and the cat will move there"></canvas>
   </footer>
 
+
+  <div class="ai-chatbot-embed" id="ai-chatbot-embed">
+    <iframe src="https://ai-chatbot-six-tau-13.vercel.app/" title="Yilin AI design assistant" allow="clipboard-write"></iframe>
+  </div>
+
+  <script>
+    const chatbotEmbed = document.getElementById("ai-chatbot-embed");
+    const aboutProjectPage = document.querySelector(".about-project-page");
+
+    if (chatbotEmbed) {
+      window.addEventListener("message", event => {
+        if (!event.data || event.data.type !== "yilin-chatbot-open-state") return;
+        chatbotEmbed.classList.toggle("is-open", Boolean(event.data.open));
+      });
+    }
+
+    if (chatbotEmbed && aboutProjectPage) {
+      const updateChatbotVisibility = () => {
+        const paperBottom = aboutProjectPage.getBoundingClientRect().bottom;
+        const grassRevealStarted = paperBottom < window.innerHeight - 24;
+        chatbotEmbed.classList.toggle("is-hidden", grassRevealStarted);
+      };
+
+      updateChatbotVisibility();
+      window.addEventListener("scroll", updateChatbotVisibility, { passive: true });
+      window.addEventListener("resize", updateChatbotVisibility);
+    }
+  </script>
+
   <script src="about.js?v=20260702-no-reveal"></script>
   <script src="site-nav.js?v=20260701-contact-target-3"></script>
   <script src="case-study-footer.js"></script>
