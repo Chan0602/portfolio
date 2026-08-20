@@ -1332,42 +1332,65 @@
       <img class="portfolio-nav__icon portfolio-nav__icon--close" src="images/nav/menu-close.png" alt="" aria-hidden="true">
     </button>
     <div class="portfolio-nav__panel" id="portfolio-nav-links">
-      <a href="#work">Work</a>
-      <a href="#play">Play</a>
+      <a href="#work" data-scroll-target="work">Work</a>
+      <a href="#play" data-scroll-target="play">Play</a>
       <a href="about.html">About</a>
-      <a class="portfolio-nav__contact" href="#contact-me" aria-label="Contact">
+      <a class="portfolio-nav__contact" href="#scroll-footer" aria-label="Contact" data-scroll-target="contact">
         <img src="images/nav/contact-icon.png" alt="">
       </a>
     </div>
   </nav>
   <script>
-    document.addEventListener("click", (event) => {
-      const contactLink = event.target.closest('.portfolio-nav__contact[href="#contact-me"]');
-      if (!contactLink) return;
+    const trackHomeEvent = (eventName, params = {}) => {
+      if (typeof window.gtag !== "function") return;
+      window.gtag("event", eventName, params);
+    };
 
-      const footer = document.getElementById("scroll-footer");
-      if (!footer) return;
-
-      event.preventDefault();
+    const closePortfolioNav = () => {
       const nav = document.querySelector("[data-portfolio-nav]");
       const toggle = document.querySelector("[data-portfolio-nav-toggle]");
       nav?.classList.remove("is-open");
       document.body.classList.remove("portfolio-nav-open");
       toggle?.setAttribute("aria-expanded", "false");
       toggle?.setAttribute("aria-label", "Open navigation");
+    };
 
-      history.pushState(null, "", "#contact-me");
-      const targetTop = footer.offsetTop + Math.max(1, footer.offsetHeight - window.innerHeight);
-      window.scrollTo({ top: targetTop, behavior: "auto" });
+    const keepCleanHomeUrl = () => {
+      const cleanPath = `${window.location.pathname}${window.location.search}`;
+      window.history.replaceState(null, "", cleanPath);
+    };
 
-      const contactPanel = document.getElementById("contact-panel");
-      const footerScene = footer.querySelector(".footer-scene");
-      if (contactPanel) {
-        contactPanel.style.opacity = "1";
-        contactPanel.classList.add("is-visible");
-        contactPanel.setAttribute("aria-hidden", "false");
+    document.addEventListener("click", (event) => {
+      const scrollLink = event.target.closest("[data-scroll-target]");
+      if (!scrollLink) return;
+
+      const sectionName = scrollLink.dataset.scrollTarget;
+      const target = sectionName === "contact"
+        ? document.getElementById("scroll-footer")
+        : document.getElementById(sectionName);
+      if (!target) return;
+
+      event.preventDefault();
+      closePortfolioNav();
+      trackHomeEvent("home_nav_click", { section_name: sectionName });
+
+      if (sectionName === "contact") {
+        const targetTop = target.offsetTop + Math.max(1, target.offsetHeight - window.innerHeight);
+        window.scrollTo({ top: targetTop, behavior: "auto" });
+
+        const contactPanel = document.getElementById("contact-panel");
+        const footerScene = target.querySelector(".footer-scene");
+        if (contactPanel) {
+          contactPanel.style.opacity = "1";
+          contactPanel.classList.add("is-visible");
+          contactPanel.setAttribute("aria-hidden", "false");
+        }
+        footerScene?.classList.add("contact-active");
+      } else {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-      footerScene?.classList.add("contact-active");
+
+      keepCleanHomeUrl();
     }, true);
   </script>
 
@@ -1621,9 +1644,15 @@ Each card hides a circuit under a traditional pattern. Solving a small maze with
 
   <script>
     const chatbotEmbed = document.getElementById("ai-chatbot-embed");
+    let chatbotWasOpen = false;
     window.addEventListener("message", event => {
       if (!event.data || event.data.type !== "yilin-chatbot-open-state") return;
-      chatbotEmbed.classList.toggle("is-open", Boolean(event.data.open));
+      const isOpen = Boolean(event.data.open);
+      chatbotEmbed.classList.toggle("is-open", isOpen);
+      if (isOpen !== chatbotWasOpen) {
+        trackHomeEvent(isOpen ? "chatbot_open" : "chatbot_close", { source: "home_floating_chatbot" });
+        chatbotWasOpen = isOpen;
+      }
     });
   </script>
 
@@ -2237,5 +2266,6 @@ Each card hides a circuit under a traditional pattern. Solving a small maze with
   </script>
   <script src="site-nav.js?v=20260701-contact-target-3"></script>
   <script src="footer/footer-scene.js?v=20260701-no-fallback-art"></script>
+  <script src="clean-url.js"></script>
 </body>
 </html>
