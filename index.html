@@ -417,6 +417,14 @@
       text-transform: uppercase;
     }
 
+    .case-link--disabled {
+      cursor: default;
+    }
+
+    .case-media--disabled {
+      cursor: default;
+    }
+
     .case-media {
       min-height: clamp(280px, 42vw, 560px);
       margin: 0;
@@ -447,6 +455,11 @@
       min-height: inherit;
       display: block;
       object-fit: cover;
+    }
+
+    .case-media__video--mapwa {
+      transform: scale(1.08) translateY(-1.5%);
+      transform-origin: center center;
     }
 
     .play-card {
@@ -1414,14 +1427,14 @@
             </div>
           </article>
           <article class="case-card">
-            <a class="case-media" href="mapwa.html" aria-label="View Mapwa case study">
-              <video src="case-study-videos/mapwa.mp4" autoplay muted loop playsinline></video>
+            <div class="case-media case-media--disabled" aria-label="Mapwa case study coming soon">
+              <video class="case-media__video--mapwa" src="case-study-videos/mapwa.mp4" autoplay muted loop playsinline></video>
          
-            </a>
+            </div>
             <div class="case-copy">
               <h3 class="case-title"><span>Mapwa</span> · System redesign</h3>
               <p class="case-desc">Redesigning the practicum selection and matching system for 200+ MA-LIS students.</p>
-              <a href="mapwa.html" class="case-link">View Case</a>
+              <span class="case-link case-link--disabled">Coming soon</span>
             </div>
           </article>
           <article class="case-card">
