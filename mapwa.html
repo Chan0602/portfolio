@@ -24,7 +24,7 @@
       --ink: #0f0f0f;
       --muted: #666;
       --line: rgba(15, 15, 15, 0.16);
-      --accent: #c5050c;
+      --accent: #AD5954;
       --serif: "Crimson Pro", Georgia, "Times New Roman", serif;
       --sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -91,7 +91,7 @@
 
     .project-nav__links {
       display: flex;
-      gap: 22px;
+      gap: 18px;
     }
 
     .project-page {
@@ -305,7 +305,7 @@
     }
 
     .hero-media-after {
-      margin-top: 24px;
+      margin-top: 18px;
       opacity: 0;
       animation: fade-up 700ms cubic-bezier(0.4, 0, 0.2, 1) 1600ms forwards;
     }
@@ -327,7 +327,7 @@
     }
 
     .hero-context-after {
-      margin-top: 24px;
+      margin-top: 18px;
       margin-bottom: 0;
     }
 
@@ -1256,7 +1256,7 @@
       }
 
       .hero-details {
-        margin-top: 28px;
+        margin-top: 18px;
       }
 
       .hero-subtitle {
@@ -1323,7 +1323,7 @@
       }
 
       .stat-card {
-        gap: 22px;
+        gap: 18px;
         padding-top: 30px;
       }
 
@@ -1375,6 +1375,729 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
+
+
+    /* Visual-first MAPWA restructure */
+    .mapwa-hero-showcase {
+      padding-bottom: 20px;
+    }
+
+    .mapwa-hero-image {
+      display: block;
+      min-height: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .mapwa-hero-image img {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .mapwa-hero-intro {
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      gap: 64px;
+      padding-top: 38px;
+    }
+
+    .mapwa-project-details {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 820px;
+    }
+
+    .mapwa-hero-copy {
+      gap: 18px;
+      padding-top: 0;
+    }
+
+    .mapwa-hero-copy .hero-subtitle {
+      max-width: 600px;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.62;
+    }
+
+    .mapwa-impact-section,
+    .mapwa-prototype-section,
+    .mapwa-thinking-section,
+    .mapwa-reflection-section {
+      padding-block: 36px;
+    }
+
+    .mapwa-prototype-section .large-heading,
+    .mapwa-thinking-section .large-heading,
+    .mapwa-reflection-section .large-heading {
+      max-width: 980px;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .mapwa-impact-section {
+      display: grid;
+      gap: 34px;
+    }
+
+    .mapwa-impact-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1.2;
+      font-weight: 430;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .mapwa-impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .mapwa-impact-metric {
+      min-width: 0;
+    }
+
+    .mapwa-impact-metric strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 5vw, 4rem);
+      line-height: 0.9;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+    }
+
+    .mapwa-impact-metric p {
+      margin: 16px 0 0;
+      max-width: 240px;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.42;
+      font-weight: 300;
+    }
+
+    .mapwa-prototype-list {
+      display: grid;
+      gap: 64px;
+      margin-top: 64px;
+    }
+
+    .mapwa-prototype-block {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: start;
+      padding-top: 56px;
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+    }
+
+    .mapwa-prototype-block:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .mapwa-prototype-heading {
+      margin: 0 auto 14px;
+      max-width: 1020px;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.038em;
+    }
+
+    .mapwa-prototype-heading em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: inherit;
+    }
+
+    .mapwa-prototype-body {
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(220px, 1fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .mapwa-prototype-media {
+      min-width: 0;
+      min-height: clamp(260px, 42vw, 560px);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(15, 15, 15, 0.07);
+    }
+
+    .mapwa-prototype-media.solution-feature__media--framed-video {
+      display: block;
+      min-height: 0;
+      aspect-ratio: auto;
+      background: transparent;
+    }
+
+    .mapwa-prototype-media.solution-feature__media--framed-video video {
+      position: static;
+      width: 100%;
+      min-height: 0;
+      border-radius: 12px;
+      box-shadow: none;
+      background: transparent;
+      transform: none;
+    }
+
+    .mapwa-prototype-media--image {
+      display: grid;
+      place-items: center;
+      background: url("mapwa/solution-video-background.png") center / cover no-repeat;
+      padding: clamp(28px, 5vw, 70px);
+    }
+
+    .mapwa-prototype-media--image img {
+      width: min(92%, 980px);
+      border-radius: 16px;
+      box-shadow: 0 22px 46px rgba(78, 0, 0, 0.22);
+      background: #fff;
+    }
+
+    .mapwa-prototype-copy {
+      min-width: 0;
+    }
+
+    .mapwa-prototype-label,
+    .mapwa-prototype-copy small,
+    .mapwa-v1-v2 span {
+      display: block;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 720;
+      letter-spacing: 0.08em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .mapwa-thinking-chapter h3 {
+      margin: 14px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .mapwa-prototype-copy p {
+      margin: 18px 0 0;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.66;
+      font-weight: 300;
+    }
+
+    .mapwa-prototype-copy small {
+      margin-top: 20px;
+    }
+
+    .mapwa-thinking-section .next-description,
+    .mapwa-prototype-section .next-description {
+      margin-top: 18px;
+      max-width: 660px;
+    }
+
+    .mapwa-thinking-chapter {
+      margin-top: 72px;
+    }
+
+    .mapwa-chapter-kicker {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .mapwa-chapter-kicker p {
+      margin: 0;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 0.95;
+      font-style: italic;
+      letter-spacing: -0.04em;
+    }
+
+    .mapwa-evidence-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: clamp(22px, 3vw, 36px);
+      align-items: center;
+    }
+
+    .mapwa-evidence-main {
+      box-shadow: 0 20px 52px rgba(15, 15, 15, 0.08);
+    }
+
+    .mapwa-large-statement {
+      margin: 34px 0 0;
+      max-width: 980px;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 0.98;
+      font-weight: 500;
+      letter-spacing: -0.05em;
+    }
+
+    .mapwa-large-statement--small {
+      max-width: 900px;
+      font-size: clamp(2rem, 3.4vw, 2.7rem);
+    }
+
+    .mapwa-thinking-chapter .body-copy {
+      max-width: 780px;
+      margin-top: 18px;
+    }
+
+    .mapwa-workflow-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(20px, 3vw, 34px);
+      align-items: start;
+      margin-top: 34px;
+    }
+
+    .mapwa-v1-v2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: clamp(20px, 4vw, 56px);
+      align-items: center;
+      margin: 34px 0;
+      padding: 28px 0;
+      border-top: 1px solid rgba(15, 15, 15, 0.18);
+      border-bottom: 1px solid rgba(15, 15, 15, 0.18);
+    }
+
+    .mapwa-v1-v2 strong {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 0.98;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+    }
+
+    .mapwa-v1-v2 em {
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-style: italic;
+    }
+
+    .mapwa-wide-visual {
+      box-shadow: 0 24px 60px rgba(15, 15, 15, 0.08);
+    }
+
+    .mapwa-edge-visual {
+      position: relative;
+      margin-top: 34px;
+      padding: 22px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 24px 60px rgba(15, 15, 15, 0.08);
+      overflow: hidden;
+    }
+
+    .mapwa-edge-visual img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .mapwa-edge-note {
+      position: absolute;
+      max-width: 180px;
+      padding: 10px 12px;
+      border: 1px solid rgba(197, 5, 12, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 720;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 30px rgba(15, 15, 15, 0.08);
+    }
+
+    .mapwa-edge-note--one { left: 7%; top: 12%; }
+    .mapwa-edge-note--two { right: 7%; top: 18%; }
+    .mapwa-edge-note--three { left: 13%; bottom: 16%; }
+    .mapwa-edge-note--four { right: 10%; bottom: 12%; }
+
+
+    .mapwa-thinking-intro {
+      max-width: 100%;
+    }
+
+    .mapwa-thinking-intro .large-heading {
+      max-width: 100%;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.08;
+      white-space: nowrap;
+    }
+
+    .mapwa-thinking-chapter {
+      margin-top: 64px;
+    }
+
+    .mapwa-thinking-chapter-label {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 430;
+      letter-spacing: 0.12em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .mapwa-thinking-headline {
+      width: 100%;
+      margin: 0 auto;
+      max-width: none;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.04;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .mapwa-thinking-turn {
+      width: 100%;
+      margin: 10px auto 0;
+      text-align: center;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.4vw, 2.7rem);
+      line-height: 1;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: -0.035em;
+    }
+
+    .mapwa-thinking-chapter .mapwa-thinking-headline,
+    .mapwa-thinking-chapter .mapwa-thinking-turn {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .mapwa-thinking-visual {
+      margin-top: 34px;
+    }
+
+    .mapwa-thinking-image,
+    .mapwa-thinking-video {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: transparent;
+      box-shadow: 0 18px 46px rgba(15, 15, 15, 0.06);
+    }
+
+    .mapwa-thinking-image img,
+    .mapwa-thinking-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .mapwa-thinking-image--flat {
+      box-shadow: none;
+    }
+
+    .mapwa-thinking-evidence-line {
+      margin: 14px 0 0;
+      color: rgba(15, 15, 15, 0.52);
+      font-size: 0.84rem;
+      line-height: 1.45;
+      font-weight: 300;
+    }
+
+    .mapwa-thinking-transition {
+      margin: 34px 0 0;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    .mapwa-thinking-insight {
+      width: 100%;
+      margin: 34px 0 0;
+      max-width: none;
+      text-align: left;
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+    }
+
+    .mapwa-thinking-insight--body {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      line-height: 1.55;
+      font-weight: 300;
+      letter-spacing: 0;
+    }
+
+    .mapwa-thinking-explanation {
+      width: 100%;
+      max-width: none;
+      margin: 18px 0 0;
+      text-align: left;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.68;
+      font-weight: 300;
+    }
+
+    .mapwa-thinking-explanation--center {
+      text-align: center;
+    }
+
+    .mapwa-thinking-insight--compact {
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.68;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .mapwa-thinking-comparison {
+      display: grid;
+      grid-template-columns: minmax(0, 0.35fr) minmax(170px, 0.15fr) minmax(0, 0.5fr);
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+    }
+
+    .mapwa-thinking-panel-label {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mapwa-thinking-v1 {
+      opacity: 0.88;
+    }
+
+    .mapwa-thinking-v1-note {
+      margin: 12px 0 0;
+      color: rgba(15, 15, 15, 0.58);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .mapwa-thinking-gap {
+      text-align: center;
+    }
+
+    .mapwa-thinking-gap span {
+      display: block;
+      margin: 0;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+      line-height: 1.18;
+      font-style: italic;
+    }
+
+    .mapwa-thinking-gap b {
+      display: block;
+      color: rgba(15, 15, 15, 0.5);
+      font-family: var(--sans);
+      font-size: 1.1rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 1.35;
+    }
+
+    .mapwa-thinking-v2-wrap {
+      position: relative;
+    }
+
+    .mapwa-thinking-callouts {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mapwa-thinking-callouts span {
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 680;
+      letter-spacing: 0.03em;
+    }
+
+    .mapwa-thinking-system-ending {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      max-width: 720px;
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(15, 15, 15, 0.12);
+    }
+
+    .mapwa-thinking-system-ending span {
+      display: block;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 720;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mapwa-thinking-system-ending strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1rem;
+      line-height: 1.45;
+      font-weight: 520;
+    }
+
+    .mapwa-reflection-section .large-heading {
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      line-height: 1.12;
+      font-family: var(--serif);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+    }
+
+    .mapwa-reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(24px, 3vw, 36px);
+      margin-top: 34px;
+    }
+
+    .mapwa-reflection-row {
+      display: grid;
+      grid-template-columns: 60px minmax(0, 1fr);
+      gap: clamp(20px, 3vw, 42px);
+      align-items: start;
+    }
+
+    .mapwa-reflection-row span {
+      display: block;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+
+    .mapwa-reflection-row h3 {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .mapwa-reflection-row p {
+      margin: 0;
+      color: rgba(15, 15, 15, 0.72);
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .mapwa-reflection-copy {
+      display: grid;
+      gap: 0;
+    }
+
+    @media (max-width: 980px) {
+      .mapwa-hero-intro,
+      .mapwa-prototype-body,
+      .mapwa-evidence-grid,
+      .mapwa-workflow-pair,
+      .mapwa-reflection-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mapwa-project-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mapwa-thinking-comparison,
+      .mapwa-thinking-system-ending,
+      .mapwa-reflection-row {
+        grid-template-columns: 1fr;
+      }
+
+      .mapwa-reflection-row {
+        gap: 12px;
+      }
+
+      .mapwa-thinking-gap {
+        text-align: left;
+      }
+
+      .mapwa-prototype-media {
+        min-height: 0;
+      }
+
+      .mapwa-chapter-kicker {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .mapwa-project-details,
+      .mapwa-v1-v2 {
+        grid-template-columns: 1fr;
+      }
+
+      .mapwa-impact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .mapwa-impact-metric strong {
+        font-size: clamp(2.5rem, 12vw, 3.5rem);
+      }
+
+      .mapwa-thinking-intro .large-heading {
+        white-space: normal;
+      }
+
+      .mapwa-prototype-media--image {
+        padding: 20px;
+      }
+
+      .mapwa-edge-note {
+        position: static;
+        display: inline-flex;
+        margin: 10px 8px 0 0;
+      }
+    }
+
   </style>
   <link rel="stylesheet" href="site-nav.css?v=20260702-nav-size-split">
   <link rel="stylesheet" href="case-study-footer.css">
@@ -1402,33 +2125,34 @@
         <nav class="spy-nav">
           <ul class="spy-nav__list">
             <li class="spy-nav__item" style="--i: 0"><button class="spy-nav__link is-active" data-target="hero"><span class="spy-nav__dot"></span><span>Overview</span></button></li>
-            <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="context"><span class="spy-nav__dot"></span><span>Context</span></button></li>
-            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="began"><span class="spy-nav__dot"></span><span>Problem</span></button></li>
-            <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="found"><span class="spy-nav__dot"></span><span>Research</span></button></li>
-            <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="solution"><span class="spy-nav__dot"></span><span>Design Approach</span></button></li>
-            <li class="spy-nav__item" style="--i: 5"><button class="spy-nav__link" data-target="next"><span class="spy-nav__dot"></span><span>Solution</span></button></li>
-            <li class="spy-nav__item" style="--i: 6"><button class="spy-nav__link" data-target="takeaway"><span class="spy-nav__dot"></span><span>Results</span></button></li>
-            <li class="spy-nav__item" style="--i: 7"><button class="spy-nav__link" data-target="learn"><span class="spy-nav__dot"></span><span>Reflection</span></button></li>
+            <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="impact"><span class="spy-nav__dot"></span><span>Impact</span></button></li>
+            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="prototype"><span class="spy-nav__dot"></span><span>Prototype</span></button></li>
+            <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="thinking"><span class="spy-nav__dot"></span><span>How I Think</span></button></li>
+            <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="reflection"><span class="spy-nav__dot"></span><span>Reflection</span></button></li>
           </ul>
         </nav>
       </aside>
 
       <div class="case-study-layout__main">
-        <section id="hero" class="hero-section page-shell">
-          <div class="media-card media-card--short hero-media-before">
-            <img src="mapwa/1.jpg" alt="MAPWA product overview">
+        <section id="hero" class="hero-section page-shell mapwa-hero-showcase">
+          <div class="media-card media-card--short hero-media-before mapwa-hero-image">
+            <img src="mapwa/hero.png?v=20260824-2" alt="MAPWA admin dashboard hero mockup">
           </div>
 
-          <div class="hero-content">
+          <div class="hero-content mapwa-hero-intro">
             <div>
               <div class="hero-title-group">
-                <p class="award">System Design · UX Design and Research</p>
-                <h1>MAPWA — Practicum Matching System Redesign</h1>
+                <p class="award">B2B / Internal Tool · Workflow Design</p>
+                <h1>MAPWA —<br>Practicum Matching<br>System</h1>
               </div>
-              <div class="hero-details">
+              <div class="hero-details mapwa-project-details">
                 <div>
                   <div class="detail-label">Role</div>
-                  <div class="detail-value">UX Designer and Researcher</div>
+                  <div class="detail-value">Product Designer</div>
+                </div>
+                <div>
+                  <div class="detail-label">Team</div>
+                  <div class="detail-value">1 Designer, 1 Developer, 1 Team Lead</div>
                 </div>
                 <div>
                   <div class="detail-label">Timeline</div>
@@ -1436,199 +2160,186 @@
                 </div>
                 <div>
                   <div class="detail-label">Tools</div>
-                  <div class="detail-value">Figma, Screen Recording</div>
+                  <div class="detail-value">Figma</div>
                 </div>
               </div>
             </div>
 
-            <div class="hero-right">
-              <p class="hero-subtitle">Students were confused, administrators were buried in emails. I redesigned the student user flow and built an admin dashboard that turned a reactive, manual process into something legible and manageable.</p>
+            <div class="hero-right mapwa-hero-copy">
+              <p class="hero-subtitle">A practicum matching platform that coordinates applications, placements, and multi round matching across students and administrators.</p>
+              <p class="hero-subtitle">I reframed the experience around clarity and decision support, redesigning the student flow to make next steps explicit and the admin dashboard to surface where action was needed.</p>
               <div class="tag-list">
-                <span class="tag">UX Design</span>
-                <span class="tag">Research</span>
-                <span class="tag">Education</span>
+                <span class="tag">Product Design</span>
+                <span class="tag">UX Research</span>
+                <span class="tag">Workflow Design</span>
               </div>
-              <button class="skip-btn" data-target="next"><span>Skip to solution</span></button>
             </div>
           </div>
+        </section>
 
-          <div class="media-card media-card--short hero-media-after">
-            <video src="mapwa/2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA product demonstration"></video>
-          </div>
-
-          <div class="context-top hero-context-after">
-            <article class="context-item">
-              <h2 class="context-title">What is MAPWA?</h2>
-              <p class="body-copy">MAPWA is the practicum matching web app used by the MA-LIS program at the University of Wisconsin-Madison. Every semester, over 200 graduate students use it to apply for and get matched to library and information science placements.</p>
+        <section id="impact" class="section page-shell mapwa-impact-section" data-mapwa-impact>
+          <p class="mapwa-impact-label" data-mapwa-impact-item>Impact</p>
+          <div class="mapwa-impact-grid">
+            <article class="mapwa-impact-metric" data-mapwa-impact-item>
+              <strong>8h → 30m</strong>
+              <p>weekly staff lookup and email work</p>
             </article>
-            <article class="context-item">
-              <h2 class="context-title">My Role</h2>
-              <p class="body-copy">I led research synthesis, student workflow analysis, interaction design, prototyping, and the admin dashboard experience with a developer and team lead.</p>
+            <article class="mapwa-impact-metric" data-mapwa-impact-item>
+              <strong>45m → 10m</strong>
+              <p>average task completion time</p>
+            </article>
+            <article class="mapwa-impact-metric" data-mapwa-impact-item>
+              <strong>80+ → 5</strong>
+              <p>student inquiry emails per matching cycle</p>
             </article>
           </div>
         </section>
 
-        <section id="context" class="section page-shell">
-          <div class="section-content">
-            <div class="impact-block">
-              <p class="eyebrow reveal">Context</p>
-              <p class="statement reveal">A matching system that worked on paper but left everyone guessing.</p>
-              <p class="body-copy reveal">The system technically functioned, but the experience was opaque enough to generate constant confusion — students who did not know where they stood, and administrators spending hours each week dealing with the fallout.</p>
-            </div>
-          </div>
-        </section>
+        <section id="prototype" class="section page-shell mapwa-prototype-section">
+          <p class="eyebrow reveal">Prototype</p>
+          <h2 class="large-heading reveal">Turning complexity into clear actions.</h2>
+          <p class="next-description reveal">Three moments where the system needed clarity most.</p>
 
-        <section id="began" class="section page-shell">
-          <p class="eyebrow reveal">Problem</p>
-          <p class="statement reveal">43 emails that told the whole story.</p>
-          <p class="body-copy reveal">After the first round of matching, the admin inbox received 43 emails from students. I read and categorized every single one. The pattern was immediate and unambiguous.</p>
-          <div class="media-placeholder mapwa-image reveal">
-            <img src="mapwa/email-notification-visualization.png" alt="Email notification visualization showing student questions around MAPWA">
-          </div>
-          <p class="pes-caption">Student emails received after the first matching round — more than half asking the same two questions</p>
-          <div class="pes-grid pes-grid--two">
-            <article class="pes-card reveal"><p class="pes-card-label">20+ emails</p><h3>No idea what step they were on</h3><p>Students did not know whether their application had been submitted, whether they had been matched, or what was supposed to happen next. The system completed their action but gave them nothing to hold onto afterward.</p></article>
-            <article class="pes-card reveal"><p class="pes-card-label">Remaining emails</p><h3>Edge cases the flow never addressed</h3><p>Questions about finding placements outside the system, contacting sites before confirmation, and requests to switch after a match had already been made.</p></article>
-          </div>
-          <div class="media-placeholder mapwa-image mapwa-image--quotes reveal">
-            <img src="mapwa/student-pain-points.png" alt="Student pain points overlaid on MAPWA email notification cards">
-          </div>
-          <p class="pes-caption">Real quotes from student emails mapped onto the interface — the gaps in the flow made visible</p>
-          <p class="body-copy reveal">On the admin side, there was no dashboard and no way to see match status at a glance. Every incoming question required someone to dig through spreadsheets to find an answer — consuming three to four hours every week.</p>
-        </section>
-
-        <section id="found" class="section page-shell">
-          <p class="eyebrow reveal">Research</p>
-          <p class="statement reveal">Reading the old flow to find exactly where it broke down.</p>
-          <p class="body-copy reveal">I interviewed admin staff to understand how they spent their time and what information they needed most often. Then I mapped the existing student workflow in full — not to document it, but to find every point where a student could complete an action and still have no idea what came next.</p>
-          <div class="mapwa-workflow-compare reveal" data-workflow-compare>
-            <div class="mapwa-workflow-compare__layer mapwa-workflow-compare__old">
-              <img src="mapwa/old-workflow.png" alt="Old MAPWA student workflow">
-            </div>
-            <div class="mapwa-workflow-compare__layer mapwa-workflow-compare__new">
-              <img src="mapwa/new-workflow.png" alt="New MAPWA student workflow with clearer touchpoints">
-            </div>
-            <span class="mapwa-workflow-compare__label mapwa-workflow-compare__label--old">Old workflow</span>
-            <span class="mapwa-workflow-compare__label mapwa-workflow-compare__label--new">New workflow</span>
-            <span class="mapwa-workflow-compare__divider" aria-hidden="true"></span>
-            <input class="mapwa-workflow-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare old and new MAPWA workflows">
-          </div>
-          <p class="pes-caption">Old and new workflow comparison — drag the divider to see how confirmation points and next-step guidance were added into the same process</p>
-          <p class="body-copy reveal">The flow itself was not wrong. Students were following the steps correctly. The problem was that nothing acknowledged when they had completed a step or told them what was coming next. Every transition was a black box. The brief became: do not rebuild the flow from scratch; close the gaps within it.</p>
-        </section>
-
-        <section id="solution" class="section page-shell">
-          <p class="eyebrow reveal">Design Approach</p>
-          <div class="solution-overview reveal">
-            <h2 class="large-heading">Two workstreams, one for students and one for admins.</h2>
-            <p class="body-copy">The redesign split into two parallel tracks. Before opening a frame, I established the design system that would carry both — grounded in the university's existing brand with UW red as the primary color and a clean typographic scale that worked across dense data views and simple confirmation states alike.</p>
-            <div class="mapwa-design-system">
-              <div class="media-placeholder mapwa-image">
-                <img src="mapwa/design-system-typography.png" alt="MAPWA design system colors and typography">
+          <div class="mapwa-prototype-list">
+            <article class="mapwa-prototype-block reveal">
+              <span class="mapwa-prototype-label">01 · Student Experience</span>
+              <h3 class="mapwa-prototype-heading">Explore with <em>confidence.</em></h3>
+              <div class="mapwa-prototype-body">
+                <div class="mapwa-prototype-media solution-feature__media--framed-video">
+                  <video src="mapwa/prototype1.mp4?v=20260824-2" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA student exploration prototype"></video>
+                </div>
+                <div class="mapwa-prototype-copy">
+                  <p>I reduced competing information and surfaced what students could act on now—current round, deadline, site details, and next actions.</p>
+                  <small>Information Hierarchy</small>
+                </div>
               </div>
-              <div class="media-placeholder mapwa-image">
-                <img src="mapwa/design-system-buttons.png" alt="MAPWA primary and outline button components">
+            </article>
+
+            <article class="mapwa-prototype-block reveal">
+              <span class="mapwa-prototype-label">02 · Student Experience</span>
+              <h3 class="mapwa-prototype-heading">Know what happens <em>next.</em></h3>
+              <div class="mapwa-prototype-body">
+                <div class="mapwa-prototype-media solution-feature__media--framed-video">
+                  <video src="mapwa/prototype2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA application and matching status prototype"></video>
+                </div>
+                <div class="mapwa-prototype-copy">
+                  <p>Every major action now confirms what happened, shows the current status, and makes the next step explicit.</p>
+                  <small>Feedback + Status</small>
+                </div>
               </div>
-            </div>
-            <p class="pes-caption">Design system foundation — UW red as primary, consistent type scale across student and admin surfaces</p>
-            <div class="media-placeholder mapwa-image mapwa-image--wide">
-              <img src="mapwa/all-pages.png" alt="MAPWA full Figma design overview showing all pages">
-            </div>
-            <p class="pes-caption">Full design overview in Figma — Homepage, Login, Student flow steps, Admin Dashboard, and data views</p>
+            </article>
+
+            <article class="mapwa-prototype-block reveal">
+              <span class="mapwa-prototype-label">03 · Admin Experience</span>
+              <h3 class="mapwa-prototype-heading">See where attention is <em>needed.</em></h3>
+              <div class="mapwa-prototype-body">
+                <div class="mapwa-prototype-media solution-feature__media--framed-video">
+                  <video src="mapwa/prototype3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA admin dashboard prototype"></video>
+                </div>
+                <div class="mapwa-prototype-copy">
+                  <p>The admin dashboard turns scattered records into one operating view for matching progress, exceptions, capacity, and unresolved students.</p>
+                  <small>Operational Visibility</small>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="thinking" class="section page-shell mapwa-thinking-section">
+          <div class="mapwa-thinking-intro reveal">
+            <p class="eyebrow">How I Think</p>
+            <h2 class="large-heading">Three decisions shaped the redesign.</h2>
+            <p class="next-description">The interface changed as my understanding of the problem changed.</p>
           </div>
 
-          <article class="feature reveal">
-            <p class="feature-title">Two parallel workstreams</p>
-            <p class="statement">Communication for students. Visibility for admins.</p>
-            <div class="pes-grid pes-grid--two">
-              <article class="pes-card"><p class="pes-card-label">Student flow</p><h3>Closing every gap with an automated touchpoint</h3><p>Automated emails were added at the end of every major step. Students received confirmation summaries, match instructions, and a full walkthrough video before beginning the process.</p></article>
-              <article class="pes-card"><p class="pes-card-label">Admin dashboard</p><h3>Replacing spreadsheet archaeology with a single view</h3><p>A dashboard surfaced matched, pending, and unmatched students at once. Site popularity rankings and one-click export replaced the manual spreadsheet process.</p></article>
+          <article class="mapwa-thinking-chapter reveal">
+            <span class="mapwa-thinking-chapter-label">01 · Reframing the Problem</span>
+            <h3 class="mapwa-thinking-headline">I thought the workflow was broken.</h3>
+            <p class="mapwa-thinking-turn">It wasn't.</p>
+
+            <div class="mapwa-thinking-visual mapwa-thinking-image mapwa-thinking-image--flat">
+              <img src="mapwa/howithink01.png" alt="Student email questions clustered around submission, status, and next-step uncertainty">
             </div>
+            <p class="mapwa-thinking-evidence-line">80+ post-round emails · 20+ asking about status or next steps</p>
+
+            <p class="mapwa-thinking-transition">Mapping the process made the real issue clear: the steps worked, but the transitions between them didn't.</p>
+            <div class="mapwa-thinking-visual mapwa-thinking-image mapwa-thinking-image--flat">
+              <img src="mapwa/howithink2.png" alt="Annotated MAPWA student workflow showing uncertainty points around submission, confirmation, viewing matches, and next steps">
+            </div>
+
+            <p class="mapwa-thinking-explanation">Students could complete the required steps, but the system rarely confirmed what had happened, where they were in the process, or what would happen next. Instead of rebuilding the workflow, I focused on closing those communication gaps.</p>
           </article>
 
-        </section>
+          <article class="mapwa-thinking-chapter reveal">
+            <span class="mapwa-thinking-chapter-label">02 · Designing for Decisions</span>
+            <h3 class="mapwa-thinking-headline">Everything was visible.</h3>
+            <p class="mapwa-thinking-turn">Nothing was prioritized.</p>
+            <p class="mapwa-thinking-explanation mapwa-thinking-explanation--center">The first dashboard showed the system. The second helped admins act on it.</p>
 
-        <section id="next" class="section page-shell">
-          <p class="eyebrow reveal">Solution</p>
-          <div class="reveal">
-            <h2 class="large-heading">Three interventions, one calmer matching process.</h2>
-            <p class="next-description">The redesign focused on the three places where the system needed the most support: administrator visibility, student flow clarity, and a walkthrough that explained the process before confusion turned into emails.</p>
-          </div>
+            <div class="mapwa-thinking-visual mapwa-thinking-comparison">
+              <div class="mapwa-thinking-v1">
+                <span class="mapwa-thinking-panel-label">V1 · Information Display</span>
+                <div class="mapwa-thinking-image"><img src="mapwa/howithink03.png" alt="Early MAPWA admin dashboard showing metrics, charts, popular sites, and detailed data tables"></div>
+                <p class="mapwa-thinking-v1-note">Everything had a place. Nothing had priority.</p>
+              </div>
 
-          <div class="solution-features">
-            <article class="solution-feature reveal">
-              <span class="solution-feature__number">Solution 01 · Admin Interface</span>
-              <h3>Give administrators a <em class="title-accent">single operating view.</em></h3>
-              <div class="solution-feature__body">
-                <div class="solution-feature__media solution-feature__media--framed-video">
-                  <video src="mapwa/2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA admin interface walkthrough"></video>
-                </div>
-                <div class="solution-feature__copy">
-                  <p>I added an admin-facing dashboard so staff could see match status, student records, site popularity, and export actions in one place. Instead of piecing together updates from spreadsheets and email threads, administrators could scan the system and act from a single interface.</p>
-                  <ul class="solution-feature__points">
-                    <li>Surfaced matched, pending, and unmatched students together</li>
-                    <li>Added site popularity and student record visibility</li>
-                    <li>Reduced weekly manual follow-up and spreadsheet checking</li>
-                  </ul>
+              <div class="mapwa-thinking-gap">
+                <span>Visible<b>↓</b>?<b>↓</b>Actionable</span>
+              </div>
+
+              <div class="mapwa-thinking-v2-wrap">
+                <span class="mapwa-thinking-panel-label">V2 · Actionable Dashboard</span>
+                <div class="mapwa-thinking-image"><img src="mapwa/howithink4.png" alt="Redesigned MAPWA admin dashboard prioritizing matching progress, needs-attention items, placement breakdown, and site capacity"></div>
+                <div class="mapwa-thinking-callouts" aria-label="Dashboard decision annotations">
+                  <span>01 Surface exceptions</span>
+                  <span>02 Prioritize urgency</span>
+                  <span>03 Connect insight to action</span>
                 </div>
               </div>
-            </article>
-
-            <article class="solution-feature reveal">
-              <span class="solution-feature__number">Solution 02 · Flow Optimization</span>
-              <h3>Close the gaps in the <em class="title-accent">student workflow.</em></h3>
-              <div class="solution-feature__body">
-                <div class="solution-feature__media">
-                  <div class="solution-feature__placeholder">Flow optimization placeholder</div>
-                </div>
-                <div class="solution-feature__copy">
-                  <p>The flow itself did not need to be rebuilt from scratch. The bigger problem was that students could complete a step and still not know what happened next. I optimized the existing process by adding clearer confirmation points, expectations, and next-step guidance at each transition.</p>
-                  <ul class="solution-feature__points">
-                    <li>Kept the familiar practicum application structure intact</li>
-                    <li>Added confirmation and status cues after key actions</li>
-                    <li>Made waiting periods and next steps more explicit</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="solution-feature reveal">
-              <span class="solution-feature__number">Solution 03 · Walkthrough Video</span>
-              <h3>Explain the process <em class="title-accent">before students begin.</em></h3>
-              <div class="solution-feature__body">
-                <div class="solution-feature__media">
-                  <div class="solution-feature__placeholder">Walkthrough video placeholder</div>
-                </div>
-                <div class="solution-feature__copy">
-                  <p>The walkthrough video gave students a preview of the full process before they started applying. Instead of discovering each step only when they reached it, students could understand the overall sequence, what information they needed, and what would happen after submission.</p>
-                  <ul class="solution-feature__points">
-                    <li>Introduced the full process before students began</li>
-                    <li>Reduced uncertainty around application and matching steps</li>
-                    <li>Gave administrators a reusable explanation instead of repeated emails</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section id="takeaway" class="section page-shell">
-          <p class="eyebrow reveal">Results</p>
-          <div class="reveal">
-            <h2 class="large-heading">The email count said everything.</h2>
-            <div class="pes-stat-grid">
-              <div class="pes-stat"><strong><span class="mapwa-before">43</span> → 5</strong><span>admin emails received after matching round</span></div>
-              <div class="pes-stat"><strong>3hrs</strong><span>saved per week for admin staff on manual follow-up</span></div>
-              <div class="pes-stat"><strong>200+</strong><span>MA-LIS students served each semester</span></div>
             </div>
-          </div>
+
+            <p class="mapwa-thinking-explanation">I defined decision support as the dashboard’s core purpose, then reorganized the hierarchy around exceptions, urgency, and next actions, turning it from a passive report into an operating tool for admins.</p>
+          </article>
+
+          <article class="mapwa-thinking-chapter reveal">
+            <span class="mapwa-thinking-chapter-label">03 · Designing the Real System</span>
+            <h3 class="mapwa-thinking-headline">The happy path wasn't the whole product.</h3>
+            <p class="mapwa-thinking-explanation mapwa-thinking-explanation--center">Many of the hardest cases appeared outside the expected matching flow.</p>
+
+            <div class="mapwa-thinking-visual mapwa-thinking-video">
+              <video src="mapwa/howithink3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA system flow and exception handling prototype"></video>
+            </div>
+
+            <p class="mapwa-thinking-explanation">I expanded the design beyond the happy path, defining how the system should guide students through the standard flow while making exceptions visible and actionable for administrators.</p>
+          </article>
         </section>
 
-        <section id="learn" class="section page-shell">
+        <section id="reflection" class="section page-shell mapwa-reflection-section">
           <p class="eyebrow reveal">Reflection</p>
-          <h2 class="large-heading reveal">What I took away from this project</h2>
-          <p class="body-copy pes-reflection reveal">The most valuable thing I did on this project was not design a single screen. It was sitting down with 43 emails and reading every one of them. That exercise turned a vague sense that something was wrong into a precise map of where and why. It gave the whole team a shared language for the problem — instead of talking about student confusion as a general feeling, we could point to specific moments in the flow where the system went silent.</p>
-          <p class="body-copy pes-reflection reveal">That is what I keep coming back to: finding the gap is harder than filling it. Once you know exactly where the flow breaks down, the design decisions almost make themselves. The automated emails, walkthrough video, and dashboard were not complicated ideas. What made them effective was that they were aimed at real, documented problems rather than assumptions. The gap analysis was the design work. Everything else was execution.</p>
+          <h2 class="large-heading reveal">What this changed about how I design.</h2>
+          <div class="mapwa-reflection-grid reveal">
+            <article class="mapwa-reflection-row">
+              <span>01</span>
+              <div class="mapwa-reflection-copy">
+                <h3>Clarity before simplicity</h3>
+                <p>Simplifying a workflow does not always mean removing steps. Sometimes the better solution is to make progress, status, and next actions easier to understand.</p>
+              </div>
+            </article>
+            <article class="mapwa-reflection-row">
+              <span>02</span>
+              <div class="mapwa-reflection-copy">
+                <h3>Design the system, not the screen</h3>
+                <p>Student confusion and admin workload were two sides of the same problem. Designing across both experiences helped me see how one interface decision could reduce friction elsewhere in the system.</p>
+              </div>
+            </article>
+            <article class="mapwa-reflection-row">
+              <span>03</span>
+              <div class="mapwa-reflection-copy">
+                <h3>Edge cases are part of the product</h3>
+                <p>A workflow is not finished when only the happy path works. Self sourced placements, unmatched students, and reallocation showed me that exceptions need to be designed as deliberately as the main flow.</p>
+              </div>
+            </article>
+          </div>
           <a class="footer-link" href="index.html">Back to all work</a>
         </section>
       </div>
@@ -1688,6 +2399,27 @@
       updateCompare();
       slider.addEventListener("input", updateCompare);
     });
+
+    const impactSection = document.querySelector("[data-mapwa-impact]");
+    if (impactSection) {
+      const impactItems = Array.from(impactSection.querySelectorAll("[data-mapwa-impact-item]"));
+      const impactObserver = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        impactItems.forEach((item, index) => {
+          item.animate([
+            { opacity: 0, transform: "translateY(30px)" },
+            { opacity: 1, transform: "translateY(0)" }
+          ], {
+            duration: 900,
+            delay: index * 120,
+            easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+            fill: "both"
+          });
+        });
+        impactObserver.unobserve(impactSection);
+      }, { threshold: 0.2, rootMargin: "0px 0px -20% 0px" });
+      impactObserver.observe(impactSection);
+    }
 
     const spyObserver = new IntersectionObserver(entries => {
       const visible = entries
