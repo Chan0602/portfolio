@@ -1,0 +1,41 @@
+/* Shared case-study baseline. Override only the color tokens per project. */
+:root {
+  --case-page-max: 1380px;
+  --case-page-gutter: clamp(24px, 4vw, 52px);
+
+  --case-font-display: Georgia, "Times New Roman", serif;
+  --case-font-body: "Satoshi", Arial, sans-serif;
+  --case-size-h1: 50px;
+  --case-size-h2: 40px;
+  --case-size-h3: 40px;
+  --case-size-intro: 18px;
+  --case-size-body: 18px;
+  --case-size-label: 14px;
+  --case-size-caption: 14px;
+  --case-size-metric: clamp(40px, 4.5vw, 44px);
+
+  --case-leading-display: 1.1;
+  --case-leading-h1: 1.05;
+  --case-leading-body: 1.6;
+  --case-leading-intro: 1.5;
+  --case-leading-label: 1.4;
+
+  --case-section-space: 36px;
+  --case-section-heading-gap: 34px;
+  --case-chapter-gap: 64px;
+  --case-chapter-padding: 56px;
+  --case-content-gap: 42px;
+
+  --case-radius-small: 8px;
+  --case-radius-media: 12px;
+  --case-line: rgba(15, 15, 15, 0.16);
+  --case-line-subtle: rgba(15, 15, 15, 0.08);
+}
+
+@media (max-width: 480px) {
+  :root {
+    --case-size-h1: 40px;
+    --case-size-h2: 34px;
+    --case-size-h3: 34px;
+  }
+}

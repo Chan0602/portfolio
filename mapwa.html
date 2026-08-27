@@ -19,25 +19,26 @@
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="case-study-tokens.css?v=20260826-mapwa-reference">
   <style>
     :root {
-      --page-max-width: 1380px;
-      --page-gutter-x: clamp(24px, 4vw, 52px);
+      --page-max-width: var(--case-page-max);
+      --page-gutter-x: var(--case-page-gutter);
       --paper: #f5f5f5;
       --ink: #0f0f0f;
       --muted: #666;
-      --line: rgba(15, 15, 15, 0.16);
+      --line: var(--case-line);
       --accent: #AD5954;
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: "Satoshi", Arial, sans-serif;
-      --type-hero-title: 50px;
-      --type-section-title: 40px;
-      --type-subheading: 40px;
-      --type-intro: 18px;
-      --type-body: 18px;
-      --type-label: 14px;
-      --type-caption: 14px;
-      --type-metric: clamp(40px, 4.5vw, 44px);
+      --serif: var(--case-font-display);
+      --sans: var(--case-font-body);
+      --type-hero-title: var(--case-size-h1);
+      --type-section-title: var(--case-size-h2);
+      --type-subheading: var(--case-size-h3);
+      --type-intro: var(--case-size-intro);
+      --type-body: var(--case-size-body);
+      --type-label: var(--case-size-label);
+      --type-caption: var(--case-size-caption);
+      --type-metric: var(--case-size-metric);
     }
 
     * {
@@ -1450,7 +1451,7 @@
     .mapwa-prototype-section,
     .mapwa-thinking-section,
     .mapwa-reflection-section {
-      padding-block: 36px;
+      padding-block: var(--case-section-space);
     }
 
     .mapwa-prototype-section .large-heading,
@@ -1465,7 +1466,7 @@
 
     .mapwa-impact-section {
       display: grid;
-      gap: 34px;
+      gap: var(--case-section-heading-gap);
     }
 
     .mapwa-impact-label {
@@ -1511,8 +1512,8 @@
 
     .mapwa-prototype-list {
       display: grid;
-      gap: 64px;
-      margin-top: 34px;
+      gap: var(--case-chapter-gap);
+      margin-top: var(--case-section-heading-gap);
     }
 
     .mapwa-prototype-block {
@@ -1520,8 +1521,8 @@
       grid-template-columns: 1fr;
       gap: 28px;
       align-items: start;
-      padding-top: 56px;
-      border-top: 1px solid rgba(15, 15, 15, 0.08);
+      padding-top: var(--case-chapter-padding);
+      border-top: 1px solid var(--case-line-subtle);
     }
 
     .mapwa-prototype-block:first-child {
@@ -1549,14 +1550,14 @@
     .mapwa-prototype-body {
       display: grid;
       grid-template-columns: minmax(0, 4fr) minmax(220px, 1fr);
-      gap: 42px;
+      gap: var(--case-content-gap);
       align-items: center;
     }
 
     .mapwa-prototype-media {
       min-width: 0;
       min-height: clamp(260px, 42vw, 560px);
-      border-radius: 12px;
+      border-radius: var(--case-radius-media);
       overflow: hidden;
       box-shadow: 0 14px 34px rgba(15, 15, 15, 0.07);
     }
@@ -1572,7 +1573,7 @@
       position: static;
       width: 100%;
       min-height: 0;
-      border-radius: 12px;
+      border-radius: var(--case-radius-media);
       box-shadow: none;
       background: transparent;
       transform: none;
@@ -2108,14 +2109,6 @@
       }
     }
 
-    @media (max-width: 480px) {
-      :root {
-        --type-hero-title: 40px;
-        --type-section-title: 34px;
-        --type-subheading: 34px;
-      }
-    }
-
     @media (max-width: 760px) {
       .mapwa-project-details,
       .mapwa-v1-v2 {
@@ -2211,7 +2204,7 @@
     }
 
   </style>
-  <link rel="stylesheet" href="site-nav.css?v=20260702-nav-size-split">
+  <link rel="stylesheet" href="site-nav.css?v=20260826-always-glass">
   <link rel="stylesheet" href="case-study-footer.css">
   <style>
     .portfolio-nav,
@@ -2466,6 +2459,12 @@
       .map(link => document.getElementById(link.dataset.target))
       .filter(Boolean);
 
+    function setActiveSection(sectionId) {
+      spyLinks.forEach(link => {
+        link.classList.toggle("is-active", link.dataset.target === sectionId);
+      });
+    }
+
     function updateProjectNav() {
       projectNav.classList.toggle("is-scrolled", window.scrollY > 12);
     }
@@ -2477,6 +2476,7 @@
       button.addEventListener("click", () => {
         const target = document.getElementById(button.dataset.target);
         if (!target) return;
+        setActiveSection(target.id);
         const navHeight = projectNav.getBoundingClientRect().height;
         const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight - 21;
         window.scrollTo({ top: targetTop, behavior: "smooth" });
@@ -2527,20 +2527,21 @@
       impactObserver.observe(impactSection);
     }
 
-    const spyObserver = new IntersectionObserver(entries => {
-      const visible = entries
-        .filter(entry => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      spyLinks.forEach(link => {
-        link.classList.toggle("is-active", link.dataset.target === visible.target.id);
-      });
-    }, {
-      rootMargin: "-18% 0px -58% 0px",
-      threshold: [0.05, 0.2, 0.4, 0.7]
-    });
+    let spyFrame = null;
+    function updateSpyNav() {
+      spyFrame = null;
+      const activationLine = projectNav.getBoundingClientRect().height + 32;
+      const activeSection = sections.reduce((current, section) => {
+        return section.getBoundingClientRect().top <= activationLine ? section : current;
+      }, sections[0]);
+      if (activeSection) setActiveSection(activeSection.id);
+    }
 
-    sections.forEach(section => spyObserver.observe(section));
+    updateSpyNav();
+    window.addEventListener("scroll", () => {
+      if (spyFrame !== null) return;
+      spyFrame = window.requestAnimationFrame(updateSpyNav);
+    }, { passive: true });
   </script>
 
   <script>

@@ -49,11 +49,11 @@ const timing = {
   sceneInEnd: 0.10,
   grassStart: 0,
   grassEnd: 0.10,
-  dandelionStart: 0.26,
-  dandelionEnd: 0.4,
-  catStart: 0.42,
+  dandelionStart: 0.10,
+  dandelionEnd: 0.24,
+  catStart: 0.22,
   catEnterEnd: 0.6,
-  catRunEnd: 0.62,
+  catRunEnd: 0.82,
   catExitEnd: 0.9,
 };
 
