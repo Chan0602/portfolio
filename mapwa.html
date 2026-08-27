@@ -12,10 +12,13 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Mapwa Case Study | Yilin Chen</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --page-max-width: 1380px;
@@ -25,8 +28,16 @@
       --muted: #666;
       --line: rgba(15, 15, 15, 0.16);
       --accent: #AD5954;
-      --serif: "Crimson Pro", Georgia, "Times New Roman", serif;
-      --sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Satoshi", Arial, sans-serif;
+      --type-hero-title: 50px;
+      --type-section-title: 40px;
+      --type-subheading: 40px;
+      --type-intro: 18px;
+      --type-body: 18px;
+      --type-label: 14px;
+      --type-caption: 14px;
+      --type-metric: clamp(40px, 4.5vw, 44px);
     }
 
     * {
@@ -42,7 +53,7 @@
       background: var(--paper);
       color: var(--ink);
       font-family: var(--sans);
-      font-size: 16px;
+      font-size: var(--type-body);
       overflow-x: hidden;
     }
 
@@ -69,8 +80,8 @@
       padding: 20px max(24px, calc((100vw - var(--page-max-width)) / 2));
       background: #fff;
       color: rgba(15, 15, 15, 0.74);
-      font-size: 0.9rem;
-      font-weight: 520;
+      font-size: var(--type-label);
+      font-weight: 500;
       pointer-events: none;
       transition:
         background-color 260ms ease,
@@ -186,12 +197,16 @@
     .award {
       margin: 0;
       color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 560;
+      font-size: var(--type-label);
+      font-weight: 600;
       font-style: italic;
       letter-spacing: 0.04em;
       line-height: 1.35;
       text-transform: uppercase;
+    }
+
+    .award em {
+      font-style: inherit;
     }
 
     h1 {
@@ -199,10 +214,10 @@
       max-width: 760px;
       color: var(--ink);
       font-family: var(--serif);
-      font-size: clamp(3rem, 8vw, 4.4rem);
-      line-height: 0.96;
-      font-weight: 500;
-      letter-spacing: -0.045em;
+      font-size: var(--type-hero-title);
+      line-height: 1.05;
+      font-weight: 400;
+      letter-spacing: -0.025em;
       overflow-wrap: anywhere;
     }
 
@@ -215,9 +230,9 @@
     .detail-label,
     .eyebrow,
     .spy-nav__link {
-      font-size: 0.7rem;
-      line-height: 1.2;
-      font-weight: 430;
+      font-size: var(--type-label);
+      line-height: 1.4;
+      font-weight: 600;
       letter-spacing: 0.06em;
       color: var(--muted);
       text-transform: uppercase;
@@ -225,9 +240,9 @@
 
     .detail-value {
       margin-top: 4px;
-      font-size: 0.96rem;
-      line-height: 1.4;
-      font-weight: 560;
+      font-size: var(--type-body);
+      line-height: 1.5;
+      font-weight: 400;
     }
 
     .hero-right {
@@ -240,9 +255,9 @@
     .hero-subtitle {
       margin: 0;
       max-width: 520px;
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      line-height: 1.62;
-      font-weight: 300;
+      font-size: var(--type-intro);
+      line-height: 1.5;
+      font-weight: 400;
     }
 
     .tag-list {
@@ -256,7 +271,7 @@
       border-radius: 999px;
       padding: 5px 13px;
       background: rgba(15, 15, 15, 0.08);
-      font-size: 0.76rem;
+      font-size: var(--type-caption);
     }
 
     .skip-btn {
@@ -273,8 +288,8 @@
         repeating-linear-gradient(0deg, rgba(197, 5, 12, 0.12) 0 1px, transparent 1px 3px),
         repeating-linear-gradient(90deg, rgba(197, 5, 12, 0.12) 0 1px, transparent 1px 3px);
       background-size: 4px 4px;
-      font-size: 0.86rem;
-      font-weight: 620;
+      font-size: var(--type-label);
+      font-weight: 600;
       letter-spacing: 0.04em;
       overflow: hidden;
       cursor: pointer;
@@ -357,10 +372,10 @@
     .context-title,
     .large-heading {
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.08;
-      font-weight: 600;
-      letter-spacing: -0.038em;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.02em;
       overflow-wrap: anywhere;
     }
 
@@ -373,9 +388,9 @@
 
     .body-copy {
       margin: 18px 0 0;
-      font-size: 1rem;
-      line-height: 1.7;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
     }
 
     .accent {
@@ -601,7 +616,7 @@
     }
 
     .mapwa-solution-module h3 {
-      font-size: 1rem;
+      font-size: var(--type-body);
       line-height: 1.35;
       font-weight: 720;
     }
@@ -653,7 +668,7 @@
       margin: 0 auto 56px;
       text-align: center;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-size: var(--type-section-title);
       line-height: 1.08;
       font-weight: 500;
       letter-spacing: -0.038em;
@@ -708,7 +723,7 @@
       display: grid;
       place-items: center;
       aspect-ratio: 2045 / 1119;
-      background: url("mapwa/solution-video-background.png") center / cover no-repeat;
+      background: url("mapwa-assets/solution-video-background.png") center / cover no-repeat;
     }
 
     .solution-feature__media--framed-video video {
@@ -729,7 +744,7 @@
     .solution-feature__copy p {
       margin: 20px 0 0;
       color: rgba(15, 15, 15, 0.72);
-      font-size: 1rem;
+      font-size: var(--type-body);
       line-height: 1.72;
       font-weight: 300;
     }
@@ -754,9 +769,9 @@
     .story-text {
       max-width: min(48rem, 100%);
       margin: 0 0 36px;
-      font-size: 1rem;
-      line-height: 1.68;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
     }
 
     .story-text--right {
@@ -796,7 +811,7 @@
 
     .stat-lead {
       margin: 0 0 8px;
-      font-size: 1rem;
+      font-size: var(--type-body);
       font-weight: 300;
     }
 
@@ -881,9 +896,9 @@
     .feature-caption,
     .next-description {
       margin: 0;
-      font-size: 1rem;
-      line-height: 1.66;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
     }
 
     .two-card-grid {
@@ -954,7 +969,7 @@
     .pes-card h3 {
       margin: 0;
       color: var(--ink);
-      font-size: 1rem;
+      font-size: var(--type-body);
       line-height: 1.35;
       font-weight: 720;
     }
@@ -1068,9 +1083,9 @@
     .pes-stat span {
       display: block;
       margin-top: 13px;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      font-weight: 300;
+      font-size: var(--type-caption);
+      line-height: 1.45;
+      font-weight: 400;
     }
 
     .pes-stat strong .mapwa-before {
@@ -1184,7 +1199,7 @@
         display: inline-flex;
         align-items: center;
         text-align: left;
-        font-family: "Inder", var(--sans);
+        font-family: var(--sans);
         cursor: pointer;
         transition: color 180ms ease, font-weight 180ms ease;
       }
@@ -1219,6 +1234,14 @@
       }
     }
 
+    @media (max-width: 480px) {
+      :root {
+        --type-hero-title: 40px;
+        --type-section-title: 34px;
+        --type-subheading: 34px;
+      }
+    }
+
     @media (max-width: 760px) {
       :root {
         --page-gutter-x: clamp(22px, 7vw, 34px);
@@ -1250,9 +1273,9 @@
 
       h1 {
         max-width: 100%;
-        font-size: clamp(2.7rem, 15vw, 4.4rem);
-        line-height: 0.98;
-        letter-spacing: -0.035em;
+        font-size: var(--type-hero-title);
+        line-height: 1.05;
+        letter-spacing: -0.025em;
       }
 
       .hero-details {
@@ -1260,7 +1283,7 @@
       }
 
       .hero-subtitle {
-        font-size: 1rem;
+        font-size: var(--type-body);
         line-height: 1.6;
       }
 
@@ -1284,7 +1307,7 @@
 
       .context-title,
       .large-heading {
-        font-size: clamp(2rem, 10.5vw, 2.85rem);
+        font-size: var(--type-section-title);
         line-height: 1.04;
         letter-spacing: -0.03em;
       }
@@ -1293,7 +1316,7 @@
       .story-text,
       .feature-caption,
       .next-description {
-        font-size: 0.98rem;
+        font-size: 17px;
         line-height: 1.72;
       }
 
@@ -1302,7 +1325,7 @@
       }
 
       .statement {
-        font-size: clamp(2.05rem, 10.8vw, 2.95rem);
+        font-size: var(--type-section-title);
         line-height: 1.04;
         letter-spacing: -0.03em;
       }
@@ -1418,8 +1441,9 @@
 
     .mapwa-hero-copy .hero-subtitle {
       max-width: 600px;
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      line-height: 1.62;
+      font-size: var(--type-intro);
+      line-height: 1.5;
+      font-weight: 400;
     }
 
     .mapwa-impact-section,
@@ -1432,9 +1456,11 @@
     .mapwa-prototype-section .large-heading,
     .mapwa-thinking-section .large-heading,
     .mapwa-reflection-section .large-heading {
-      max-width: 980px;
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.08;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
     .mapwa-impact-section {
@@ -1445,9 +1471,9 @@
     .mapwa-impact-label {
       margin: 0;
       color: var(--muted);
-      font-size: 0.7rem;
-      line-height: 1.2;
-      font-weight: 430;
+      font-size: var(--type-label);
+      line-height: 1.4;
+      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
@@ -1466,27 +1492,27 @@
     .mapwa-impact-metric strong {
       display: block;
       color: var(--accent);
-      font-family: var(--serif);
-      font-size: clamp(3.5rem, 5vw, 4rem);
-      line-height: 0.9;
-      font-weight: 500;
-      letter-spacing: -0.045em;
+      font-family: var(--sans);
+      font-size: var(--type-metric);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       white-space: nowrap;
     }
 
     .mapwa-impact-metric p {
       margin: 16px 0 0;
-      max-width: 240px;
+      max-width: 260px;
       color: rgba(15, 15, 15, 0.72);
-      font-size: 1rem;
-      line-height: 1.42;
-      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 400;
     }
 
     .mapwa-prototype-list {
       display: grid;
       gap: 64px;
-      margin-top: 64px;
+      margin-top: 34px;
     }
 
     .mapwa-prototype-block {
@@ -1504,14 +1530,14 @@
     }
 
     .mapwa-prototype-heading {
-      margin: 0 auto 14px;
-      max-width: 1020px;
-      text-align: center;
+      margin: 0 0 14px;
+      max-width: none;
+      text-align: left;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.08;
-      font-weight: 500;
-      letter-spacing: -0.038em;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
     .mapwa-prototype-heading em {
@@ -1555,7 +1581,7 @@
     .mapwa-prototype-media--image {
       display: grid;
       place-items: center;
-      background: url("mapwa/solution-video-background.png") center / cover no-repeat;
+      background: url("mapwa-assets/solution-video-background.png") center / cover no-repeat;
       padding: clamp(28px, 5vw, 70px);
     }
 
@@ -1575,8 +1601,8 @@
     .mapwa-v1-v2 span {
       display: block;
       color: var(--accent);
-      font-size: 0.72rem;
-      font-weight: 720;
+      font-size: var(--type-label);
+      font-weight: 600;
       letter-spacing: 0.08em;
       line-height: 1.35;
       text-transform: uppercase;
@@ -1585,18 +1611,18 @@
     .mapwa-thinking-chapter h3 {
       margin: 14px 0 0;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.02;
-      font-weight: 500;
-      letter-spacing: -0.04em;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
     .mapwa-prototype-copy p {
       margin: 18px 0 0;
       color: rgba(15, 15, 15, 0.72);
-      font-size: 1rem;
-      line-height: 1.66;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
     }
 
     .mapwa-prototype-copy small {
@@ -1625,7 +1651,7 @@
       margin: 0;
       color: var(--accent);
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-size: var(--type-section-title);
       line-height: 0.95;
       font-style: italic;
       letter-spacing: -0.04em;
@@ -1646,7 +1672,7 @@
       margin: 34px 0 0;
       max-width: 980px;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-size: var(--type-section-title);
       line-height: 0.98;
       font-weight: 500;
       letter-spacing: -0.05em;
@@ -1654,7 +1680,7 @@
 
     .mapwa-large-statement--small {
       max-width: 900px;
-      font-size: clamp(2rem, 3.4vw, 2.7rem);
+      font-size: var(--type-section-title);
     }
 
     .mapwa-thinking-chapter .body-copy {
@@ -1685,7 +1711,7 @@
       display: block;
       margin-top: 14px;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-size: var(--type-section-title);
       line-height: 0.98;
       font-weight: 500;
       letter-spacing: -0.045em;
@@ -1694,7 +1720,7 @@
     .mapwa-v1-v2 em {
       color: var(--accent);
       font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: var(--type-section-title);
       font-style: italic;
     }
 
@@ -1725,8 +1751,8 @@
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.88);
       color: var(--accent);
-      font-size: 0.72rem;
-      font-weight: 720;
+      font-size: var(--type-label);
+      font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       box-shadow: 0 12px 30px rgba(15, 15, 15, 0.08);
@@ -1744,21 +1770,29 @@
 
     .mapwa-thinking-intro .large-heading {
       max-width: 100%;
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.08;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
       white-space: nowrap;
     }
 
     .mapwa-thinking-chapter {
       margin-top: 64px;
+      padding-top: 56px;
+      border-top: 1px solid rgba(15, 15, 15, 0.08);
+    }
+
+    .mapwa-thinking-intro + .mapwa-thinking-chapter {
+      margin-top: 34px;
+      padding-top: 0;
+      border-top: 0;
     }
 
     .mapwa-thinking-chapter-label {
       display: block;
       margin-bottom: 18px;
       color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 430;
+      font-size: var(--type-label);
+      font-weight: 600;
       letter-spacing: 0.12em;
       line-height: 1.35;
       text-transform: uppercase;
@@ -1766,14 +1800,20 @@
 
     .mapwa-thinking-headline {
       width: 100%;
-      margin: 0 auto;
+      margin: 0;
       max-width: none;
-      text-align: center;
+      text-align: left;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.04;
-      font-weight: 500;
-      letter-spacing: -0.04em;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .mapwa-thinking-headline em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: inherit;
     }
 
     .mapwa-thinking-turn {
@@ -1782,19 +1822,18 @@
       text-align: center;
       color: var(--accent);
       font-family: var(--serif);
-      font-size: clamp(2rem, 3.4vw, 2.7rem);
-      line-height: 1;
-      font-style: italic;
-      font-weight: 500;
-      letter-spacing: -0.035em;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
     .mapwa-thinking-chapter .mapwa-thinking-headline,
     .mapwa-thinking-chapter .mapwa-thinking-turn {
       width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
+      margin: 0;
+      text-align: left;
     }
 
     .mapwa-thinking-visual {
@@ -1825,17 +1864,17 @@
     .mapwa-thinking-evidence-line {
       margin: 14px 0 0;
       color: rgba(15, 15, 15, 0.52);
-      font-size: 0.84rem;
+      font-size: var(--type-caption);
       line-height: 1.45;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .mapwa-thinking-transition {
       margin: 34px 0 0;
       color: rgba(15, 15, 15, 0.72);
-      font-size: clamp(1rem, 1.5vw, 1.18rem);
-      line-height: 1.55;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
     }
 
     .mapwa-thinking-insight {
@@ -1844,17 +1883,17 @@
       max-width: none;
       text-align: left;
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.02;
-      font-weight: 500;
-      letter-spacing: -0.045em;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
     .mapwa-thinking-insight--body {
       font-family: var(--sans);
-      font-size: clamp(1rem, 1.5vw, 1.18rem);
-      line-height: 1.55;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
       letter-spacing: 0;
     }
 
@@ -1864,19 +1903,19 @@
       margin: 18px 0 0;
       text-align: left;
       color: rgba(15, 15, 15, 0.72);
-      font-size: 1rem;
-      line-height: 1.68;
-      font-weight: 300;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 400;
     }
 
     .mapwa-thinking-explanation--center {
-      text-align: center;
+      text-align: left;
     }
 
     .mapwa-thinking-insight--compact {
       font-family: var(--sans);
-      font-size: 1rem;
-      line-height: 1.68;
+      font-size: var(--type-body);
+      line-height: 1.6;
       font-weight: 700;
       letter-spacing: 0;
     }
@@ -1892,8 +1931,8 @@
       display: block;
       margin-bottom: 14px;
       color: var(--muted);
-      font-size: 0.7rem;
-      font-weight: 650;
+      font-size: var(--type-label);
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -1905,9 +1944,9 @@
     .mapwa-thinking-v1-note {
       margin: 12px 0 0;
       color: rgba(15, 15, 15, 0.58);
-      font-size: 0.88rem;
-      line-height: 1.5;
-      font-weight: 300;
+      font-size: var(--type-caption);
+      line-height: 1.45;
+      font-weight: 400;
     }
 
     .mapwa-thinking-gap {
@@ -1918,17 +1957,18 @@
       display: block;
       margin: 0;
       color: var(--accent);
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      line-height: 1.18;
-      font-style: italic;
+      font-family: var(--sans);
+      font-size: var(--type-subheading);
+      line-height: 1.25;
+      font-style: normal;
+      font-weight: 600;
     }
 
     .mapwa-thinking-gap b {
       display: block;
       color: rgba(15, 15, 15, 0.5);
       font-family: var(--sans);
-      font-size: 1.1rem;
+      font-size: var(--type-body);
       font-style: normal;
       font-weight: 300;
       line-height: 1.35;
@@ -1946,8 +1986,8 @@
 
     .mapwa-thinking-callouts span {
       color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 680;
+      font-size: var(--type-caption);
+      font-weight: 600;
       letter-spacing: 0.03em;
     }
 
@@ -1964,8 +2004,8 @@
     .mapwa-thinking-system-ending span {
       display: block;
       color: var(--accent);
-      font-size: 0.72rem;
-      font-weight: 720;
+      font-size: var(--type-label);
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -1973,17 +2013,17 @@
     .mapwa-thinking-system-ending strong {
       display: block;
       margin-top: 8px;
-      font-size: 1rem;
-      line-height: 1.45;
-      font-weight: 520;
+      font-size: var(--type-body);
+      line-height: 1.6;
+      font-weight: 600;
     }
 
     .mapwa-reflection-section .large-heading {
-      font-size: clamp(1.9rem, 3vw, 2.5rem);
-      line-height: 1.12;
+      font-size: var(--type-section-title);
+      line-height: 1.1;
       font-family: var(--serif);
-      font-weight: 700;
-      letter-spacing: -0.035em;
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
     .mapwa-reflection-grid {
@@ -2003,7 +2043,7 @@
     .mapwa-reflection-row span {
       display: block;
       color: var(--accent);
-      font-size: 0.9rem;
+      font-size: var(--type-label);
       font-weight: 600;
       letter-spacing: 0.02em;
       line-height: 1.25;
@@ -2012,7 +2052,7 @@
     .mapwa-reflection-row h3 {
       margin: 0;
       font-family: var(--sans);
-      font-size: 1rem;
+      font-size: var(--type-body);
       line-height: 1.6;
       font-weight: 700;
       letter-spacing: 0;
@@ -2021,9 +2061,9 @@
     .mapwa-reflection-row p {
       margin: 0;
       color: rgba(15, 15, 15, 0.72);
-      font-size: 1rem;
+      font-size: var(--type-body);
       line-height: 1.6;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .mapwa-reflection-copy {
@@ -2068,6 +2108,14 @@
       }
     }
 
+    @media (max-width: 480px) {
+      :root {
+        --type-hero-title: 40px;
+        --type-section-title: 34px;
+        --type-subheading: 34px;
+      }
+    }
+
     @media (max-width: 760px) {
       .mapwa-project-details,
       .mapwa-v1-v2 {
@@ -2098,9 +2146,80 @@
       }
     }
 
+
+    .mapwa-lightbox-trigger {
+      cursor: zoom-in;
+    }
+
+    .mapwa-media-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 52px);
+      background: rgba(15, 15, 15, 0.78);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+    }
+
+    .mapwa-media-lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mapwa-media-lightbox__content {
+      width: auto;
+      max-width: 94vw;
+      max-height: 86vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .mapwa-media-lightbox__content img,
+    .mapwa-media-lightbox__content video {
+      width: auto;
+      max-width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .mapwa-media-lightbox__close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    body.mapwa-lightbox-open {
+      overflow: hidden;
+    }
+
   </style>
   <link rel="stylesheet" href="site-nav.css?v=20260702-nav-size-split">
   <link rel="stylesheet" href="case-study-footer.css">
+  <style>
+    .portfolio-nav,
+    .portfolio-nav a,
+    .portfolio-nav button {
+      font-family: var(--sans);
+    }
+  </style>
 </head>
 <body>
     <nav class="portfolio-nav project-nav" data-portfolio-nav aria-label="Main navigation">
@@ -2134,16 +2253,16 @@
       </aside>
 
       <div class="case-study-layout__main">
-        <section id="hero" class="hero-section page-shell mapwa-hero-showcase">
+        <section id="hero" class="hero-section page-shell mapwa-hero-showcase" data-section-group="overview">
           <div class="media-card media-card--short hero-media-before mapwa-hero-image">
-            <img src="mapwa/hero.png?v=20260824-2" alt="MAPWA admin dashboard hero mockup">
+            <img src="mapwa-assets/hero.png?v=20260824-2" alt="MAPWA admin dashboard hero mockup">
           </div>
 
           <div class="hero-content mapwa-hero-intro">
             <div>
               <div class="hero-title-group">
-                <p class="award">B2B / Internal Tool · Workflow Design</p>
-                <h1>MAPWA —<br>Practicum Matching<br>System</h1>
+                <p class="award"><em>MAPWA / B2B / Internal Tool · Workflow Design</em></p>
+                <h1>Streamlining practicum matching for students and administrators</h1>
               </div>
               <div class="hero-details mapwa-project-details">
                 <div>
@@ -2177,7 +2296,7 @@
           </div>
         </section>
 
-        <section id="impact" class="section page-shell mapwa-impact-section" data-mapwa-impact>
+        <section id="impact" class="section page-shell mapwa-impact-section" data-section-group="impact" data-mapwa-impact>
           <p class="mapwa-impact-label" data-mapwa-impact-item>Impact</p>
           <div class="mapwa-impact-grid">
             <article class="mapwa-impact-metric" data-mapwa-impact-item>
@@ -2195,18 +2314,14 @@
           </div>
         </section>
 
-        <section id="prototype" class="section page-shell mapwa-prototype-section">
+        <section id="prototype" class="section page-shell mapwa-prototype-section" data-section-group="prototype">
           <p class="eyebrow reveal">Prototype</p>
-          <h2 class="large-heading reveal">Turning complexity into clear actions.</h2>
-          <p class="next-description reveal">Three moments where the system needed clarity most.</p>
-
           <div class="mapwa-prototype-list">
             <article class="mapwa-prototype-block reveal">
-              <span class="mapwa-prototype-label">01 · Student Experience</span>
-              <h3 class="mapwa-prototype-heading">Explore with <em>confidence.</em></h3>
+              <h3 class="mapwa-prototype-heading">01 · Helping students <em>find and compare</em> practicum options</h3>
               <div class="mapwa-prototype-body">
                 <div class="mapwa-prototype-media solution-feature__media--framed-video">
-                  <video src="mapwa/prototype1.mp4?v=20260824-2" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA student exploration prototype"></video>
+                  <video src="mapwa-assets/prototype1.mp4?v=20260824-2" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA student exploration prototype"></video>
                 </div>
                 <div class="mapwa-prototype-copy">
                   <p>I reduced competing information and surfaced what students could act on now—current round, deadline, site details, and next actions.</p>
@@ -2216,11 +2331,10 @@
             </article>
 
             <article class="mapwa-prototype-block reveal">
-              <span class="mapwa-prototype-label">02 · Student Experience</span>
-              <h3 class="mapwa-prototype-heading">Know what happens <em>next.</em></h3>
+              <h3 class="mapwa-prototype-heading">02 · Making application <em>progress and next steps</em> explicit</h3>
               <div class="mapwa-prototype-body">
                 <div class="mapwa-prototype-media solution-feature__media--framed-video">
-                  <video src="mapwa/prototype2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA application and matching status prototype"></video>
+                  <video src="mapwa-assets/prototype2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA application and matching status prototype"></video>
                 </div>
                 <div class="mapwa-prototype-copy">
                   <p>Every major action now confirms what happened, shows the current status, and makes the next step explicit.</p>
@@ -2230,11 +2344,10 @@
             </article>
 
             <article class="mapwa-prototype-block reveal">
-              <span class="mapwa-prototype-label">03 · Admin Experience</span>
-              <h3 class="mapwa-prototype-heading">See where attention is <em>needed.</em></h3>
+              <h3 class="mapwa-prototype-heading">03 · Helping administrators spot where <em>action is needed</em></h3>
               <div class="mapwa-prototype-body">
                 <div class="mapwa-prototype-media solution-feature__media--framed-video">
-                  <video src="mapwa/prototype3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA admin dashboard prototype"></video>
+                  <video src="mapwa-assets/prototype3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA admin dashboard prototype"></video>
                 </div>
                 <div class="mapwa-prototype-copy">
                   <p>The admin dashboard turns scattered records into one operating view for matching progress, exceptions, capacity, and unresolved students.</p>
@@ -2245,41 +2358,35 @@
           </div>
         </section>
 
-        <section id="thinking" class="section page-shell mapwa-thinking-section">
+        <section id="thinking" class="section page-shell mapwa-thinking-section" data-section-group="thinking">
           <div class="mapwa-thinking-intro reveal">
             <p class="eyebrow">How I Think</p>
-            <h2 class="large-heading">Three decisions shaped the redesign.</h2>
-            <p class="next-description">The interface changed as my understanding of the problem changed.</p>
           </div>
 
           <article class="mapwa-thinking-chapter reveal">
-            <span class="mapwa-thinking-chapter-label">01 · Reframing the Problem</span>
-            <h3 class="mapwa-thinking-headline">I thought the workflow was broken.</h3>
-            <p class="mapwa-thinking-turn">It wasn't.</p>
+            <h3 class="mapwa-thinking-headline">01 · Mapping student questions to <em>gaps</em> in the application flow</h3>
 
             <div class="mapwa-thinking-visual mapwa-thinking-image mapwa-thinking-image--flat">
-              <img src="mapwa/howithink01.png" alt="Student email questions clustered around submission, status, and next-step uncertainty">
+              <img src="mapwa-assets/howithink01.png" alt="Student email questions clustered around submission, status, and next-step uncertainty">
             </div>
             <p class="mapwa-thinking-evidence-line">80+ post-round emails · 20+ asking about status or next steps</p>
 
             <p class="mapwa-thinking-transition">Mapping the process made the real issue clear: the steps worked, but the transitions between them didn't.</p>
             <div class="mapwa-thinking-visual mapwa-thinking-image mapwa-thinking-image--flat">
-              <img src="mapwa/howithink2.png" alt="Annotated MAPWA student workflow showing uncertainty points around submission, confirmation, viewing matches, and next steps">
+              <img src="mapwa-assets/howithink2.png" alt="Annotated MAPWA student workflow showing uncertainty points around submission, confirmation, viewing matches, and next steps">
             </div>
 
             <p class="mapwa-thinking-explanation">Students could complete the required steps, but the system rarely confirmed what had happened, where they were in the process, or what would happen next. Instead of rebuilding the workflow, I focused on closing those communication gaps.</p>
           </article>
 
           <article class="mapwa-thinking-chapter reveal">
-            <span class="mapwa-thinking-chapter-label">02 · Designing for Decisions</span>
-            <h3 class="mapwa-thinking-headline">Everything was visible.</h3>
-            <p class="mapwa-thinking-turn">Nothing was prioritized.</p>
+            <h3 class="mapwa-thinking-headline">02 · Making important information easier to <em>prioritize</em></h3>
             <p class="mapwa-thinking-explanation mapwa-thinking-explanation--center">The first dashboard showed the system. The second helped admins act on it.</p>
 
             <div class="mapwa-thinking-visual mapwa-thinking-comparison">
               <div class="mapwa-thinking-v1">
                 <span class="mapwa-thinking-panel-label">V1 · Information Display</span>
-                <div class="mapwa-thinking-image"><img src="mapwa/howithink03.png" alt="Early MAPWA admin dashboard showing metrics, charts, popular sites, and detailed data tables"></div>
+                <div class="mapwa-thinking-image"><img src="mapwa-assets/howithink03.png" alt="Early MAPWA admin dashboard showing metrics, charts, popular sites, and detailed data tables"></div>
                 <p class="mapwa-thinking-v1-note">Everything had a place. Nothing had priority.</p>
               </div>
 
@@ -2289,7 +2396,7 @@
 
               <div class="mapwa-thinking-v2-wrap">
                 <span class="mapwa-thinking-panel-label">V2 · Actionable Dashboard</span>
-                <div class="mapwa-thinking-image"><img src="mapwa/howithink4.png" alt="Redesigned MAPWA admin dashboard prioritizing matching progress, needs-attention items, placement breakdown, and site capacity"></div>
+                <div class="mapwa-thinking-image"><img src="mapwa-assets/howithink4.png" alt="Redesigned MAPWA admin dashboard prioritizing matching progress, needs-attention items, placement breakdown, and site capacity"></div>
                 <div class="mapwa-thinking-callouts" aria-label="Dashboard decision annotations">
                   <span>01 Surface exceptions</span>
                   <span>02 Prioritize urgency</span>
@@ -2302,19 +2409,18 @@
           </article>
 
           <article class="mapwa-thinking-chapter reveal">
-            <span class="mapwa-thinking-chapter-label">03 · Designing the Real System</span>
-            <h3 class="mapwa-thinking-headline">The happy path wasn't the whole product.</h3>
+            <h3 class="mapwa-thinking-headline">03 · Expanding the system to support <em>real-world edge cases</em></h3>
             <p class="mapwa-thinking-explanation mapwa-thinking-explanation--center">Many of the hardest cases appeared outside the expected matching flow.</p>
 
             <div class="mapwa-thinking-visual mapwa-thinking-video">
-              <video src="mapwa/howithink3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA system flow and exception handling prototype"></video>
+              <video src="mapwa-assets/howithink3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="MAPWA system flow and exception handling prototype"></video>
             </div>
 
             <p class="mapwa-thinking-explanation">I expanded the design beyond the happy path, defining how the system should guide students through the standard flow while making exceptions visible and actionable for administrators.</p>
           </article>
         </section>
 
-        <section id="reflection" class="section page-shell mapwa-reflection-section">
+        <section id="reflection" class="section page-shell mapwa-reflection-section" data-section-group="reflection">
           <p class="eyebrow reveal">Reflection</p>
           <h2 class="large-heading reveal">What this changed about how I design.</h2>
           <div class="mapwa-reflection-grid reveal">
@@ -2436,6 +2542,77 @@
 
     sections.forEach(section => spyObserver.observe(section));
   </script>
+
+  <script>
+    const lightboxTargets = Array.from(document.querySelectorAll(
+      '[data-section-group] img, [data-section-group] video'
+    )).filter(target => !target.closest('.portfolio-nav') && !target.closest('.case-study-grass-footer'));
+
+    if (lightboxTargets.length) {
+      const lightbox = document.createElement("div");
+      lightbox.className = "mapwa-media-lightbox";
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "Expanded media preview");
+      lightbox.innerHTML = `
+        <button class="mapwa-media-lightbox__close" type="button" aria-label="Close preview">×</button>
+        <div class="mapwa-media-lightbox__content"></div>
+      `;
+      document.body.appendChild(lightbox);
+
+      const lightboxContent = lightbox.querySelector(".mapwa-media-lightbox__content");
+      const closeLightboxButton = lightbox.querySelector(".mapwa-media-lightbox__close");
+
+      const closeLightbox = () => {
+        lightbox.classList.remove("is-open");
+        document.body.classList.remove("mapwa-lightbox-open");
+        lightboxContent.innerHTML = "";
+      };
+
+      const openLightbox = source => {
+        const isVideo = source.tagName.toLowerCase() === "video";
+        const expanded = document.createElement(isVideo ? "video" : "img");
+        if (isVideo) {
+          expanded.src = source.currentSrc || source.src;
+          expanded.controls = true;
+          expanded.autoplay = true;
+          expanded.loop = true;
+          expanded.muted = true;
+          expanded.playsInline = true;
+        } else {
+          expanded.src = source.currentSrc || source.src;
+          expanded.alt = source.alt || "Expanded MAPWA project image";
+        }
+        lightboxContent.innerHTML = "";
+        lightboxContent.appendChild(expanded);
+        document.body.classList.add("mapwa-lightbox-open");
+        lightbox.classList.add("is-open");
+        closeLightboxButton.focus({ preventScroll: true });
+      };
+
+      lightboxTargets.forEach(target => {
+        target.classList.add("mapwa-lightbox-trigger");
+        target.setAttribute("tabindex", "0");
+        target.setAttribute("role", "button");
+        target.setAttribute("aria-label", target.getAttribute("aria-label") || target.alt || "Open larger preview");
+        target.addEventListener("click", () => openLightbox(target));
+        target.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          openLightbox(target);
+        });
+      });
+
+      closeLightboxButton.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", event => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      window.addEventListener("keydown", event => {
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+      });
+    }
+  </script>
+
   <script src="clean-url.js"></script>
 </body>
 </html>

@@ -46,13 +46,15 @@ const assets = {
 
 const timing = {
   sceneInStart: 0,
-  sceneInEnd: 0.16,
-  dandelionStart: 0.18,
-  dandelionEnd: 0.36,
+  sceneInEnd: 0.10,
+  grassStart: 0,
+  grassEnd: 0.10,
+  dandelionStart: 0.26,
+  dandelionEnd: 0.4,
   catStart: 0.42,
-  catEnterEnd: 0.56,
-  catRunEnd: 0.8,
-  catExitEnd: 0.94,
+  catEnterEnd: 0.6,
+  catRunEnd: 0.62,
+  catExitEnd: 0.9,
 };
 
 let vw = 0;
@@ -330,7 +332,7 @@ function drawCloud(x, y, scale) {
 }
 
 function drawWatercolorGrass() {
-  const reveal = smoothstep(timing.sceneInStart, timing.sceneInEnd, progress);
+  const reveal = smoothstep(timing.grassStart, timing.grassEnd, progress);
   if (reveal <= 0 || !assets.layers.grass) return;
 
   ctx.save();

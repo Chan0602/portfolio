@@ -15,12 +15,13 @@
   <title>Yilin Chen Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inder&family=Libre+Bodoni:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,300;6..12,500;6..12,600;6..12,700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inder&family=Libre+Bodoni:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,300;6..12,500;6..12,600;6..12,700&family=Permanent+Marker&family=Young+Serif&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #30435a;
       --soft-ink: #5b7087;
-      --hero-height: 70vh;
+      --hero-height: 90vh;
       --art-ratio: 2548 / 965;
       --transition-top-radius: 42px;
       --case-study-width: 1000px;
@@ -29,6 +30,8 @@
       --hero-artboard-x: -50%;
       --hero-artboard-y: -50%;
       --hero-artboard-scale: 1;
+      --hero-character-shift-x: -50px;
+      --hero-character-shift-y: 70px;
       --case-paper: #f5f5f5;
       --case-ink: #0f0f0f;
       --case-muted: #666;
@@ -37,7 +40,7 @@
       --case-serif: "Crimson Pro", Georgia, "Times New Roman", serif;
       --case-sans: "Satoshi", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --about-sans: "Inder", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --display-serif: "Libre Bodoni", Georgia, "Times New Roman", serif;
+      --display-serif: "Cooper Lt BT", Georgia, "Times New Roman", serif;
       --play-modal-font: "Nunito Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -55,7 +58,7 @@
       overflow-x: hidden;
       color: var(--ink);
       background: #f8fbff;
-      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-family: var(--case-sans);
     }
 
     body.play-modal-open {
@@ -79,7 +82,7 @@
       width: min(1120px, calc(100% - 56px));
       margin: 0 auto;
       padding: 28px 0;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: var(--case-sans);
       color: rgba(48, 67, 90, 0.82);
     }
 
@@ -174,15 +177,16 @@
       position: relative;
       z-index: 3;
       display: grid;
-      grid-template-columns: minmax(260px, 0.92fr) minmax(360px, 1.08fr);
+      grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.28fr);
       align-items: center;
       width: var(--hero-content-width);
       height: 100%;
       margin: 0 auto;
+      padding-top: clamp(72px, 9vh, 112px);
     }
 
     .intro {
-      max-width: 500px;
+      max-width: 840px;
       margin-left: calc((var(--hero-content-width) - var(--case-content-width)) / 2);
       opacity: 0;
       transform: translateY(18px);
@@ -190,42 +194,60 @@
       animation-delay: 2800ms;
     }
 
-    .intro h1 {
-      margin: 0 0 18px;
-      font-family: "Permanent Marker", "Brush Script MT", "Bradley Hand", "Segoe Print", cursive;
-      font-size: clamp(2.4rem, 4.8vw, 5rem);
-      line-height: 0.96;
+    .intro-eyebrow {
+      margin: 0 0 26px;
+      color: rgba(48, 67, 90, 0.78);
+      font-family: var(--case-sans);
+      font-size: clamp(13px, 1vw, 14px);
       font-weight: 500;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      margin: 0 0 38px;
+      color: var(--ink);
+      font-family: "Young Serif", Georgia, "Times New Roman", serif;
+      font-size: 58px;
+      line-height: 1.28;
+      font-weight: 400;
       letter-spacing: 0;
-      text-wrap: balance;
       text-shadow: 0 1px 16px rgba(255, 255, 255, 0.6);
     }
 
-    .intro p {
+    .intro p:not(.intro-eyebrow) {
       margin: 0;
-      max-width: 430px;
+      max-width: 500px;
       color: var(--soft-ink);
-      font-family: var(--about-sans);
-      font-size: clamp(0.92rem, 1.35vw, 1.08rem);
-      line-height: 1.58;
+      font-family: var(--case-sans);
+      font-size: clamp(17px, 1.25vw, 18px);
+      font-weight: 400;
+      line-height: 1.5;
       letter-spacing: 0;
       text-shadow: 0 1px 14px rgba(255, 255, 255, 0.7);
+    }
+
+    .intro h1 span {
+      display: block;
+      white-space: nowrap;
     }
 
     .sky-stage {
       position: relative;
       height: min(430px, 58vh);
       min-height: 320px;
+      transform: translateY(clamp(24px, 4vh, 10px));
     }
 
     .hero-cloud,
     .hero-cat {
       position: absolute;
-      inset: 0;
       pointer-events: none;
     }
 
     .hero-cloud {
+      inset: 4%;
       z-index: 1;
       opacity: 0.93;
       filter: drop-shadow(0 10px 18px rgba(91, 122, 148, 0.08));
@@ -241,6 +263,7 @@
       object-fit: contain;
       object-position: center;
       opacity: 0;
+      transform: translate(var(--hero-character-shift-x), var(--hero-character-shift-y));
     }
 
     .hero-cloud img {
@@ -261,7 +284,9 @@
     }
 
     .hero-cat {
+      inset: 0;
       z-index: 2;
+      transform: translateX(calc(clamp(-64px, -4vw, -36px) - 60px));
       filter: drop-shadow(0 10px 10px rgba(72, 92, 112, 0.16));
     }
 
@@ -305,11 +330,12 @@
       padding: clamp(86px, 11vw, 150px) 0 42px;
       margin-top: calc(var(--transition-top-radius) * -0.35);
       border-radius: var(--transition-top-radius) var(--transition-top-radius) 0 0;
-      background:
-        radial-gradient(circle at 16% 12%, rgba(255, 246, 220, 0.72), transparent 24%),
-        radial-gradient(circle at 82% 36%, rgba(255, 255, 255, 0.34), transparent 30%),
-        radial-gradient(circle at 28% 78%, rgba(226, 238, 218, 0.5), transparent 32%),
-        linear-gradient(180deg, #fff5d9 0%, #fbfbf7 10%, #edf6fb 28%, #eaf6ed 60%, #e5efd9 82%, #d9f0fb 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.72) 0,
+        #fff 90px,
+        #fff 100%
+      );
       overflow: hidden;
     }
 
@@ -385,7 +411,7 @@
     .case-title {
       margin: 12px 0 10px;
       color: #172233;
-      font-family: var(--display-serif);
+      font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(1.35rem, 2.2vw, 1.85rem);
       line-height: 1.18;
       font-weight: 760;
@@ -400,9 +426,14 @@
     .case-desc {
       margin: 0;
       color: rgba(23, 34, 51, 0.78);
-      font-family: var(--about-sans);
+      font-family: var(--case-sans);
       font-size: clamp(1rem, 1.7vw, 1.2rem);
       line-height: 1.52;
+    }
+
+    .case-desc strong {
+      font-weight: 700;
+      font-style: italic;
     }
 
     .case-link {
@@ -410,7 +441,7 @@
       gap: 12px;
       margin-top: 18px;
       color: #db4a2f;
-      font-family: var(--display-serif);
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 0.96rem;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -641,7 +672,10 @@
     .case-showcase .section-note,
     .play-intro .section-note {
       margin-left: 0;
+      max-width: none;
+      font-family: var(--case-sans);
       text-align: left;
+      white-space: nowrap;
     }
 
     .play-modal {
@@ -871,14 +905,39 @@
       height: 320vh;
     }
 
+    .scroll-footer::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 2;
+      height: clamp(140px, 18vh, 180px);
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.86) 16%,
+        rgba(255, 255, 255, 0.48) 48%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      pointer-events: none;
+    }
+
     .footer-scene {
       position: sticky;
       top: 0;
+      z-index: 0;
       width: 100%;
       height: 100vh;
       min-height: 520px;
       overflow: hidden;
-      background: #d9f0fb;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(255, 255, 255, 0.72) 10%,
+          rgba(255, 255, 255, 0.28) 22%,
+          rgba(255, 255, 255, 0) 34%
+        ),
+        url("footer/sky.png") center top / cover no-repeat;
     }
 
     #scene-canvas {
@@ -1135,9 +1194,12 @@
 
     @media (max-width: 760px) {
       :root {
+        --hero-height: 92vh;
         --hero-artboard-x: -72%;
         --hero-artboard-y: -56%;
         --hero-artboard-scale: 0.9;
+        --hero-character-shift-x: -20px;
+        --hero-character-shift-y: 24px;
       }
 
       .site-nav {
@@ -1180,20 +1242,46 @@
       .hero-inner {
         grid-template-columns: 1fr;
         align-content: center;
-        gap: 8px;
+        gap: 20px;
         width: min(100% - 36px, 560px);
-        padding-top: 18px;
+        padding-top: 74px;
       }
 
       .intro {
-        order: 2;
+        order: 1;
         margin-left: 0;
+        max-width: 100%;
+      }
+
+      .intro-eyebrow {
+        margin-bottom: 20px;
+        font-size: 13px;
+      }
+
+      .intro h1 {
+        margin-bottom: 28px;
+        font-size: clamp(38px, 10.5vw, 46px);
+        line-height: 1;
+      }
+
+      .intro p:not(.intro-eyebrow) {
+        max-width: 440px;
+        font-size: clamp(16px, 4.4vw, 17px);
       }
 
       .sky-stage {
-        order: 1;
-        height: 330px;
-        min-height: 300px;
+        order: 2;
+        height: 260px;
+        min-height: 230px;
+        transform: translateY(12px);
+      }
+
+      .hero-cloud {
+        inset: 2%;
+      }
+
+      .hero-cat {
+        transform: translateX(-18px);
       }
 
       .hero-artboard {
@@ -1322,10 +1410,10 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="site-nav.css?v=20260702-nav-size-split">
+  <link rel="stylesheet" href="site-nav.css?v=20260826-homepage-initial-glass">
 </head>
 <body>
-  <nav class="portfolio-nav" data-portfolio-nav aria-label="Main navigation">
+  <nav class="portfolio-nav homepage-nav" data-portfolio-nav aria-label="Main navigation">
     <a class="portfolio-nav__brand" href="index.html">Yilin Chen</a>
     <button class="portfolio-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="portfolio-nav-links" data-portfolio-nav-toggle>
       <img class="portfolio-nav__icon portfolio-nav__icon--hamburger" src="images/nav/hamburger-icon.png" alt="" aria-hidden="true">
@@ -1414,8 +1502,9 @@
 
     <div class="hero-inner">
       <div class="intro" aria-live="polite">
-        <h1>Hi, I'm Yilin Chen</h1>
-        <p>Product Designer crafting AI and B2B enterprise products with strong visual discipline, fast iteration, and system-level thinking.</p>
+        <p class="intro-eyebrow">PRODUCT DESIGNER · AI × DESIGN × ENGINEERING</p>
+        <h1><span>I own complexity,</span><span>bridge disciplines, and</span><span>build <em>boldly.</em></span></h1>
+        <p>I turn complex workflows into clear experiences and bold ideas into working products.</p>
       </div>
 
       <div class="sky-stage" aria-hidden="true"></div>
@@ -1432,8 +1521,8 @@
          
             </a>
             <div class="case-copy">
-              <h3 class="case-title"><span>Mapwa</span> · System redesign</h3>
-              <p class="case-desc">Transforming a fragmented practicum workflow into a clearer system for student guidance and admin decision making.</p>
+              <h3 class="case-title"><span>Mapwa</span> · A Clearer Practicum Matching System</h3>
+              <p class="case-desc">Simplified practicum matching for students and staff, reducing weekly admin work by <strong><em>94%</em></strong> and task completion time by <strong><em>78%</em></strong>.</p>
               <a href="mapwa.html" class="case-link">View Case</a>
             </div>
           </article>
@@ -1462,7 +1551,7 @@
           </article>
           <article class="case-card">
             <a class="case-media" href="productive-energy-solutions.html" aria-label="View Productive Energy Solutions case study">
-              <video src="case-study-videos/web.mp4" autoplay muted loop playsinline></video>
+              <video src="case-study-videos/web.mp4?v=20260826-webredesign" autoplay muted loop playsinline></video>
             
             </a>
             <div class="case-copy">
@@ -2265,7 +2354,7 @@ Each card hides a circuit under a traditional pattern. Solving a small maze with
     playCat();
   </script>
   <script src="site-nav.js?v=20260701-contact-target-3"></script>
-  <script src="footer/footer-scene.js?v=20260701-no-fallback-art"></script>
+  <script src="footer/footer-scene.js?v=20260826-grass-16"></script>
   <script src="clean-url.js"></script>
 </body>
 </html>
