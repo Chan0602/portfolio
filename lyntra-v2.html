@@ -36,6 +36,54 @@
       font-style: italic;
     }
 
+    .lyntra-hero-visual {
+      clip-path: inset(100% 0 0 0);
+      animation: lyntra-reveal-from-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes lyntra-reveal-from-bottom {
+      to {
+        clip-path: inset(0);
+      }
+    }
+
+    .lyntra-reveal {
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 760ms cubic-bezier(0.4, 0, 0.2, 1), transform 760ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .lyntra-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 1024px) {
+      .spy-nav__item {
+        opacity: 0;
+        transform: translateY(8px);
+        animation: lyntra-nav-in 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: calc(0.2s + var(--i) * 0.07s);
+      }
+
+      @keyframes lyntra-nav-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .spy-nav__link {
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .spy-nav__link.is-active {
+        font-weight: 760;
+      }
+    }
+
     .lyntra-final-experience .case-flow__body {
       grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
       align-items: center;
@@ -138,6 +186,69 @@
       text-transform: uppercase;
     }
 
+    .lyntra-lightbox-trigger {
+      cursor: zoom-in;
+    }
+
+    .lyntra-media-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 52px);
+      background: rgba(15, 15, 15, 0.78);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+    }
+
+    .lyntra-media-lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lyntra-media-lightbox__content {
+      display: grid;
+      width: auto;
+      max-width: 94vw;
+      max-height: 86vh;
+      place-items: center;
+    }
+
+    .lyntra-media-lightbox__content img,
+    .lyntra-media-lightbox__content video {
+      width: auto;
+      max-width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      border-radius: 0;
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .lyntra-media-lightbox__close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-family: var(--case-font-body);
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    body.lyntra-lightbox-open {
+      overflow: hidden;
+    }
+
     @media (max-width: 980px) {
       .lyntra-final-experience .case-flow__body {
         grid-template-columns: 1fr;
@@ -182,11 +293,11 @@
       <aside class="spy-nav-slot" aria-label="Case study sections">
         <nav class="spy-nav">
           <ul class="spy-nav__list">
-            <li><button class="spy-nav__link is-active" data-target="overview"><span class="spy-nav__dot"></span><span>&nbsp; Overview</span></button></li>
-            <li><button class="spy-nav__link" data-target="final-experience"><span class="spy-nav__dot"></span><span>&nbsp; Final Experience</span></button></li>
-            <li><button class="spy-nav__link" data-target="challenge"><span class="spy-nav__dot"></span><span>&nbsp; The Challenge</span></button></li>
-            <li><button class="spy-nav__link" data-target="decisions"><span class="spy-nav__dot"></span><span>&nbsp; Design Decisions</span></button></li>
-            <li><button class="spy-nav__link" data-target="reflection"><span class="spy-nav__dot"></span><span>&nbsp; Reflection</span></button></li>
+            <li class="spy-nav__item" style="--i: 0"><button class="spy-nav__link is-active" data-target="overview"><span class="spy-nav__dot"></span><span>Overview</span></button></li>
+            <li class="spy-nav__item" style="--i: 1"><button class="spy-nav__link" data-target="final-experience"><span class="spy-nav__dot"></span><span>Final Experience</span></button></li>
+            <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="challenge"><span class="spy-nav__dot"></span><span>The Challenge</span></button></li>
+            <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="decisions"><span class="spy-nav__dot"></span><span>Design Decisions</span></button></li>
+            <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="reflection"><span class="spy-nav__dot"></span><span>Reflection</span></button></li>
           </ul>
         </nav>
       </aside>
@@ -213,20 +324,20 @@
             </div>
           </div>
 
-          <div class="case-metrics" aria-label="Project impact">
-            <div class="case-metric"><strong>250+</strong><span>Active Users</span></div>
-            <div class="case-metric"><strong>70%</strong><span>Activation</span></div>
-            <div class="case-metric"><strong>80%</strong><span>Early Retention</span></div>
+          <div class="case-metrics" aria-label="Project impact" data-lyntra-impact>
+            <div class="case-metric" data-lyntra-impact-item><strong>250+</strong><span>Active Users</span></div>
+            <div class="case-metric" data-lyntra-impact-item><strong>70%</strong><span>Activation</span></div>
+            <div class="case-metric" data-lyntra-impact-item><strong>80%</strong><span>Early Retention</span></div>
           </div>
         </section>
 
         <section id="final-experience" class="case-section case-study-shell lyntra-final-experience" data-section-group="final-experience">
-          <header class="case-section__header">
+          <header class="case-section__header lyntra-reveal">
             <p class="case-section-label">Final Experience</p>
           </header>
 
           <div class="case-chapter-list">
-            <article class="case-flow">
+            <article class="case-flow lyntra-reveal">
               <header class="case-flow__header">
                 <h3 class="case-flow__title">01 · Review and customize an <em>AI-generated plan</em> before scheduling it</h3>
               </header>
@@ -239,20 +350,20 @@
               </div>
             </article>
 
-            <article class="case-flow">
+            <article class="case-flow lyntra-reveal">
               <header class="case-flow__header">
                 <h3 class="case-flow__title">02 · Turn a conversation into a structured <em>study plan</em></h3>
               </header>
               <div class="case-flow__body">
                 <div class="lyntra-flow__media">
                   <video class="lyntra-flow__video" src="lyntra-v2-assets/flow-02.mp4?v=20260901-2" width="1080" height="1728" autoplay muted loop playsinline preload="metadata" aria-label="AI chatbot guided study plan flow"></video>
-                  <p class="lyntra-flow__path">Ask Lyntra → Choose or add an assignment → Confirm details → Generate plan/p>
+                  <p class="lyntra-flow__path">Ask Lyntra → Choose or add an assignment → Confirm details → Generate plan</p>
                 </div>
                 <p class="case-copy lyntra-flow__copy">Rather than asking students to navigate a broad set of AI tools, Ask Lyntra guides them through a specific academic goal. I shaped the conversation logic with engineering, connecting it to Canvas coursework and adding a confirmation step so students can correct the AI’s understanding before it generates a plan.</p>
               </div>
             </article>
 
-            <article class="case-flow">
+            <article class="case-flow lyntra-reveal">
               <header class="case-flow__header">
                 <h3 class="case-flow__title">03 · Complete an assignment through a guided <em>focus mode</em></h3>
               </header>
@@ -268,12 +379,12 @@
         </section>
 
         <section id="challenge" class="case-section case-study-shell" data-section-group="challenge">
-          <header class="case-section__header">
+          <header class="case-section__header lyntra-reveal">
             <p class="case-section-label">The Challenge</p>
             <h2 class="case-heading">The first version had the right features but lacked a <em>clear path</em> from AI planning to action.</h2>
           </header>
-          <img class="lyntra-challenge-visual" src="lyntra-v2-assets/challenge.png?v=20260901" width="2793" height="2414" loading="lazy" alt="Early Lyntra interface showing unclear plan status, unguided chatbot assistance, and a confusing hierarchy between tasks, subtasks, and focus steps">
-          <div class="case-insights">
+          <img class="lyntra-challenge-visual lyntra-reveal" src="lyntra-v2-assets/challenge.png?v=20260901" width="2793" height="2414" loading="lazy" alt="Early Lyntra interface showing unclear plan status, unguided chatbot assistance, and a confusing hierarchy between tasks, subtasks, and focus steps">
+          <div class="case-insights lyntra-reveal">
             <article class="case-insight"><h3>Unclear plan status</h3><p>Newly generated plans appeared alongside daily tasks, making it difficult for students to tell what was new, what had synced, and what still required review.</p></article>
             <article class="case-insight"><h3>Unguided AI assistance</h3><p>The chatbot offered a broad set of tools and templates, but provided limited guidance for turning a specific assignment into a structured, reliable plan.</p></article>
             <article class="case-insight"><h3>Confusing task hierarchy</h3><p>Main tasks, subtasks, study blocks, and focus steps used overlapping structures, obscuring how an assignment connected to the next actionable step.</p></article>
@@ -281,23 +392,23 @@
         </section>
 
         <section id="decisions" class="case-section case-study-shell" data-section-group="decisions">
-          <header class="case-section__header">
+          <header class="case-section__header lyntra-reveal">
             <p class="case-section-label">Design Decisions</p>
           </header>
           <div class="case-chapter-list">
-            <article class="case-decision">
+            <article class="case-decision lyntra-reveal">
               <h3 class="case-flow__title">01 · Give planning and daily execution <em>distinct roles</em></h3>
               <img class="lyntra-decision-visual" src="lyntra-v2-assets/decision-01.png?v=20260901-2" width="6210" height="3568" loading="lazy" alt="V1 Home compared with V2 Today, Plan, and Calendar product architecture">
               <p class="case-copy lyntra-decision-copy">In V1, Home carried new tasks, daily priorities, weekly planning, and progress in one place. For V2, I separated these responsibilities across Today, Plan, Calendar, and Ask Lyntra. This gave AI generated work a predictable place to appear and kept each surface focused on one primary user question.</p>
             </article>
 
-            <article class="case-decision">
+            <article class="case-decision lyntra-reveal">
               <h3 class="case-flow__title">02 · Guide the conversation toward a <em>usable plan</em></h3>
               <img class="lyntra-decision-visual" src="lyntra-v2-assets/decision-02.png?v=20260901" width="6452" height="2632" loading="lazy" alt="V1 generic chatbot compared with the guided V2 assignment planning conversation">
               <p class="case-copy lyntra-decision-copy">The V1 chatbot offered a flexible set of AI tools, but students had to decide how to structure their requests and provide the right context. For V2, I organized the conversation around specific academic goals, connected it to synced coursework, and added a confirmation step before plan generation. This made the interaction more guided while preserving students’ control over what the AI understood.</p>
             </article>
 
-            <article class="case-decision">
+            <article class="case-decision lyntra-reveal">
               <h3 class="case-flow__title">03 · Replace nested tasks with a <em>clearer</em> assignment structure</h3>
               <img class="lyntra-decision-visual" src="lyntra-v2-assets/decision-03.png?v=20260901" width="6066" height="3260" loading="lazy" alt="V1 nested task model compared with V2 assignment, ordered steps, Focus Mode, and completion structure">
               <p class="case-copy lyntra-decision-copy">V1 used a flexible task and subtask model that reflected a general project management system. In practice, main tasks, subtasks, study blocks, and focus steps created overlapping levels. For V2, I simplified the model around how students understand academic work: one assignment contains a finite sequence of steps, with one step surfaced as the current action and connected directly to Focus Mode.</p>
@@ -306,11 +417,11 @@
         </section>
 
         <section id="reflection" class="case-section case-study-shell" data-section-group="reflection">
-          <header class="case-section__header">
+          <header class="case-section__header lyntra-reveal">
             <p class="case-section-label">Reflection</p>
             <h2 class="case-heading">Useful AI needs a clear path to action.</h2>
           </header>
-          <div class="lyntra-reflection-list">
+          <div class="lyntra-reflection-list lyntra-reveal">
             <article class="lyntra-reflection-item">
               <span class="lyntra-reflection-number">01</span>
               <div class="lyntra-reflection-content">
@@ -333,7 +444,7 @@
               </div>
             </article>
           </div>
-          <a class="case-back-link lyntra-back-link" href="index.html">Back to all work</a>
+          <a class="case-back-link lyntra-back-link lyntra-reveal" href="index.html">Back to all work</a>
         </section>
       </div>
     </div>
@@ -343,7 +454,7 @@
     <canvas class="case-study-grass-footer__canvas" aria-label="Click anywhere in the scene and the cat will move there"></canvas>
   </footer>
   <script src="site-nav.js?v=20260701-contact-target-3"></script>
-  <script src="case-study-nav.js?v=20260901-lyntra-framework"></script>
+  <script src="case-study-nav.js?v=20260902-clickable-media"></script>
   <script src="case-study-footer.js"></script>
 </body>
 </html>
