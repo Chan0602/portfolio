@@ -20,6 +20,7 @@
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="case-study-tokens.css?v=20260826-mapwa-reference">
+  <link rel="stylesheet" href="case-study-next.css?v=20260902-9">
   <style>
     :root {
       --page-max-width: var(--case-page-max);
@@ -2214,7 +2215,7 @@
     }
   </style>
 </head>
-<body>
+<body data-case-project="mapwa">
     <nav class="portfolio-nav project-nav" data-portfolio-nav aria-label="Main navigation">
     <a class="portfolio-nav__brand" href="index.html">Yilin Chen</a>
     <button class="portfolio-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="portfolio-nav-links" data-portfolio-nav-toggle>
@@ -2241,6 +2242,7 @@
             <li class="spy-nav__item" style="--i: 2"><button class="spy-nav__link" data-target="prototype"><span class="spy-nav__dot"></span><span>Prototype</span></button></li>
             <li class="spy-nav__item" style="--i: 3"><button class="spy-nav__link" data-target="thinking"><span class="spy-nav__dot"></span><span>How I Think</span></button></li>
             <li class="spy-nav__item" style="--i: 4"><button class="spy-nav__link" data-target="reflection"><span class="spy-nav__dot"></span><span>Reflection</span></button></li>
+            <li class="spy-nav__item" style="--i: 5"><button class="spy-nav__link" data-target="see-next"><span class="spy-nav__dot"></span><span>See Next</span></button></li>
           </ul>
         </nav>
       </aside>
@@ -2439,6 +2441,14 @@
               </div>
             </article>
           </div>
+          <section class="case-next" id="see-next" data-section-group="see-next" aria-labelledby="case-next-title">
+            <h2 class="case-next__label" id="case-next-title">SEE NEXT</h2>
+            <div class="case-next__grid" data-case-study-nav-boundary>
+              <article class="case-next__card"><a class="case-next__link" href="lyntra/"><div class="case-next__media"><video src="case-study-videos/lyntra.mp4?v=20260901-scene" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div><div class="case-next__copy"><h3 class="case-next__title">Lyntra · Designing a product from 0 to 1</h3><p class="case-next__description">Designing an AI-powered academic planning experience from zero to one.</p></div></a></article>
+              <article class="case-next__card"><a class="case-next__link" href="productive-energy-solutions.html"><div class="case-next__media"><video src="case-study-videos/web.mp4?v=20260826-webredesign" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div><div class="case-next__copy"><h3 class="case-next__title">Productive Energy Solutions · Website redesign</h3><p class="case-next__description">Reframed the site's information architecture, reducing task time by 30% and driving 10+ inquiries.</p></div></a></article>
+              <article class="case-next__card"><a class="case-next__link" href="oshkosh.html"><div class="case-next__media"><video src="case-study-videos/oshkosh.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div><div class="case-next__copy"><h3 class="case-next__title">Oshkosh · One dashboard for two different engineers</h3><p class="case-next__description">Owned a real-time truck performance dashboard, improving user satisfaction by 25%.</p></div></a></article>
+            </div>
+          </section>
           <a class="footer-link" href="index.html">Back to all work</a>
         </section>
       </div>
@@ -2450,6 +2460,7 @@
   </footer>
   <script src="site-nav.js?v=20260701-contact-target-3"></script>
   <script src="case-study-footer.js"></script>
+  <script src="case-study-next.js?v=20260902-10"></script>
 
   <script>
     const projectNav = document.querySelector(".project-nav");
